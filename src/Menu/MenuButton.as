@@ -63,7 +63,7 @@ package Menu
 			
 			//set hitbox for entity (to the dimensions of the button graphic)
 			this.setHitbox(menuButton.scaledWidth, menuButton.scaledHeight);
-			
+			//this.layer = -1;
 			
 			
 		}

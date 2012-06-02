@@ -21,9 +21,13 @@ package UI
 		protected var inputBox:Image;
 		protected var inputHeight:int;
 		protected var inputWidth:int;
-		protected var GraphicList:Graphiclist;
+		protected var graphicList:Graphiclist;
+		protected var activeGraphicList:Graphiclist;
 		protected var labelText:Text;
 		protected var inputActive:Boolean;
+		
+		protected var activeFlash:Image;
+		
 		//protected var inputText:Text;
 		//protected var inputString:String;
 		
@@ -47,17 +51,23 @@ package UI
 			inputBox.x = inputOutline.x + 2;
 			inputBox.y = inputOutline.y + 2;
 			
+
+			
 			
 			textGraphic = new Text("");
 			textGraphic.color = 0xffffff;
 			textGraphic.x = inputOutline.x + 5;
 			textGraphic.y = inputOutline.y + 2;
 			
-			this.text = text;
+			activeFlash = Image.createRect(2, inputHeight - 6, 0xffffff, 1);
 			
-			GraphicList = new Graphiclist(labelText, inputOutline, inputBox, textGraphic);
 			
-			graphic = GraphicList;
+			//this.text = text;
+			
+			graphicList = new Graphiclist(labelText, inputOutline, inputBox, textGraphic);
+			activeGraphicList = new Graphiclist(labelText, inputOutline, inputBox, textGraphic, activeFlash);
+			
+			graphic = graphicList;
 			
 			
 			// position this entity
@@ -86,10 +96,17 @@ package UI
 			super.update();
 			if (inputActive == true) 
 			{
+				//capture text
 				text += Input.keyString;
 				Input.keyString = "";
+				if (Input.pressed(Key.BACKSPACE)) { text = text.substr(0, _text.length - 1); activeFlash.x = labelText.scaledWidth + textGraphic.scaledWidth; }
 				
-				if (Input.pressed(Key.BACKSPACE)) text = _text.substr(0, _text.length - 1);
+				activeFlash.x = labelText.scaledWidth + 5 + textGraphic.scaledWidth;
+				if (graphic == graphicList) { graphic = activeGraphicList; }
+			}
+			else
+			{
+				if (graphic == activeGraphicList) graphic = graphicList;
 			}
 			//if mouse is colliding with this entities hit box
 			if (this.collide(GC.TYPE_MOUSE, x, y))
@@ -106,7 +123,7 @@ package UI
 			{
 				if (Input.mousePressed)
 				{
-					trace ("inputboxpressed");
+					//trace ("inputboxpressed");
 					inputActive = false;
 				}
 			}

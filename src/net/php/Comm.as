@@ -12,12 +12,12 @@ package net.php
 		public static var returnedVar:String = new String;
 		
 		// Assign a variable name for our URLVariables object
-		var variables:URLVariables = new URLVariables();
+		protected var variables:URLVariables = new URLVariables();
 		// Build the varSend variable
 		// Be sure you place the proper location reference to your PHP config file here
-		var varSend:URLRequest = new URLRequest("http://www.skipgamer.com/flashcomm.php");
+		protected var varSend:URLRequest = new URLRequest("http://www.skipgamer.com/flashcomm.php");
 		// Build the varLoader variable
-		var varLoader:URLLoader = new URLLoader;
+		protected var varLoader:URLLoader = new URLLoader;
 		
 		public function Comm(varName:String) //varName (a string) is passed to this function
 		{
@@ -35,9 +35,9 @@ package net.php
 			varLoader.addEventListener(Event.COMPLETE, completeHandler);
 		}
 		
-		function completeHandler(event:Event):void
+		private function completeHandler(event:Event):void
 		{
-			var phpVar1 = event.target.data.var1;
+			var phpVar1:String = event.target.data.var1;
 			returnedVar = phpVar1;
 		}		
 		

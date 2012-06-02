@@ -37,6 +37,7 @@ package UI
 			add (new MouseCursorEntity());
 			
 			phpVar = Comm.returnedVar;
+			trace(phpVar);
 			add (new SimpleText(1, 8, phpVar));
 		}
 		
