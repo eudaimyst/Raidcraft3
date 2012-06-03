@@ -3,12 +3,14 @@ package UI
 	import flash.ui.MouseCursor;
 	import Menu.MainMenu;
 	import Menu.MenuButton;
+	import Menu.SubmitButton;
+	import net.flashpunk.Entity;
 	import net.flashpunk.World;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Text
 	import net.flashpunk.graphics.Image
 	import net.flashpunk.utils.Input
-	import net.php.Comm;
+	import net.php.phpComm;
 	
 	import flash.net.*;
 	import flash.events.*;
@@ -20,12 +22,15 @@ package UI
 	public class UITest extends World 
 	{
 		protected var phpVar:String;
+		protected var testCommunication:LineInputComm;
 		
 		public static var returnedVar:String = new String;
 		
 		public function UITest()
 		{
 			super();
+			
+			testCommunication = (new LineInputComm(1, 7, "textbox"));
 			
 			add (new MenuButton("save", 5, MainMenu));
 			add (new Checkbox(1, 1, "testbox"));
@@ -35,18 +40,20 @@ package UI
 			add (new LineInput(10, 2, "password"));
 			
 			add (new SimpleText(1, 6, "php communication:"));
-			add (new LineInput(1, 7, "textbox"));
+			add (testCommunication);
+			add (new SubmitButton(1, 8, "submit", testCommunication));
 			
 			trace ("Menu loaded");
 			
 			add (new MouseCursorEntity());
 			
-			phpComm();
+			//phpComm();
 			
 			//trace(phpVar);
 			//add (new SimpleText(1, 8, phpVar));
 		}
 		
+		/*
 		function phpComm():void
 
 		{
@@ -86,6 +93,8 @@ package UI
 		{
 			returnedVar = event.target.data.var1;
 		}	
+		
+		*/
 		
 		override public function update():void 
 		{
