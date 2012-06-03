@@ -25,6 +25,12 @@ package UI
 			this.y = FP.width/20 * yPos;
 		}
 		
+		public function updateText(_text:String)
+		{
+			text = new Text(_text)
+			graphic = new Graphiclist(text);
+		}
+		
 	}
 
 }

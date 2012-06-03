@@ -22,7 +22,9 @@ package UI
 	public class UITest extends World 
 	{
 		protected var phpVar:String;
-		protected var testCommunication:LineInputComm;
+		public var testCommunication:LineInputComm;
+		public var testSubmitButton:SubmitButton;
+		public static var testSimpleText:SimpleText;
 		
 		public static var returnedVar:String = new String;
 		
@@ -30,7 +32,7 @@ package UI
 		{
 			super();
 			
-			testCommunication = (new LineInputComm(1, 7, "textbox"));
+			
 			
 			add (new MenuButton("save", 5, MainMenu));
 			add (new Checkbox(1, 1, "testbox"));
@@ -40,8 +42,12 @@ package UI
 			add (new LineInput(10, 2, "password"));
 			
 			add (new SimpleText(1, 6, "php communication:"));
+			testCommunication = (new LineInputComm(1, 7, "textbox"));
+			testSubmitButton = (new SubmitButton(1, 8, "submit", testCommunication));
+			testSimpleText = (new SimpleText(1,9,testSubmitButton.result));
 			add (testCommunication);
-			add (new SubmitButton(1, 8, "submit", testCommunication));
+			add (testSubmitButton);
+			add (testSimpleText);
 			
 			trace ("Menu loaded");
 			

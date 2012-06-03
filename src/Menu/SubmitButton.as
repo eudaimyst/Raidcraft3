@@ -8,6 +8,7 @@ package Menu
 	import net.flashpunk.utils.Input;
 	import net.php.phpComm;
 	import UI.LineInputComm;
+	import UI.UITest;
 	/**
 	 * ...
 	 * @author skipgamer
@@ -20,11 +21,18 @@ package Menu
 		protected var buttonGraphicList:Graphiclist;
 		protected var isHover:Boolean;
 		protected var selectedWorld:Class;
-		protected var attachedInput:LineInputComm
+		protected var attachedInput:LineInputComm;
+		
+		protected var communicationInstance:phpComm;
+		
+		public var result:String = "boo";
 		
 		
 		public function SubmitButton(xPos:int, yPos:int, text:String, _attachedInput:LineInputComm) 
 		{
+			
+			
+			
 			//selectedWorld = worldToGo;
 			attachedInput = _attachedInput;
 			
@@ -81,8 +89,10 @@ package Menu
 					
 					var testvar:String = new String;
 					trace("test");
-					new phpComm(attachedInput.textGraphic.text);
-					trace (testvar);
+					communicationInstance = new phpComm();
+					communicationInstance.phpComm2(attachedInput.textGraphic.text, this);
+					//new phpComm(attachedInput.textGraphic.text);
+					
 					//trace (attachedInput.textGraphic.text);
 				}
 			}
@@ -93,6 +103,15 @@ package Menu
 				isHover = false;
 			}
 		}
+		
+		
+		public function setresult():void
+		{
+			trace (communicationInstance.phpVar1);
+			UITest.testSimpleText.updateText(communicationInstance.phpVar1);
+			//trace(result);
+		}
+		
 		
 	}
 
