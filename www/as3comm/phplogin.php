@@ -26,12 +26,12 @@ if ($_POST['sendRequest'] == "parse") {
 		//Feel free to edit / change as required
 		if($username == "")
 		{
-			$errormessage = "no username";
+			$errormessage = "no username or password";
 			echo "var1=".$username."&var2=".$success."&var3=".$errormessage;
 		}
 		if($password == "")
 		{
-			$errormessage = "no password";
+			$errormessage = "no username or password";
 			echo "var1=".$username."&var2=".$success."&var3=".$errormessage;
 		}
 		

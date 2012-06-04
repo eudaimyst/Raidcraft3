@@ -18,6 +18,8 @@ package Menu
 	 */
 	public class MenuButton extends Entity 
 	{
+		public static var isDisabled:Boolean;
+		
 		protected var buttonText:Text;
 		protected var menuButton:Image;
 		protected var menuButtonHover:Image;
@@ -72,6 +74,12 @@ package Menu
 		{
 			super.update();
 			
+			if (isDisabled == true)
+			{
+			}
+			
+			else
+			{
 			//if mouse is colliding with this entities hit box
 			if (this.collide(GC.TYPE_MOUSE, x, y))
 			{
@@ -95,6 +103,7 @@ package Menu
 				//return this entities graphic to normal button, set hovering flag to true so if statement above knows to change it back
 				if (isHover == true) {graphic = new Graphiclist(menuButton, buttonText); trace("changed to hover false");}
 				isHover = false;
+			}
 			}
 		}
 		

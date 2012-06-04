@@ -26,6 +26,7 @@ package Menu
 		
 		protected var attachedUserInput:LineInputComm;
 		protected var attachedPassInput:LineInputComm;
+		public var loginBox:LoginBox;
 		
 		
 		//protected var attachedText:SimpleText;
@@ -35,11 +36,12 @@ package Menu
 		public var result:String = "boo";
 		
 		
-		public function LoginButton(xPos:int, yPos:int, text:String, _userInput:LineInputComm, _passInput:LineInputComm) 
+		public function LoginButton(xPos:int, yPos:int, text:String, _userInput:LineInputComm, _passInput:LineInputComm, _loginBox:LoginBox) 
 		{
 			
 			attachedUserInput = _userInput;
 			attachedPassInput = _passInput;
+			loginBox = _loginBox;
 			
 			Text.size = 14;
 			

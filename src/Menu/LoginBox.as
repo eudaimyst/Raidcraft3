@@ -27,7 +27,13 @@ package Menu
 			
 			userInput = (new LineInputComm(1, 1, "user"));
 			passInput = (new LineInputComm(1, 2, "pass"));
-			login = (new LoginButton(1, 3, "login",userInput,passInput));
+			login = (new LoginButton(1, 3, "login",userInput,passInput, this));
+		}
+		
+		public function LoginMessage(_message:String):void
+		{
+			trace(_message);
+			world.add (new PopupBox(_message));
 		}
 		
 		override public function added():void
