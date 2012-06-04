@@ -7,6 +7,7 @@ package Menu
 	import net.flashpunk.FP;
 	import net.flashpunk.utils.Input;
 	import net.php.phpComm;
+	import net.php.phpLogin;
 	import UI.LineInputComm;
 	import UI.SimpleText;
 	import UI.UITest;
@@ -14,7 +15,7 @@ package Menu
 	 * ...
 	 * @author skipgamer
 	 */
-	public class SubmitButton extends Entity 
+	public class LoginButton extends Entity 
 	{
 		protected var buttonText:Text;
 		protected var button:Image;
@@ -23,21 +24,24 @@ package Menu
 		protected var isHover:Boolean;
 		protected var selectedWorld:Class;
 		
-		protected var attachedInput:LineInputComm;
-		protected var attachedText:SimpleText;
+		protected var attachedUserInput:LineInputComm;
+		protected var attachedPassInput:LineInputComm;
 		
-		protected var communicationInstance:phpComm;
+		
+		//protected var attachedText:SimpleText;
+		
+		protected var loginInstance:phpLogin;
 		
 		public var result:String = "boo";
 		
 		
-		public function SubmitButton(xPos:int, yPos:int, text:String, _attachedInput:LineInputComm, _attachedText:SimpleText) 
+		public function LoginButton(xPos:int, yPos:int, text:String, _userInput:LineInputComm, _passInput:LineInputComm) 
 		{
 			
-			attachedInput = _attachedInput;
-			attachedText = _attachedText;
+			attachedUserInput = _userInput;
+			attachedPassInput = _passInput;
 			
-			Text.size = 18;
+			Text.size = 14;
 			
 			//define button text and button graphic
 			button = new Image(GC.GFX_LOGIN_BUTTON);
@@ -82,10 +86,10 @@ package Menu
 				if (Input.mousePressed)
 				{
 					
-					communicationInstance = new phpComm(); //create new phpComm instance
-					communicationInstance.getphp(attachedInput.textGraphic.text, this); //run phpCom.getphp with attached lineinput instance's textGraphic.text value
+					loginInstance = new phpLogin(); //create new phpComm instance
+					loginInstance.getphp(attachedUserInput.textGraphic.text, attachedPassInput.textGraphic.text, this); //run phpCom.getphp with attached lineinput instance's textGraphic.text value
 					
-					trace (attachedInput.textGraphic.text);
+					//trace (attachedInput.textGraphic.text);
 					
 				}
 			}
@@ -100,11 +104,11 @@ package Menu
 		
 		public function setresult():void //this is called from phpComm
 		{
-			trace("test");
+			trace("result set from phpComm");
 			//trace (communicationInstance.phpVar1);
-			trace(attachedText.text, communicationInstance.phpVar1)
-			attachedText.text = communicationInstance.phpVar1;
-			trace(communicationInstance.phpVar1);
+			//trace(attachedText.text, communicationInstance.phpVar1)
+			//attachedText.text = communicationInstance.phpVar1;
+			//trace(communicationInstance.phpVar1);
 		}
 		
 		

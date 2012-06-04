@@ -29,7 +29,8 @@ package Menu
 			add (new MenuButton("options", 2, OptionsMenu));
 			add (new MenuButton("UI test", 3, UITest));
 			add (new MenuButton("exit", 5, MainMenu));
-			add (new SmallButton(1, 1, "login", MainMenu));
+			//add (new SmallButton(1, 1, "login", MainMenu));
+			add (new LoginBox());
 			add (new TitleGraphic());
 			
 			

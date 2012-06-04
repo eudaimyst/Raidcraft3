@@ -22,17 +22,18 @@ package UI
 	public class UITest extends World 
 	{
 		protected var phpVar:String;
-		public var testCommunication:LineInputComm;
+		public var testInput:LineInputComm;
 		public var testSubmitButton:SubmitButton;
-		public static var testSimpleText:SimpleText;
+		public var testSimpleText:SimpleText;
+		public var testInput2:LineInputComm;
+		public var testSubmitButton2:SubmitButton;
+		public var testSimpleText2:SimpleText;
 		
 		public static var returnedVar:String = new String;
 		
 		public function UITest()
 		{
 			super();
-			
-			
 			
 			add (new MenuButton("save", 5, MainMenu));
 			add (new Checkbox(1, 1, "testbox"));
@@ -42,65 +43,31 @@ package UI
 			add (new LineInput(10, 2, "password"));
 			
 			add (new SimpleText(1, 6, "php communication:"));
-			testCommunication = (new LineInputComm(1, 7, "textbox"));
-			testSubmitButton = (new SubmitButton(1, 8, "submit", testCommunication));
-			testSimpleText = (new SimpleText(1,9,testSubmitButton.result));
-			add (testCommunication);
-			add (testSubmitButton);
+			
+			testInput = (new LineInputComm(1, 7, "textbox"));
+			testSimpleText = (new SimpleText(1,9,"hmm"));
+			testSubmitButton = (new SubmitButton(1, 8, "submit", testInput, testSimpleText));
+			add (testInput);
 			add (testSimpleText);
+			add (testSubmitButton);
+			
+			testInput2 = (new LineInputComm(11, 7, "textbox"));
+			testSimpleText2 = (new SimpleText(11,9,"ummm"));
+			testSubmitButton2 = (new SubmitButton(11, 8, "submit", testInput2, testSimpleText2));
+			add (testInput2);
+			add (testSimpleText2);
+			add (testSubmitButton2);
+			
+			
 			
 			trace ("Menu loaded");
 			
 			add (new MouseCursorEntity());
 			
-			//phpComm();
-			
-			//trace(phpVar);
-			//add (new SimpleText(1, 8, phpVar));
 		}
 		
-		/*
-		function phpComm():void
-
-		{
-			// Assign a variable name for our URLVariables object
-			var variables:URLVariables = new URLVariables();
-			// Build the varSend variable
-			// Be sure you place the proper location reference to your PHP config file here
-			var varSend:URLRequest = new URLRequest("http://www.skipgamer.com/raidcraft/flashcomm.php");
-			varSend.method = URLRequestMethod.POST;
-			varSend.data = variables;
-			// Build the varLoader variable
-			var varLoader:URLLoader = new URLLoader;
-			varLoader.dataFormat = URLLoaderDataFormat.VARIABLES;
-			varLoader.addEventListener(Event.COMPLETE, completeHandler);
-			variables.uname = "username2";
-			variables.pword = "password123";
-			variables.sendRequest = "parse";	
-			// Send the data to the php file
-			varLoader.load(varSend);
-
-			// When the data comes back from PHP we display it here		
-			function completeHandler(event:Event):void
-			{
-				var phpVar1 = event.target.data.var1;
-				var phpVar2 = event.target.data.var2;
-				
-				//trace(phpVar1);
-				//trace(phpVar2);
-				
-				add (new SimpleText (1, 8, phpVar1));
-				add (new SimpleText (1, 9, phpVar2));
-			}
-		}
-
 		
-		private function completeHandler(event:Event):void
-		{
-			returnedVar = event.target.data.var1;
-		}	
-		
-		*/
+
 		
 		override public function update():void 
 		{

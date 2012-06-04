@@ -51,16 +51,13 @@ package UI
 			inputBox.x = inputOutline.x + 2;
 			inputBox.y = inputOutline.y + 2;
 			
-
-			
-			
 			textGraphic = new Text("");
 			textGraphic.color = 0xffffff;
 			textGraphic.x = inputOutline.x + 5;
 			textGraphic.y = inputOutline.y + 2;
 			
+			//create image for flash when active
 			activeFlash = Image.createRect(2, inputHeight - 6, 0xffffff, 1);
-			
 			
 			//this.text = text;
 			
@@ -102,7 +99,7 @@ package UI
 				if (Input.pressed(Key.BACKSPACE)) { text = text.substr(0, _text.length - 1); activeFlash.x = labelText.scaledWidth + textGraphic.scaledWidth; }
 				
 				activeFlash.x = labelText.scaledWidth + 5 + textGraphic.scaledWidth;
-				if (graphic == graphicList) { graphic = activeGraphicList; }
+				if (graphic == graphicList) graphic = activeGraphicList;
 			}
 			else
 			{
