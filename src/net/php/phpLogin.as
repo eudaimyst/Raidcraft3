@@ -5,6 +5,7 @@ package net.php
 	import Menu.LoginButton;
 	import net.flashpunk.FP
 	import UI.SimpleText;
+	import user.variables;
 	
 	/**
 	 * ...
@@ -13,9 +14,9 @@ package net.php
 	 
 	public class phpLogin
 	{
-		public var phpVar1:String = "boo";
-		public var phpVar2:String = "boo";
-		public var phpVar3:String = "boo";
+		public var username:String;
+		public var success:String;
+		public var errormessage:String;
 		public var pressedButton:LoginButton;
         protected var _text:String = "";
 		
@@ -49,10 +50,18 @@ package net.php
 			// When the data comes back from PHP we capture it here		
 			function completeHandler(event:Event):void
 			{
-				phpVar1 = event.target.data.var1;
-				phpVar2 = event.target.data.var2;
-				phpVar3 = event.target.data.var3;
-				trace (phpVar1, phpVar2, phpVar3);
+				username = event.target.data.var1;
+				success = event.target.data.var2;
+				errormessage = event.target.data.var3;
+				trace (username, success, errormessage);
+				if (success == "true")
+				{
+					variables.loggedIn = true;
+				}
+				else
+				{
+					
+				}
 				//pressedButton.setresult();
 				
 			}
