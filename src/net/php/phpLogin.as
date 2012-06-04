@@ -24,7 +24,7 @@ package net.php
 			
 		}
 		
-		public function getphp(firstVar:String, secondVar:String, _pressedButton:LoginButton):void
+		public function getphp(_username:String, _password:String, _pressedButton:LoginButton):void
 		{
 			pressedButton = _pressedButton; //*works!
 			
@@ -39,12 +39,11 @@ package net.php
 			var varLoader:URLLoader = new URLLoader;
 			varLoader.dataFormat = URLLoaderDataFormat.VARIABLES;
 			varLoader.addEventListener(Event.COMPLETE, completeHandler);
-			variables.username = firstVar;
-			variables.password = secondVar;
+			variables.username = _username;
+			variables.password = _password;
 			variables.sendRequest = "parse";	
 			// Send the data to the php file
-			trace(variables.username);
-			trace(variables.password);
+			trace(variables.username, variables.password);
 			varLoader.load(varSend);
 				
 			// When the data comes back from PHP we capture it here		

@@ -170,9 +170,21 @@ pip-log.txt
 
 #specific folders
 obj/
-www/
 bin/
 assets/
 assets_src/
 
+$www
+www/layout/
+www/layout_inc/
+www/models/
+www/Scripts/
+www/swf/
+www/*.*
 
+#dreamweaver
+_notes
+
+
+
+.gitignore
