@@ -93,12 +93,23 @@ package UI
 			super.update();
 			if (inputActive == true) 
 			{
+				trace (String(textGraphic.textWidth));
 				//capture text
 				text += Input.keyString;
 				Input.keyString = "";
-				if (Input.pressed(Key.BACKSPACE)) { text = text.substr(0, _text.length - 1); activeFlash.x = labelText.scaledWidth + textGraphic.scaledWidth; }
+				if (Input.pressed(Key.BACKSPACE))
+				{
+					trace("reduce text by 1");
+					text = text.substr(0, _text.length - 1);
+					activeFlash.x = labelText.scaledWidth + 5 + textGraphic.textWidth;
+					graphic = activeGraphicList;
+					
+				}
+				else
+				{
+					activeFlash.x = labelText.scaledWidth + 5 + textGraphic.textWidth;
+				}
 				
-				activeFlash.x = labelText.scaledWidth + 5 + textGraphic.scaledWidth;
 				if (graphic == graphicList) graphic = activeGraphicList;
 			}
 			else

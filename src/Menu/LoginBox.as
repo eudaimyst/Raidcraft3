@@ -20,6 +20,7 @@ package Menu
 		public var userInput:LineInputComm;
 		public var passInput:LineInputComm;
 		public var login:LoginButton;
+		public var register:SmallButton;
 		
 		public var displayLoggedIn:SimpleText;
 		
@@ -39,7 +40,8 @@ package Menu
 			{
 				userInput = (new LineInputComm(1, 1, "user"));
 				passInput = (new LineInputComm(1, 2, "pass"));
-				login = (new LoginButton(1, 3, "login", userInput, passInput, this));	
+				login = (new LoginButton(1, 3, "login", userInput, passInput, this));
+				register = (new SmallButton(6, 3, "register", RegisterAccount));
 			}
 		}
 		
@@ -55,6 +57,7 @@ package Menu
 			world.remove (userInput);
 			world.remove (passInput);
 			world.remove (login);
+			world.remove (register);
 			world.add (new SimpleText(1, 1, "you are logged in as " + UserVariables.userName));
 			
 			//world.remove (this);
@@ -68,6 +71,7 @@ package Menu
 				world.add (userInput);
 				world.add (passInput);
 				world.add (login);
+				world.add (register);
 			}
 			
 		}

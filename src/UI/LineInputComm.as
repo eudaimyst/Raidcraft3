@@ -33,6 +33,7 @@ package UI
 		
         protected var _text:String = "";
         public var textGraphic:Text;
+		public var isPassword:Boolean;
 		
 		public function LineInputComm(xPos:int, yPos:int, label:String) 
 		{
@@ -100,11 +101,14 @@ package UI
 				Input.keyString = "";
 				if (Input.pressed(Key.BACKSPACE))
 				{
-					text = text.substr(0, _text.length - 1);  
-					//activeFlash.x = labelText.scaledWidth + textGraphic.scaledWidth; 
+					trace("reduce text by 1");
+					text = text.substr(0, _text.length - 1);
+					activeFlash.x = labelText.scaledWidth + 5 + textGraphic.textWidth;
+					graphic = activeGraphicList;
+					
 				}
 				
-				activeFlash.x = labelText.scaledWidth + 5 + textGraphic.scaledWidth; //move activeFlash across with text
+				activeFlash.x = labelText.scaledWidth + 5 + textGraphic.textWidth; //move activeFlash across with text
 				if (graphic == graphicList) graphic = activeGraphicList; //set graphiclist to "active" (display activeFlash)
 			}
 			else //when 

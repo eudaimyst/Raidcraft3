@@ -33,8 +33,7 @@ package Menu
 			add (new MenuButton("UI test", 3, UITest));
 			add (new MenuButton("exit", 5, MainMenu));
 			//add (new SmallButton(1, 1, "login", MainMenu));
-			loginBox = new LoginBox();
-			add (loginBox);
+			add (new LoginBox());
 			add (new TitleGraphic());
 			
 			
