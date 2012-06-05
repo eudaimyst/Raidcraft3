@@ -7,7 +7,9 @@ package Menu
 	import net.flashpunk.graphics.Image
 	import net.flashpunk.utils.Input
 	import UI.LineInput;
+	import UI.SimpleText;
 	import UI.UITest;
+	import user.variables;
 	
 	
 	/**
@@ -17,6 +19,7 @@ package Menu
 	public class MainMenu extends World 
 	{
 		protected var gameVersion:Text;
+		protected var loginBox:LoginBox;
 		
 		
 		public function MainMenu():void
@@ -30,14 +33,15 @@ package Menu
 			add (new MenuButton("UI test", 3, UITest));
 			add (new MenuButton("exit", 5, MainMenu));
 			//add (new SmallButton(1, 1, "login", MainMenu));
-			add (new LoginBox());
+			loginBox = new LoginBox();
+			add (loginBox);
 			add (new TitleGraphic());
 			
 			
 			Text.size = 24;
 			
 			//game version
-			gameVersion = new Text("Version 0.50",10,FP.screen.height-40);
+			gameVersion = new Text("Version 0.51",10,FP.screen.height-40);
 			addGraphic(gameVersion);
 			
 			

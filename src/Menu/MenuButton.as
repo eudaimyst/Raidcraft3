@@ -10,6 +10,7 @@ package Menu
 	import net.flashpunk.FP;
 	import net.flashpunk.utils.Input;
 	import UI.UITest;
+	import user.UserVariables;
 	
 	
 	/**
@@ -18,7 +19,7 @@ package Menu
 	 */
 	public class MenuButton extends Entity 
 	{
-		public static var isDisabled:Boolean;
+		//public static var isDisabled:Boolean;
 		
 		protected var buttonText:Text;
 		protected var menuButton:Image;
@@ -76,6 +77,7 @@ package Menu
 			
 			if (isDisabled == true)
 			{
+				
 			}
 			
 			else

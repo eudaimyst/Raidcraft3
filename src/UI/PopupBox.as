@@ -33,8 +33,6 @@ package UI
 			message = _message;
 			messageText = new Text(message);
 			
-			bg = Image.createRect(messageText.scaledWidth,200,0x000000,.5);
-			
 			button = new Image(GC.GFX_LOGIN_BUTTON);
 			button.scale = 2;
 			button.x = messageText.scaledWidth / 2 - button.scaledWidth / 2;
@@ -49,6 +47,13 @@ package UI
 			buttonText.color = 0x000000;
 			buttonText.y = button.y + 2;
 			buttonText.x = button.x + button.scaledWidth / 2 - buttonText.scaledWidth / 2;
+			
+			if (messageText.scaledWidth < button.scaledWidth) // if messagetext is smaller than the button width
+			{
+				bg = Image.createRect(button.scaledWidth + 20, messageText.scaledHeight + button.scaledHeight + 10, 0x000000, .5);
+				bg.x += button.x - messageText.x - 10;
+			}
+			else bg = Image.createRect(messageText.scaledWidth,messageText.scaledHeight + button.scaledHeight + 10,0x000000,.5);
 			
 			graphicList = new Graphiclist(bg, messageText, button, buttonText);
 			graphicListHover = new Graphiclist(bg, messageText, buttonHover, buttonText);

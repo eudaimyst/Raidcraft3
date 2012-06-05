@@ -4,9 +4,11 @@ package net.php
 	import flash.events.*;
 	import Menu.LoginBox;
 	import Menu.LoginButton;
+	import Menu.MainMenu;
 	import net.flashpunk.FP
 	import UI.PopupBox;
 	import UI.SimpleText;
+	import user.UserVariables;
 	import user.variables;
 	
 	/**
@@ -58,8 +60,12 @@ package net.php
 				trace (username, success, errormessage);
 				if (success == "true")
 				{
-					pressedButton.loginBox.LoginMessage("logged in");
-					variables.loggedIn = true;
+					UserVariables.loggedIn = true;
+					UserVariables.userName = username;
+					pressedButton.loginBox.LoginMessage("logged in as " + username);
+					pressedButton.loginBox.RemoveThis();
+					
+					
 				}
 				else
 				{

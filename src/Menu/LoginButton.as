@@ -89,7 +89,7 @@ package Menu
 				{
 					
 					loginInstance = new phpLogin(); //create new phpComm instance
-					loginInstance.getphp(attachedUserInput.textGraphic.text, attachedPassInput.textGraphic.text, this); //run phpCom.getphp with attached lineinput instance's textGraphic.text value
+					loginInstance.getphp(attachedUserInput.textGraphic.text, attachedPassInput.textGraphic.text, this); //run phpLogin.getphp with attached lineinput instance's textGraphic.text value
 					
 					//trace (attachedInput.textGraphic.text);
 					
