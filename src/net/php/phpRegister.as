@@ -20,6 +20,7 @@ package net.php
 	public class phpRegister
 	{
 		public var success:String;
+		public var errormessage:String;
         protected var _text:String = "";
 		
 		public function phpLogin():void
@@ -54,6 +55,7 @@ package net.php
 			function completeHandler(event:Event):void
 			{
 				success = event.target.data.var1;
+				errormessage = event.target.data.var2;
 				
 				if (success == "true")
 				{
@@ -64,6 +66,7 @@ package net.php
 				{
 					//pressedButton.loginBox.LoginMessage(errormessage);
 					trace ("success = " + success);
+					trace ("error = " + errormessage);
 				}
 				//pressedButton.setresult();
 				
