@@ -5,6 +5,7 @@ package net.php
 	import Menu.LoginBox;
 	import Menu.LoginButton;
 	import Menu.MainMenu;
+	import Menu.MenuButton;
 	import net.flashpunk.FP
 	import UI.PopupBox;
 	import UI.SimpleText;
@@ -64,8 +65,6 @@ package net.php
 					UserVariables.userName = username;
 					pressedButton.loginBox.LoginMessage("logged in as " + username);
 					pressedButton.loginBox.RemoveThis();
-					
-					
 				}
 				else
 				{

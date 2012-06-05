@@ -9,6 +9,7 @@ package Menu
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.FP;
 	import net.flashpunk.utils.Input;
+	import UI.PopupBox;
 	import UI.UITest;
 	import user.UserVariables;
 	
@@ -19,8 +20,6 @@ package Menu
 	 */
 	public class MenuButton extends Entity 
 	{
-		//public static var isDisabled:Boolean;
-		
 		protected var buttonText:Text;
 		protected var menuButton:Image;
 		protected var menuButtonHover:Image;
@@ -75,14 +74,13 @@ package Menu
 		{
 			super.update();
 			
-			if (isDisabled == true)
+			//if mouse is colliding with this entities hit box
+			if (this.collide("popupbox", x, y)) //if this is colliding with popupbox do nothing;
 			{
 				
 			}
-			
 			else
 			{
-			//if mouse is colliding with this entities hit box
 			if (this.collide(GC.TYPE_MOUSE, x, y))
 			{
 				//change this entities graphic to the hover button, set hovering flag to false so else knows to change it back

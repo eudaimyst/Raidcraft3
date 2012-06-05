@@ -21,15 +21,19 @@ package Menu
 		public var passInput:LineInputComm;
 		public var login:LoginButton;
 		
+		public var displayLoggedIn:SimpleText;
+		
 		public function LoginBox() 
 		{
 			super ();
+			
+			
 			
 			trace("login loaded");
 			
 			if (UserVariables.loggedIn == true)
 			{
-				world.add (new SimpleText(1, 1, "you are logged in as " + UserVariables.userName));
+				displayLoggedIn = new SimpleText(1, 1, "you are logged in as " + UserVariables.userName)
 			}
 			else
 			{
@@ -58,9 +62,14 @@ package Menu
 		
 		override public function added():void
 		{
-			world.add (userInput);
-			world.add (passInput);
-			world.add (login);
+			if (UserVariables.loggedIn == true) world.add (displayLoggedIn);
+			else
+			{
+				world.add (userInput);
+				world.add (passInput);
+				world.add (login);
+			}
+			
 		}
 		
 		override public function update():void 

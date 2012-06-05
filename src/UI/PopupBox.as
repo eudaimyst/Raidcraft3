@@ -66,9 +66,10 @@ package UI
 			this.y = FP.height / 2;
 			
 			trace(button.scaledWidth, button.scaledHeight, this.x, this.y);
-			this.setHitbox(button.scaledWidth, button.scaledHeight, -(messageText.scaledWidth / 2 - button.scaledWidth / 2),-(messageText.scaledHeight));
+			this.setHitbox(button.scaledWidth, button.scaledHeight, -(messageText.scaledWidth / 2 - button.scaledWidth / 2), -(messageText.scaledHeight));
+			type = "popupbox"; //for collision info
 			
-			MenuButton.isDisabled = true; //disables menuButtons
+			//MenuButton.isDisabled = true; //disables menuButtons
 		}
 		
 		override public function update():void 
