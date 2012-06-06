@@ -1,7 +1,8 @@
 package Menu 
 {
 	import flash.ui.MouseCursor;
-	import Menu.Login.LoginBox;
+	import Menu.Character.CreateCharacter;
+	import Menu.Login.*;
 	import net.flashpunk.World;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Text
@@ -10,7 +11,7 @@ package Menu
 	import UI.LineInput;
 	import UI.SimpleText;
 	import UI.UITest;
-	import menu.*;
+	import Menu.*;
 	import user.variables;
 	
 	
@@ -30,12 +31,12 @@ package Menu
 			
 			
 			
-			//add (new MenuButton("play", 1));
+			add (new MenuButton("play", 1, CreateCharacter));
 			add (new MenuButton("options", 2, OptionsMenu));
 			add (new MenuButton("UI test", 3, UITest));
 			add (new MenuButton("exit", 5, MainMenu));
 			//add (new SmallButton(1, 1, "login", MainMenu));
-			add (new LoginBox());
+			add (new LoginBox(0, 0));
 			add (new TitleGraphic());
 			
 			

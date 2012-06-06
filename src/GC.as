@@ -47,7 +47,19 @@ package
 		[Embed(source = '../assets/dragon.png')]
 		public static const GFX_ENEMY_DRAGON:Class;
 		
-
+		///////////////////////////////////////
+		//Character
+		///////////////////////////////////////
+		
+		[Embed(source = '../assets/char/select_mage.png')]
+		public static const GFX_SELECT_MAGE:Class;
+		
+		[Embed(source = '../assets/char/select_warrior.png')]
+		public static const GFX_SELECT_WARRIOR:Class;
+		
+		[Embed(source = '../assets/char/select_rogue.png')]
+		public static const GFX_SELECT_ROGUE:Class;
+		
 		
 		///////////////////////////////////////
 		//UI
