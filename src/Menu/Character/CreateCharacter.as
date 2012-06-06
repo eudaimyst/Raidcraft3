@@ -14,9 +14,9 @@ package Menu.Character
 	{
 		public var numberOfChars:int = 3;
 		
-		protected var mageSelect:CharacterSelect = new CharacterSelect(GC.GFX_SELECT_MAGE, 1, this);
-		protected var rogueSelect:CharacterSelect = new CharacterSelect(GC.GFX_SELECT_ROGUE, 2, this);
-		protected var warriorSelect:CharacterSelect = new CharacterSelect(GC.GFX_SELECT_WARRIOR, 3, this);
+		protected var mageSelect:CharacterSelect;
+		protected var rogueSelect:CharacterSelect;
+		protected var warriorSelect:CharacterSelect;
 		
 		public function CreateCharacter() 
 		{
@@ -24,11 +24,11 @@ package Menu.Character
 			add (new MouseCursorEntity());
 			add (new MenuButton("back", 5, MainMenu));
 			
-			add (new SimpleText(7, 2, "Create Character"));
+			add (new SimpleText(7, 2, "Select Character"));
 			
-			mageSelect = new CharacterSelect(GC.GFX_SELECT_MAGE, 1, this);
-			rogueSelect = new CharacterSelect(GC.GFX_SELECT_ROGUE, 2, this);
-			warriorSelect = new CharacterSelect(GC.GFX_SELECT_WARRIOR, 3, this);
+			mageSelect = new CharacterSelect(GC.GFX_SELECT_MAGE, GC.TEXT_SELECT_MAGE, 1, this);
+			rogueSelect = new CharacterSelect(GC.GFX_SELECT_ROGUE, GC.TEXT_SELECT_ROGUE, 2, this);
+			warriorSelect = new CharacterSelect(GC.GFX_SELECT_WARRIOR, GC.TEXT_SELECT_WARRIOR, 3, this);
 			
 			add (mageSelect);
 			add (rogueSelect);

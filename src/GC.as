@@ -53,12 +53,15 @@ package
 		
 		[Embed(source = '../assets/char/select_mage.png')]
 		public static const GFX_SELECT_MAGE:Class;
+		public static const TEXT_SELECT_MAGE:String = "MAGE";
 		
 		[Embed(source = '../assets/char/select_warrior.png')]
 		public static const GFX_SELECT_WARRIOR:Class;
+		public static const TEXT_SELECT_WARRIOR:String = "WARRIOR";
 		
 		[Embed(source = '../assets/char/select_rogue.png')]
 		public static const GFX_SELECT_ROGUE:Class;
+		public static const TEXT_SELECT_ROGUE:String = "ROGUE";
 		
 		
 		///////////////////////////////////////

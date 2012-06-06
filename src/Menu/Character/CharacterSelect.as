@@ -16,13 +16,16 @@ package Menu.Character
 	public class CharacterSelect extends Entity 
 	{
 		protected var passedClass:Class;
+		protected var passedWorld:CreateCharacter;
 		protected var gfx:Image;
 		protected var graphicList:Graphiclist;
-		protected var passedWorld:CreateCharacter;
+		protected var selectedGraphicList:Graphiclist;
+		protected var charClass:Text;
 		protected var isHover:Boolean = false;
-		protected var isSelected:Boolean = false;
+		public var isSelected:Boolean = false;
 		
-		public function CharacterSelect(_gfx:Class, _num:int, _world:CreateCharacter) 
+		
+		public function CharacterSelect(_gfx:Class, _text:String, _num:int, _world:CreateCharacter) 
 		{
 			passedWorld = _world;
 			passedClass = _gfx;
@@ -33,7 +36,13 @@ package Menu.Character
 			gfx.color = 0x000000;
 			gfx.tinting = .5;
 			
+			charClass = new Text(_text);
+			charClass.y = gfx.scaledHeight + 10;
+			charClass.x = gfx.scaledWidth/2-charClass.textWidth/2;
+			charClass.color = 0xffffff;
+			
 			graphicList = new Graphiclist(gfx);
+			selectedGraphicList = new Graphiclist(gfx, charClass);
 			
 			graphic = Graphiclist(graphicList);
 			
@@ -59,9 +68,9 @@ package Menu.Character
 				if (isHover == false)
 				{
 					//graphic = new Graphiclist(menuButtonHover, buttonText);
-					trace("changed to hover true" + String(gfx));
 					gfx.tinting = 0;
-					graphic = Graphiclist(graphicList);
+					if (isSelected == true) { }
+					else {graphic = Graphiclist(graphicList);}
 					//gfx.color = 
 				}
 				isHover = true;
@@ -69,6 +78,9 @@ package Menu.Character
 				if (Input.mousePressed)
 				{
 					passedWorld.SelectCharacter(passedClass);
+					isSelected = true;
+					gfx.tinting = 0;
+					graphic = Graphiclist(selectedGraphicList);
 				}
 			}
 			else 
@@ -77,14 +89,17 @@ package Menu.Character
 				if (isHover == true)
 				{
 					//graphic = new Graphiclist(menuButton, buttonText);
-					trace("changed to hover false" + String(gfx));
 					gfx.tinting = .5;
-					graphic = Graphiclist(graphicList);
+					if (isSelected == true) { gfx.tinting = 0; }
+					else graphic = Graphiclist(graphicList);
 					
 				}
 				if (Input.mousePressed)
 				{
-					passedWorld.SelectCharacter(passedClass);
+					//passedWorld.SelectCharacter(passedClass);
+					isSelected = false;
+					gfx.tinting = .5;
+					graphic = Graphiclist(graphicList);
 				}
 				isHover = false;
 			}
