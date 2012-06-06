@@ -2,10 +2,8 @@ package net.php
 {
 	import flash.net.*;
 	import flash.events.*;
-	import Menu.LoginBox;
-	import Menu.LoginButton;
-	import Menu.MainMenu;
-	import Menu.MenuButton;
+	import Menu.*;
+	import Menu.Login.LoginButton;
 	import net.flashpunk.FP
 	import UI.PopupBox;
 	import UI.SimpleText;
@@ -64,7 +62,7 @@ package net.php
 					UserVariables.loggedIn = true;
 					UserVariables.userName = username;
 					pressedButton.loginBox.LoginMessage("logged in as " + username);
-					pressedButton.loginBox.RemoveThis();
+					pressedButton.loginBox.RemoveLogin();
 				}
 				else
 				{

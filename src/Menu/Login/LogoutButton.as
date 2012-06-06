@@ -1,4 +1,4 @@
-package Menu 
+package Menu.Login 
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Graphiclist;
@@ -9,38 +9,29 @@ package Menu
 	import net.php.phpComm;
 	import net.php.phpLogin;
 	import UI.LineInputComm;
+	import UI.PopupBox;
 	import UI.SimpleText;
 	import UI.UITest;
+	import user.UserVariables;
 	/**
 	 * ...
 	 * @author skipgamer
 	 */
-	public class LoginButton extends Entity 
+	public class LogoutButton extends Entity 
 	{
 		protected var buttonText:Text;
 		protected var button:Image;
 		protected var buttonHover:Image;
 		protected var buttonGraphicList:Graphiclist;
 		protected var isHover:Boolean;
-		protected var selectedWorld:Class;
-		
-		protected var attachedUserInput:LineInputComm;
-		protected var attachedPassInput:LineInputComm;
-		public var loginBox:LoginBox;
-		
-		
-		//protected var attachedText:SimpleText;
-		
-		protected var loginInstance:phpLogin;
 		
 		public var result:String = "boo";
 		
+		public var loginBox:LoginBox;
 		
-		public function LoginButton(xPos:int, yPos:int, text:String, _userInput:LineInputComm, _passInput:LineInputComm, _loginBox:LoginBox) 
+		
+		public function LogoutButton(xPos:int, yPos:int, _loginBox:LoginBox, text:String = "logout") 
 		{
-			
-			attachedUserInput = _userInput;
-			attachedPassInput = _passInput;
 			loginBox = _loginBox;
 			
 			Text.size = 14;
@@ -87,11 +78,10 @@ package Menu
 				//on mouseclick
 				if (Input.mousePressed)
 				{
-					
-					loginInstance = new phpLogin(); //create new phpComm instance
-					loginInstance.getphp(attachedUserInput.textGraphic.text, attachedPassInput.textGraphic.text, this); //run phpLogin.getphp with attached lineinput instance's textGraphic.text value
-					
-					//trace (attachedInput.textGraphic.text);
+					loginBox.LoginMessage("Successfully Logged out");
+					loginBox.RemoveLoggedIn();
+					UserVariables.loggedIn = false;
+					UserVariables.userName = "";
 					
 				}
 			}

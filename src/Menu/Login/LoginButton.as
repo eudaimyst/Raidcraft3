@@ -1,4 +1,4 @@
-package Menu 
+package Menu.Login 
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Graphiclist;
@@ -6,13 +6,16 @@ package Menu
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.FP;
 	import net.flashpunk.utils.Input;
-	import net.php.*;
-	import UI.*;
+	import net.php.phpComm;
+	import net.php.phpLogin;
+	import UI.LineInputComm;
+	import UI.SimpleText;
+	import UI.UITest;
 	/**
 	 * ...
 	 * @author skipgamer
 	 */
-	public class RegisterButton extends Entity 
+	public class LoginButton extends Entity 
 	{
 		protected var buttonText:Text;
 		protected var button:Image;
@@ -23,23 +26,22 @@ package Menu
 		
 		protected var attachedUserInput:LineInputComm;
 		protected var attachedPassInput:LineInputComm;
-		protected var attachedPassConfirmInput:LineInputComm;
-		protected var attachedEmailInput:LineInputComm;
+		public var loginBox:LoginBox;
+		
 		
 		//protected var attachedText:SimpleText;
 		
-		protected var loginInstance:phpRegister;
+		protected var loginInstance:phpLogin;
 		
 		public var result:String = "boo";
 		
 		
-		public function RegisterButton(xPos:int, yPos:int, text:String, _userInput:LineInputComm, _passInput:LineInputComm, _passConfirmInput:LineInputComm, _emailInput:LineInputComm) 
+		public function LoginButton(xPos:int, yPos:int, text:String, _userInput:LineInputComm, _passInput:LineInputComm, _loginBox:LoginBox) 
 		{
 			
 			attachedUserInput = _userInput;
 			attachedPassInput = _passInput;
-			attachedPassConfirmInput = _passConfirmInput;
-			attachedEmailInput = _emailInput;
+			loginBox = _loginBox;
 			
 			Text.size = 14;
 			
@@ -72,11 +74,6 @@ package Menu
 			
 		}
 		
-		public function PopupMessage(_message:String):void
-		{
-			world.add (new PopupBox(_message));
-		}
-		
 		override public function update():void 
 		{
 			super.update();
@@ -91,8 +88,8 @@ package Menu
 				if (Input.mousePressed)
 				{
 					
-					loginInstance = new phpRegister(); //create new phpRegister instance
-					loginInstance.getphp(attachedUserInput.textGraphic.text, attachedPassInput.textGraphic.text, attachedPassConfirmInput.textGraphic.text, attachedEmailInput.textGraphic.text, this); //run phpLogin.getphp with attached lineinput instance's textGraphic.text value
+					loginInstance = new phpLogin(); //create new phpComm instance
+					loginInstance.getphp(attachedUserInput.textGraphic.text, attachedPassInput.textGraphic.text, this); //run phpLogin.getphp with attached lineinput instance's textGraphic.text value
 					
 					//trace (attachedInput.textGraphic.text);
 					

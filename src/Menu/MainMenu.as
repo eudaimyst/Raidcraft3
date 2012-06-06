@@ -1,6 +1,7 @@
 package Menu 
 {
 	import flash.ui.MouseCursor;
+	import Menu.Login.LoginBox;
 	import net.flashpunk.World;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Text
@@ -9,6 +10,7 @@ package Menu
 	import UI.LineInput;
 	import UI.SimpleText;
 	import UI.UITest;
+	import menu.*;
 	import user.variables;
 	
 	

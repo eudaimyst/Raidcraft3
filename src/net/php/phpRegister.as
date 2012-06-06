@@ -2,10 +2,7 @@ package net.php
 {
 	import flash.net.*;
 	import flash.events.*;
-	import Menu.LoginBox;
-	import Menu.LoginButton;
-	import Menu.MainMenu;
-	import Menu.MenuButton;
+	import Menu.*;
 	import net.flashpunk.FP
 	import UI.PopupBox;
 	import UI.SimpleText;
@@ -21,6 +18,7 @@ package net.php
 	{
 		public var success:String;
 		public var errormessage:String;
+		public var pressedButton:RegisterButton;
         protected var _text:String = "";
 		
 		public function phpLogin():void
@@ -28,8 +26,9 @@ package net.php
 			
 		}
 		
-		public function getphp(_username:String, _password:String, _passwordConfirm:String, _email:String):void
+		public function getphp(_username:String, _password:String, _passwordConfirm:String, _email:String, _pressedButton:RegisterButton):void
 		{
+			pressedButton = _pressedButton; //*works!
 			
 			// Assign a variable name for our URLVariables object
 			var variables:URLVariables = new URLVariables();
@@ -48,7 +47,7 @@ package net.php
 			variables.email = _email;
 			variables.sendRequest = "parse";	
 			// Send the data to the php file
-			trace(variables.username, variables.password);
+			trace(variables.username, variables.password, variables.confirm_pass, variables.email);
 			varLoader.load(varSend);
 				
 			// When the data comes back from PHP we capture it here		
@@ -57,17 +56,11 @@ package net.php
 				success = event.target.data.var1;
 				errormessage = event.target.data.var2;
 				
-				if (success == "true")
-				{
-					trace ("success = " + success);
-					
-				}
-				else
-				{
-					//pressedButton.loginBox.LoginMessage(errormessage);
-					trace ("success = " + success);
-					trace ("error = " + errormessage);
-				}
+				trace("success=" + success + " error=" + errormessage);
+				if (success == "true") pressedButton.PopupMessage("Registration Successful");
+				if (success == "false") pressedButton.PopupMessage(errormessage);
+				
+				
 				//pressedButton.setresult();
 				
 			}
