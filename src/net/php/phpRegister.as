@@ -7,7 +7,6 @@ package net.php
 	import UI.PopupBox;
 	import UI.SimpleText;
 	import user.UserVariables;
-	import user.variables;
 	
 	/**
 	 * ...

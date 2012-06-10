@@ -77,7 +77,7 @@ package Menu.Character
 				//on mouseclick
 				if (Input.mousePressed)
 				{
-					passedWorld.SelectCharacter(passedClass);
+					passedWorld.Select(passedClass);
 					isSelected = true;
 					gfx.tinting = 0;
 					graphic = Graphiclist(selectedGraphicList);

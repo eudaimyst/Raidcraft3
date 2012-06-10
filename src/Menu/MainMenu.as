@@ -2,6 +2,7 @@ package Menu
 {
 	import flash.ui.MouseCursor;
 	import Menu.Character.CreateCharacter;
+	import Menu.Character.SelectCharacter;
 	import Menu.Login.*;
 	import net.flashpunk.World;
 	import net.flashpunk.FP;
@@ -12,8 +13,6 @@ package Menu
 	import UI.SimpleText;
 	import UI.UITest;
 	import Menu.*;
-	import user.variables;
-	
 	
 	/**
 	 * ...
@@ -31,7 +30,7 @@ package Menu
 			
 			
 			
-			add (new MenuButton("play", 1, CreateCharacter));
+			add (new MenuButton("play", 1, SelectCharacter));
 			add (new MenuButton("options", 2, OptionsMenu));
 			add (new MenuButton("UI test", 3, UITest));
 			add (new MenuButton("exit", 5, MainMenu));

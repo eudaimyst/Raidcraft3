@@ -30,7 +30,7 @@ package Menu
 		protected var timeElapsed:Number;
 		protected var selectedWorld:Class;
 		
-		public function MenuButton(BUTTON_TEXT:String, menuItemNumber:int, worldToGo:Class) 
+		public function MenuButton(BUTTON_TEXT:String, menuItemNumber:int, worldToGo:Class, _xPos:int = 3) 
 		{
 			selectedWorld = worldToGo;
 			
@@ -60,7 +60,7 @@ package Menu
 			graphic = Graphiclist(buttonGraphicList);
 			
 			// position this entity
-			this.x = FP.screen.width / 2 - this.menuButton.width;
+			this.x = FP.screen.width / 6 * _xPos - this.menuButton.width;
 			this.y = FP.screen.height * .3 + menuItemNumber * 70;
 			
 			//set hitbox for entity (to the dimensions of the button graphic)

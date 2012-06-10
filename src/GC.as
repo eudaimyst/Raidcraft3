@@ -60,8 +60,8 @@ package
 		public static const TEXT_SELECT_WARRIOR:String = "WARRIOR";
 		
 		[Embed(source = '../assets/char/select_rogue.png')]
-		public static const GFX_SELECT_ROGUE:Class;
-		public static const TEXT_SELECT_ROGUE:String = "ROGUE";
+		public static const GFX_SELECT_WANDERER:Class;
+		public static const TEXT_SELECT_WANDERER:String = "WANDERER";
 		
 		
 		///////////////////////////////////////

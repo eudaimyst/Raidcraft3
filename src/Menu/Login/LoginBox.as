@@ -9,7 +9,6 @@ package Menu.Login
 	import UI.*
 	import Menu.*
 	import user.UserVariables;
-	import user.variables;
 	/**
 	 * ...
 	 * @author skipgamer
@@ -33,6 +32,8 @@ package Menu.Login
 		protected var xPos:int = 0;
 		protected var yPos:int = 0;
 		
+		protected var bgBox:Image;
+		
 		public function LoginBox(_xPos:int = 0, _yPos:int = 0) 
 		{
 			super ();
@@ -49,8 +50,8 @@ package Menu.Login
 			logout = new LogoutButton(xPos + 15, yPos + 1, this);
 			userInput = (new LineInputComm(xPos + 1, yPos + 1, "user"));
 			passInput = (new LineInputComm(xPos + 1, yPos + 2, "pass"));
-			login = (new LoginButton(xPos + 1, yPos + 3, "submit", userInput, passInput, this));
-			register = (new SmallButton(xPos + 6, yPos + 3, "register", RegisterAccount));
+			login = (new LoginButton(xPos + 6, yPos + 3, "submit", userInput, passInput, this));
+			register = (new SmallButton(xPos + 1, yPos + 3, "register", RegisterAccount));
 			
 		}
 		
