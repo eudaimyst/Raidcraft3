@@ -8,14 +8,15 @@ package Menu.Character
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
+	import user.UserVariables;
 	
 	/**
 	 * ...
 	 * @author skipgamer
 	 */
-	public class CharacterSelect extends Entity 
+	public class CharacterSelecter extends Entity 
 	{
-		protected var passedClass:Class;
+		public var passedClass:Class;
 		protected var passedWorld:CreateCharacter;
 		protected var gfx:Image;
 		protected var graphicList:Graphiclist;
@@ -24,8 +25,7 @@ package Menu.Character
 		protected var isHover:Boolean = false;
 		public var isSelected:Boolean = false;
 		
-		
-		public function CharacterSelect(_gfx:Class, _text:String, _num:int, _world:CreateCharacter) 
+		public function CharacterSelecter(_gfx:Class, _text:String, _num:int, _world:CreateCharacter) 
 		{
 			passedWorld = _world;
 			passedClass = _gfx;
@@ -64,44 +64,62 @@ package Menu.Character
 			//if mouse is colliding with this entities hit box
 			if (this.collide(GC.TYPE_MOUSE, x, y))
 			{
-				//change this entities graphic to the hover button, set hovering flag to false so else knows to change it back
+				//if mouse was not hovering last frame
 				if (isHover == false)
 				{
-					//graphic = new Graphiclist(menuButtonHover, buttonText);
-					gfx.tinting = 0;
-					if (isSelected == true) { }
-					else {graphic = Graphiclist(graphicList);}
-					//gfx.color = 
+					gfx.tinting = 0; //no tinting (highlighted)
+					if (isSelected == true)
+					{
+						graphic = Graphiclist(selectedGraphicList);
+					}
+					else
+					{
+						graphic = Graphiclist(graphicList); //update graphic
+					}
 				}
 				isHover = true;
 				//on mouseclick
 				if (Input.mousePressed)
 				{
 					passedWorld.Select(passedClass);
+					trace(String(passedClass));
 					isSelected = true;
 					gfx.tinting = 0;
 					graphic = Graphiclist(selectedGraphicList);
 				}
 			}
-			else 
+			else //if mouse is not colliding
 			{
-				//return this entities graphic to normal button, set hovering flag to true so if statement above knows to change it back
+				//if mouse was hovering last frame
 				if (isHover == true)
 				{
 					//graphic = new Graphiclist(menuButton, buttonText);
-					gfx.tinting = .5;
-					if (isSelected == true) { gfx.tinting = 0; }
-					else graphic = Graphiclist(graphicList);
+					
+					if (isSelected == false) // if this character is not selected, make dark
+					{
+						trace("test");
+						gfx.tinting = .5;
+						graphic = Graphiclist(graphicList);
+					} 
+					else
+					{
+						gfx.tinting = 0;
+						graphic = Graphiclist(selectedGraphicList);
+					}
 					
 				}
-				if (Input.mousePressed)
+				if (Input.mousePressed) //if mouse is clicked when not hovering
 				{
-					//passedWorld.SelectCharacter(passedClass);
-					isSelected = false;
+					//passedWorld.Select(null);
+					if (isSelected == true) //if this character is selected
+					{
+						isSelected = false; //make not selected
+						passedWorld.Select(null);
+					}
 					gfx.tinting = .5;
 					graphic = Graphiclist(graphicList);
 				}
-				isHover = false;
+				isHover = false; //so above if knows we are no longer hovering
 			}
 			
 		}

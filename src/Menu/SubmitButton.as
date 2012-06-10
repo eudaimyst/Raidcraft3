@@ -37,7 +37,7 @@ package Menu
 			attachedInput = _attachedInput;
 			attachedText = _attachedText;
 			
-			Text.size = 18;
+			
 			
 			//define button text and button graphic
 			button = new Image(GC.GFX_LOGIN_BUTTON);
@@ -53,8 +53,10 @@ package Menu
 			buttonHover.scale = 2;
 			
 			buttonText.color = 0x111111;
-			buttonText.x = button.scaledWidth / 2 - buttonText.width / 2;
-			buttonText.y = button.scaledHeight /2 - buttonText.height / 2;
+			buttonText.size = 14;
+			buttonText.x = button.scaledWidth / 2 - buttonText.textWidth / 2;
+			buttonText.y = button.scaledHeight / 2 - buttonText.textHeight / 2;
+			
 			
 			// draw graphics and text
 			graphic = Graphiclist(buttonGraphicList);

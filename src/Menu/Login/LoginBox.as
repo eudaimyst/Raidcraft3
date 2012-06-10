@@ -32,7 +32,7 @@ package Menu.Login
 		protected var xPos:int = 0;
 		protected var yPos:int = 0;
 		
-		protected var bgBox:Image;
+		protected var bgBox:LoginBG;
 		
 		public function LoginBox(_xPos:int = 0, _yPos:int = 0) 
 		{
@@ -43,6 +43,7 @@ package Menu.Login
 			
 			trace("login loaded");
 			
+			
 			displayLoggedIn = new SimpleText(xPos + 1, yPos + 1, "you are logged in as " + UserVariables.userName);
 			displayNotLoggedIn = new SimpleText(xPos + 1, yPos + 1, "not logged in");
 			showLogin = new ShowLoginButton(xPos + 15, yPos + 1, this, "login");
@@ -52,6 +53,7 @@ package Menu.Login
 			passInput = (new LineInputComm(xPos + 1, yPos + 2, "pass"));
 			login = (new LoginButton(xPos + 6, yPos + 3, "submit", userInput, passInput, this));
 			register = (new SmallButton(xPos + 1, yPos + 3, "register", RegisterAccount));
+			bgBox = (new LoginBG());
 			
 		}
 		
@@ -65,6 +67,7 @@ package Menu.Login
 		{
 			if (loginShowing == false)
 			{
+				world.add (bgBox);
 				world.add (userInput);
 				world.add (passInput);
 				world.add (login);
@@ -77,6 +80,7 @@ package Menu.Login
 			}
 			else
 			{
+				world.remove (bgBox);
 				world.remove (userInput);
 				world.remove (passInput);
 				world.remove (login);
@@ -96,6 +100,7 @@ package Menu.Login
 		public function RemoveLogin():void
 		{
 			trace("login removed");
+			world.remove (bgBox);
 			world.remove (userInput);
 			world.remove (passInput);
 			world.remove (login);

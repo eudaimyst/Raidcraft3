@@ -1,4 +1,4 @@
-package Menu 
+package Menu.Character 
 {
 	//import HUD.SpellButton;
 	//import Levels.SpellSelect;
@@ -19,7 +19,7 @@ package Menu
 	 * ...
 	 * @author skipgamer
 	 */
-	public class MenuButton extends Entity 
+	public class CharacterButton extends Entity 
 	{
 		protected var buttonText:Text;
 		protected var menuButton:Image;
@@ -29,11 +29,13 @@ package Menu
 		protected var menuItemNumber2:int;
 		protected var menuOption:String;
 		protected var timeElapsed:Number;
-		protected var selectedWorld:Class;
+		protected var passedWorld:CreateCharacter;
 		
-		public function MenuButton(BUTTON_TEXT:String, menuItemNumber:int, worldToGo:Class, _xPos:int = 3) 
+		protected var tempClass:Class;
+		
+		public function CharacterButton(BUTTON_TEXT:String, menuItemNumber:int, _passedWorld:CreateCharacter, _xPos:int = 3) 
 		{
-			selectedWorld = worldToGo;
+			passedWorld = _passedWorld;
 			
 			timeElapsed = 0;
 			Text.size = 24;
@@ -82,29 +84,37 @@ package Menu
 			}
 			else
 			{
-			if (this.collide(GC.TYPE_MOUSE, x, y))
-			{
-				//change this entities graphic to the hover button, set hovering flag to false so else knows to change it back
-				if (isHover == false) {graphic = new Graphiclist(menuButtonHover, buttonText); trace("changed to hover true");}
-				isHover = true;
-				//on mouseclick
-				if (Input.mousePressed)
+				
+				
+				if (this.collide(GC.TYPE_MOUSE, x, y))
 				{
-					trace(String(menuOption));
-					//this is where the magic happens, check if the menu option text for this entity is equal to the GC variable, then do it.
-					FP.world = new selectedWorld;
-					//if (menuOption == GC.TEXT_PLAY_BUTTON) FP.world = new SpellSelect; 
-					//if (menuOption == GC.TEXT_OPTIONS_BUTTON) FP.world.add (new OptionsMenu())
-					//if (menuOption == GC.TEXT_DONE_SPELL_SELECT) FP.world = new TestLevel;
-					//trace (this.world);
+					
+					
+					if (isHover == false) //first frame when hovering
+					{
+						tempClass = passedWorld.selectedChar;
+						trace(String(tempClass));
+						graphic = new Graphiclist(menuButtonHover, buttonText);
+						trace("changed to hover true");
+					}
+					isHover = true;
+					//on mouseclick
+					if (Input.mousePressed)
+					{
+						passedWorld.SelectButtonPressed(tempClass);
+						trace("sends to selectbuttonpressed");
+					}
 				}
-			}
-			else 
-			{
-				//return this entities graphic to normal button, set hovering flag to true so if statement above knows to change it back
-				if (isHover == true) {graphic = new Graphiclist(menuButton, buttonText); trace("changed to hover false");}
+				else 
+				{
+					//return this entities graphic to normal button, set hovering flag to true so if statement above knows to change it back
+					if (isHover == true)
+					{
+						graphic = new Graphiclist(menuButton, buttonText);
+						trace("changed to hover false");
+					}
 				isHover = false;
-			}
+				}
 			}
 		}
 		

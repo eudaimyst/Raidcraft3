@@ -5,6 +5,8 @@ package Menu.Character
 	import Menu.MenuButton;
 	import net.flashpunk.World;
 	import UI.SimpleText;
+	import user.UserVariables;
+	import net.flashpunk.FP;
 	
 	/**
 	 * ...
@@ -12,15 +14,15 @@ package Menu.Character
 	 */
 	public class CreateCharacter extends World 
 	{
-		public var numberOfChars:int = 3;
+		public var numberOfChars:int = 3; //used by Character selecter to determine spacing
 		
-		protected var mageSelect:CharacterSelect;
-		protected var rogueSelect:CharacterSelect;
-		protected var warriorSelect:CharacterSelect;
+		protected var mageSelect:CharacterSelecter;
+		protected var rogueSelect:CharacterSelecter;
+		protected var warriorSelect:CharacterSelecter;
 		
-		protected var selectedChar:Class;
+		public var selectedChar:Class = null;
 		
-		protected var selectButton:MenuButton;
+		protected var selectButton:CharacterButton;
 		
 		public function CreateCharacter() 
 		{
@@ -30,34 +32,27 @@ package Menu.Character
 			
 			add (new SimpleText(7, 2, "Create Character"));
 			
-			selectButton = new MenuButton("select", 5, SelectCharacter, 5);
+			selectButton = new CharacterButton("select", 5, this, 5);
 			
-			mageSelect = new CharacterSelect(GC.GFX_SELECT_MAGE, GC.TEXT_SELECT_MAGE, 1, this);
-			rogueSelect = new CharacterSelect(GC.GFX_SELECT_WANDERER, GC.TEXT_SELECT_WANDERER, 3, this);
-			warriorSelect = new CharacterSelect(GC.GFX_SELECT_WARRIOR, GC.TEXT_SELECT_WARRIOR, 2, this);
+			mageSelect = new CharacterSelecter(GC.GFX_SELECT_MAGE, GC.TEXT_SELECT_MAGE, 1, this);
+			rogueSelect = new CharacterSelecter(GC.GFX_SELECT_WANDERER, GC.TEXT_SELECT_WANDERER, 3, this);
+			warriorSelect = new CharacterSelecter(GC.GFX_SELECT_WARRIOR, GC.TEXT_SELECT_WARRIOR, 2, this);
 			
 			add (mageSelect);
 			add (rogueSelect);
 			add (warriorSelect);
+			add (selectButton);
 		}
 		
-		public function Select(_selected:Class):void
+		public function Select(_selected:Class = null):void
 		{
 			selectedChar = _selected;
-			add (selectButton);
-			
-			if (_selected == GC.GFX_SELECT_MAGE)
-			{
-				trace("mage selected");
-			}
-			if (_selected == GC.GFX_SELECT_WANDERER)
-			{
-				trace("wanderer selected");
-			}
-			if (_selected == GC.GFX_SELECT_WARRIOR)
-			{
-				trace("warrior selected");
-			}
+			trace (String(selectedChar));
+		}
+		
+		public function SelectButtonPressed(_tempClass:Class):void
+		{
+			FP.world = new SelectCharacter(_tempClass);
 		}
 		
 	}

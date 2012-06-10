@@ -13,16 +13,20 @@ package Menu.Character
 	 */
 	public class SelectCharacter extends World 
 	{
-		public var numberOfChars:int = 3;
+		public static var selectedChar:Class
 		
-		protected var mageSelect:CharacterSelect;
-		protected var rogueSelect:CharacterSelect;
-		protected var warriorSelect:CharacterSelect;
+		protected var numOfChars:int = 0;
 		
-		protected var selectedChar:Class;
+		protected var mageSelect:CharacterSelecter;
+		protected var rogueSelect:CharacterSelecter;
+		protected var warriorSelect:CharacterSelecter;
 		
-		public function SelectCharacter() 
+		
+		
+		public function SelectCharacter(_newChar:Class = null) 
 		{
+
+			
 			add (new LoginBox());
 			add (new MouseCursorEntity());
 			add (new MenuButton("create", 5, CreateCharacter, 5));
@@ -30,21 +34,28 @@ package Menu.Character
 			
 			add (new SimpleText(1, 2, "Select Character:"));
 			
-/*			if (UserVariables.loggedIn == false) //if user is not logged in
+			if (UserVariables.loggedIn == false && _newChar == null) //if user is not logged in
 			{
 				add (new SimpleText(1, 4, "Login to access saved characters"));
 				
 			}
-			else
-			{*/
-				add (new CharacterBox(1));
-				add (new CharacterBox(2));
-				add (new CharacterBox(3));
-				add (new CharacterBox(4));
-				add (new CharacterBox(5));
-			//}
+			if (UserVariables.loggedIn == true)
+			{
+				AddCharacter(GC.GFX_SELECT_MAGE);
+				AddCharacter(GC.GFX_SELECT_MAGE);
+				AddCharacter(GC.GFX_SELECT_WARRIOR);
+			}
 			
-			
+			if (_newChar != null)
+			{
+				AddCharacter(_newChar);
+			}
+		}
+		
+		public function AddCharacter(_class:Class):void
+		{
+			add (new CharacterBox(numOfChars + 1, _class));
+			numOfChars += 1;
 		}
 		
 		public function GenericButton():void

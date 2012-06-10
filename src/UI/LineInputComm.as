@@ -42,6 +42,7 @@ package UI
 			labelText.color = 0xffffff;
 			labelText.x = 0;
 			labelText.y = 0;
+			labelText.size = 24;
 			
 			inputHeight = 34;
 			inputWidth = 250;
@@ -59,6 +60,7 @@ package UI
 			textGraphic.color = 0xffffff;
 			textGraphic.x = inputOutline.x + 5;
 			textGraphic.y = inputOutline.y + 2;
+			textGraphic.size = 24;
 			
 			activeFlash = Image.createRect(2, inputHeight - 6, 0xffffff, 1);
 			
