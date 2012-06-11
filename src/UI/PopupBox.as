@@ -32,6 +32,8 @@ package UI
 		{
 			message = _message;
 			messageText = new Text(message);
+			messageText.color = 0xffffff;
+			messageText.size = 24;
 			
 			button = new Image(GC.GFX_LOGIN_BUTTON);
 			button.scale = 2;
@@ -47,6 +49,7 @@ package UI
 			buttonText.color = 0x000000;
 			buttonText.y = button.y + 2;
 			buttonText.x = button.x + button.scaledWidth / 2 - buttonText.scaledWidth / 2;
+			buttonText.size = 24;
 			
 			if (messageText.scaledWidth < button.scaledWidth) // if messagetext is smaller than the button width
 			{

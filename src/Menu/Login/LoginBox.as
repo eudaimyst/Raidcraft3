@@ -91,10 +91,6 @@ package Menu.Login
 				
 				loginShowing = false;
 			}
-			
-			
-			
-			
 		}
 		
 		public function RemoveLogin():void
