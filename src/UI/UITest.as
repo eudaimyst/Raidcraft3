@@ -2,7 +2,7 @@ package UI
 {
 	import flash.ui.MouseCursor;
 	import Menu.MainMenu;
-	import Menu.MenuButton;
+	import UI.MenuButton;
 	import Menu.SubmitButton;
 	import net.flashpunk.Entity;
 	import net.flashpunk.World;
@@ -35,7 +35,7 @@ package UI
 		{
 			super();
 			
-			add (new MenuButton("save", 5, MainMenu));
+			add (new MenuButton("save", 1, 9, true, MainMenu));
 			add (new Checkbox(1, 1, "testbox"));
 			add (new Checkbox(1, 2, "testbox2"));
 			add (new Checkbox(1, 3, "testbox3"));

@@ -21,7 +21,7 @@ package Menu
 		{	
 			super();
 			
-			add (new MenuButton("save", 5, MainMenu));
+			add (new MenuButton("save", 1, 9, true, MainMenu));
 			add (new SimpleText(1, 1, "Options"));
 			add (new SmallButton(1, 2, "Graphics", GraphicsMenu));
 			add (new SmallButton(6, 2, "Controls", ControlsMenu));

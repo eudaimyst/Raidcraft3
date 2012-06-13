@@ -2,7 +2,7 @@ package Menu.Character
 {
 	import Menu.Login.LoginBox;
 	import Menu.MainMenu;
-	import Menu.MenuButton;
+	import UI.MenuButton;
 	import net.flashpunk.World;
 	import UI.SimpleText;
 	import user.UserVariables;
@@ -28,7 +28,7 @@ package Menu.Character
 		{
 			add (new LoginBox());
 			add (new MouseCursorEntity());
-			add (new MenuButton("back", 5, SelectCharacter, 1));
+			add (new MenuButton("back", 2, 9, false, SelectCharacter));
 			
 			add (new SimpleText(7, 2, "Create Character"));
 			

@@ -1,18 +1,16 @@
 package Menu 
 {
 	import flash.ui.MouseCursor;
-	import Menu.Character.CreateCharacter;
 	import Menu.Character.SelectCharacter;
-	import Menu.Login.*;
 	import net.flashpunk.World;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Text
 	import net.flashpunk.graphics.Image
 	import net.flashpunk.utils.Input
-	import UI.LineInput;
-	import UI.SimpleText;
-	import UI.UITest;
 	import Menu.*;
+	import Menu.Login.*;
+	import UI.*
+	
 	
 	/**
 	 * ...
@@ -21,7 +19,7 @@ package Menu
 	public class MainMenu extends World 
 	{
 		protected var gameVersion:Text;
-		protected var loginBox:LoginBox;
+		//protected var loginBox:LoginBox;
 		
 		
 		public function MainMenu():void
@@ -30,19 +28,25 @@ package Menu
 			
 			
 			
-			add (new MenuButton("play", 1, SelectCharacter));
+/*			add (new MenuButton("play", 1, SelectCharacter));
 			add (new MenuButton("options", 2, OptionsMenu));
 			add (new MenuButton("UI test", 3, UITest));
-			add (new MenuButton("exit", 5, MainMenu));
+			add (new MenuButton("exit", 5, MainMenu));*/
 			//add (new SmallButton(1, 1, "login", MainMenu));
 			add (new LoginBox(0, 0));
 			add (new TitleGraphic());
 			
 			
-			Text.size = 24;
+			add (new MenuButton("play", 1, 4, true, SelectCharacter));
+			add (new MenuButton("options", 1, 5, true, OptionsMenu));
+			add (new MenuButton("UI test", 1, 6, true, UITest));
+			
+			
+			
 			
 			//game version
-			gameVersion = new Text("Version 0.51",10,FP.screen.height-40);
+			gameVersion = new Text("Version 0.52",10,FP.screen.height-40);
+			gameVersion.size = 24;
 			addGraphic(gameVersion);
 			
 			

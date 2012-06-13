@@ -18,7 +18,7 @@ package Menu
 		
 		public function RegisterAccount() 
 		{
-			add (new MenuButton("exit", 5, MainMenu));
+			add (new MenuButton("exit", 1, 5, true, MainMenu));
 			
 			userInput = (new LineInputComm(1, 1, "username"));
 			passInput = (new LineInputComm(1, 2, "password"));
