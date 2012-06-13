@@ -40,6 +40,7 @@ package Menu
 			add (new MenuButton("play", 1, 4, true, SelectCharacter));
 			add (new MenuButton("options", 1, 5, true, OptionsMenu));
 			add (new MenuButton("UI test", 1, 6, true, UITest));
+			add (new MenuButton("exit", 1, 9, true, null, true));
 			
 			
 			

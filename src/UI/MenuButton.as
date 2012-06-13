@@ -4,17 +4,7 @@ package UI
 	 * ...
 	 * @author skipgamer
 	 */
-	import Menu.MainMenu;
-	import net.flashpunk.Entity;
-	import net.flashpunk.graphics.Graphiclist;
-	import net.flashpunk.graphics.Text;
-	import net.flashpunk.graphics.Image;
 	import net.flashpunk.FP;
-	import net.flashpunk.utils.Input;
-	import net.flashpunk.World;
-	import UI.PopupBox;
-	import UI.UITest;
-	import user.UserVariables;
 	 
 	public class MenuButton extends Button 
 	{
@@ -28,13 +18,15 @@ package UI
 		 * @param	_ypos		ypos to display entity in 1/10ths of screen size.
 		 * @param	_centered	should button be centered on x-axis.
 		 * @param	_world		world to go to when button is pressed. defaults to main menu
+		 * @param	_small		should the button use a small graphic?
 		 */
-		public function MenuButton(_text:String = "", _xpos:int = 3, _ypos:int = 1, _centered:Boolean = false, _world:Class = null) 
+		public function MenuButton(_text:String = "", _xpos:int = 3, _ypos:int = 1, _centered:Boolean = false, _world:Class = null, _small:Boolean = false) 
 		{
 			this.text = _text;
 			this.xpos = _xpos;
 			this.ypos = _ypos;
 			this.centered = _centered;
+			this.smallButton = _small;
 			
 			selectedWorld = _world;
 		}
@@ -42,7 +34,10 @@ package UI
 		override public function onPress():void
 		{
 			trace("menu button pressed");
-			FP.world = new selectedWorld;
+			if (selectedWorld != null)
+			{
+				FP.world = new selectedWorld;
+			}
 		}
 		
 	}

@@ -31,6 +31,7 @@ package UI
 		protected var xpos:int;
 		protected var ypos:int;
 		protected var centered:Boolean;
+		protected var smallButton:Boolean;
 		
 		public function Button() 
 		{	
@@ -45,13 +46,25 @@ package UI
 		override public function added():void
 		{
 			//define button text and button graphic
-			buttonGraphic = new Image(GC.GFX_MENU_BUTTON);
-			buttonGraphicHover = new Image(GC.GFX_MENU_BUTTON_HOVER);
+			buttonText = new Text(text);
+			
+			if (smallButton == true)
+			{
+				buttonGraphic = new Image(GC.GFX_LOGIN_BUTTON);
+				buttonGraphicHover = new Image(GC.GFX_LOGIN_BUTTON_HOVER);
+				buttonText.size = 18;
+			}
+			else
+			{
+				buttonGraphic = new Image(GC.GFX_MENU_BUTTON);
+				buttonGraphicHover = new Image(GC.GFX_MENU_BUTTON_HOVER);
+				buttonText.size = 24;
+			}
 			buttonGraphic.scale = 2;
 			buttonGraphicHover.scale = 2;
 			
-			buttonText = new Text(text);
-			buttonText.size = 24;
+			
+			
 			
 			//set graphiclists
 			buttonGraphicList = new Graphiclist(buttonGraphic, buttonText);
@@ -99,11 +112,7 @@ package UI
 					
 					if (Input.mousePressed) //on mouseclick
 					{
-						onPress();
-						//set world for menu button
-						//trace(String(menuOption));
-						//FP.world = new selectedWorld;
-						
+						onPress(); //call onpress function which is over-riden by classes which extend this.
 					}
 				}
 				else 
