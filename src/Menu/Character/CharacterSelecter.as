@@ -37,9 +37,10 @@ package Menu.Character
 			gfx.tinting = .5;
 			
 			charClass = new Text(_text);
-			charClass.y = gfx.scaledHeight + 10;
-			charClass.x = gfx.scaledWidth/2-charClass.textWidth/2;
 			charClass.color = 0xffffff;
+			charClass.size = 24;
+			charClass.y = gfx.scaledHeight + 10;
+			charClass.x = gfx.scaledWidth / 2 - charClass.textWidth / 2;
 			
 			graphicList = new Graphiclist(gfx);
 			selectedGraphicList = new Graphiclist(gfx, charClass);

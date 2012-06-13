@@ -32,7 +32,7 @@ package Menu.Character
 			
 			add (new SimpleText(7, 2, "Create Character"));
 			
-			selectButton = new CharacterButton("select", 5, this, 5);
+			selectButton = new CharacterButton("select", 9, this, 8);
 			
 			mageSelect = new CharacterSelecter(GC.GFX_SELECT_MAGE, GC.TEXT_SELECT_MAGE, 1, this);
 			rogueSelect = new CharacterSelecter(GC.GFX_SELECT_WANDERER, GC.TEXT_SELECT_WANDERER, 3, this);

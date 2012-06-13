@@ -34,6 +34,7 @@ package UI
 		public function UITest()
 		{
 			super();
+			Text.size = 24; //default text size testing
 			
 			add (new MenuButton("save", 1, 9, true, MainMenu));
 			add (new Checkbox(1, 1, "testbox"));

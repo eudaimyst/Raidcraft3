@@ -31,6 +31,7 @@ package Menu.Character
 			add (new MouseCursorEntity());
 			add (new MenuButton("create", 8, 9, false, CreateCharacter));
 			add (new MenuButton("back", 2, 9, false, MainMenu));
+			add (new MenuButton("play", 2, 9, true, null));
 			
 			add (new SimpleText(1, 2, "Select Character:"));
 			
