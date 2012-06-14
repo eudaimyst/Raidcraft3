@@ -28,6 +28,7 @@ package Menu
 		{
 			super(); //not sure what this does, but it needs to be here.
 			add (new HelloWorldEntity());
+			//new HelloWorld();
 			
 			add (new LoginBox(0, 0));
 			add (new TitleGraphic());

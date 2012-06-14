@@ -182,9 +182,17 @@ www/Scripts/
 www/swf/
 www/*.*
 
+#playerio serverside folders
+Serverside Code/Player.IO Serverside .NET Libraries/
+Serverside Code/Player.IO Test Server Project/
+Serverside Code/*/
+*.csproj
+*.sln
+playerioserver.as
+
 #dreamweaver
 _notes
 
-
+#
 
 .gitignore
