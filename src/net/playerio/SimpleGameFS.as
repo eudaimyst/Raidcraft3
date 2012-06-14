@@ -1,6 +1,8 @@
-﻿package net.playerio{
+﻿package net.playerio
+{
 	//Local GameFS implamentation
-	import playerio.GameFS
+	import net.playerio.GameFS
+	
 	internal class SimpleGameFS implements GameFS{
 		private var gameId:String
 		private var wo:Object

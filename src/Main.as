@@ -5,6 +5,7 @@ package
 	import Menu.MainMenu;
 	import net.flashpunk.Engine;
 	import net.flashpunk.FP;
+	import PlayerIoTest.HelloWorld;
 	import splash.SplashWorld;
 	/**
 	 * ...

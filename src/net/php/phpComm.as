@@ -15,7 +15,6 @@ package net.php
 	{
 		public var phpVar1:String = "boo";
 		public var pressedButton:SubmitButton;
-        protected var _text:String = "";
 		
 		public function phpComm():void
 		{
@@ -49,14 +48,10 @@ package net.php
 				phpVar1 = event.target.data.var1;
 				trace (phpVar1);
 				pressedButton.setresult();
-				
 			}
-			
 			
 		}
 		
-		
-		
-		
 	}
+	
 }

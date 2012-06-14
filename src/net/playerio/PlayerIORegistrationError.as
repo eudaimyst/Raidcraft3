@@ -1,4 +1,5 @@
 package net.playerio
+{
 	/**
 	* Error object PlayerIO QuickConnect registration errors
 	* This class is auto generated

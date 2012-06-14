@@ -9,6 +9,8 @@ package Menu
 	import net.flashpunk.utils.Input
 	import Menu.*;
 	import Menu.Login.*;
+	import PlayerIoTest.HelloWorld;
+	import PlayerIoTest.HelloWorldEntity;
 	import UI.*
 	
 	
@@ -25,7 +27,7 @@ package Menu
 		public function MainMenu():void
 		{
 			super(); //not sure what this does, but it needs to be here.
-			
+			add (new HelloWorldEntity());
 			
 			
 /*			add (new MenuButton("play", 1, SelectCharacter));
