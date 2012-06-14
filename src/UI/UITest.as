@@ -40,8 +40,8 @@ package UI
 			add (new Checkbox(1, 1, "testbox"));
 			add (new Checkbox(1, 2, "testbox2"));
 			add (new Checkbox(1, 3, "testbox3"));
-			add (new LineInput(10, 1, "username"));
-			add (new LineInput(10, 2, "password"));
+			add (new LineInputComm(10, 1, "username"));
+			add (new LineInputComm(10, 2, "password"));
 			
 			add (new SimpleText(1, 6, "php communication:"));
 			
