@@ -1,4 +1,4 @@
-package net.playerio
+package playerio
 {
 	/**
 	* Error object PlayerIO QuickConnect registration errors

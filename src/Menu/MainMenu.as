@@ -12,7 +12,7 @@ package Menu
 	import PlayerIoTest.HelloWorld;
 	import PlayerIoTest.HelloWorldEntity;
 	import UI.*
-	
+	import playerio.*;
 	
 	/**
 	 * ...
@@ -20,7 +20,7 @@ package Menu
 	 */
 	public class MainMenu extends World 
 	{
-		protected var gameVersion:Text;
+		var gameVersion:Text;
 		//protected var loginBox:LoginBox;
 		
 		
@@ -29,37 +29,25 @@ package Menu
 			super(); //not sure what this does, but it needs to be here.
 			add (new HelloWorldEntity());
 			
-			
-/*			add (new MenuButton("play", 1, SelectCharacter));
-			add (new MenuButton("options", 2, OptionsMenu));
-			add (new MenuButton("UI test", 3, UITest));
-			add (new MenuButton("exit", 5, MainMenu));*/
-			//add (new SmallButton(1, 1, "login", MainMenu));
 			add (new LoginBox(0, 0));
 			add (new TitleGraphic());
-			
 			
 			add (new MenuButton("play", 1, 4, true, SelectCharacter));
 			add (new MenuButton("options", 1, 5, true, OptionsMenu));
 			add (new MenuButton("UI test", 1, 6, true, UITest));
 			add (new MenuButton("exit", 1, 9, true, null, true));
 			
-			
-			
-			
 			//game version
 			gameVersion = new Text("Version 0.52",10,FP.screen.height-40);
 			gameVersion.size = 24;
 			addGraphic(gameVersion);
-			
-			
-			
 			
 			trace ("Menu loaded");
 			
 			add (new MouseCursorEntity());
 			
 		}
+		
 		
 		override public function update():void 
 		{
