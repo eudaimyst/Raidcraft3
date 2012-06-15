@@ -1,4 +1,4 @@
-package Menu 
+package UI 
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Graphiclist;
@@ -7,6 +7,7 @@ package Menu
 	import net.flashpunk.FP;
 	import net.flashpunk.utils.Input;
 	import net.php.phpComm;
+	import PlayerIoTest.playerioComm;
 	import UI.LineInputComm;
 	import UI.SimpleText;
 	import UI.UITest;
@@ -27,12 +28,15 @@ package Menu
 		protected var attachedText:SimpleText;
 		
 		protected var communicationInstance:phpComm;
+		protected var communicationInstance2:playerioComm;
 		
 		public var result:String = "boo";
 		
+		protected var playerio:Boolean;
 		
-		public function SubmitButton(xPos:int, yPos:int, text:String, _attachedInput:LineInputComm, _attachedText:SimpleText) 
+		public function SubmitButton(xPos:int, yPos:int, text:String, _attachedInput:LineInputComm, _attachedText:SimpleText, _playerio:Boolean = false) 
 		{
+			playerio = _playerio;
 			
 			attachedInput = _attachedInput;
 			attachedText = _attachedText;
@@ -84,8 +88,16 @@ package Menu
 				if (Input.mousePressed)
 				{
 					
-					communicationInstance = new phpComm(); //create new phpComm instance
-					communicationInstance.getphp(attachedInput.textGraphic.text, this); //run phpCom.getphp with attached lineinput instance's textGraphic.text value
+					if (playerio == true)
+					{
+						communicationInstance2 = new playerioComm(); //create new phpComm instance
+						communicationInstance2.getphp(attachedInput.textGraphic.text, this); //run phpCom.getphp with attached lineinput instance's textGraphic.text value
+					}
+					else
+					{
+						communicationInstance = new phpComm(); //create new phpComm instance
+						communicationInstance.getphp(attachedInput.textGraphic.text, this); //run phpCom.getphp with attached lineinput instance's textGraphic.text value
+					}
 					
 					trace (attachedInput.textGraphic.text);
 					
@@ -104,9 +116,17 @@ package Menu
 		{
 			trace("test");
 			//trace (communicationInstance.phpVar1);
-			trace(attachedText.text, communicationInstance.phpVar1)
-			attachedText.text = communicationInstance.phpVar1;
-			trace(communicationInstance.phpVar1);
+			if (playerio == true)
+			{
+				attachedText.text = communicationInstance2.phpVar1;
+				trace(communicationInstance2.phpVar1);
+			}
+			else
+			{
+				attachedText.text = communicationInstance.phpVar1;
+				trace(communicationInstance.phpVar1);
+			}
+
 		}
 		
 		

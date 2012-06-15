@@ -2,7 +2,7 @@ package net.php
 {
 	import flash.net.*;
 	import flash.events.*;
-	import Menu.SubmitButton;
+	import UI.SubmitButton;
 	import net.flashpunk.FP
 	import UI.SimpleText;
 	

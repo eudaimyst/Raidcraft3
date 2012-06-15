@@ -3,7 +3,7 @@ package UI
 	import flash.ui.MouseCursor;
 	import Menu.MainMenu;
 	import UI.MenuButton;
-	import Menu.SubmitButton;
+	import UI.SubmitButton;
 	import net.flashpunk.Entity;
 	import net.flashpunk.World;
 	import net.flashpunk.FP;
@@ -43,7 +43,8 @@ package UI
 			add (new LineInputComm(10, 1, "username"));
 			add (new LineInputComm(10, 2, "password"));
 			
-			add (new SimpleText(1, 6, "php communication:"));
+			add (new SimpleText(1, 6, "php comm:"));
+			add (new SimpleText(11, 6, "playerio comm:"));
 			
 			testInput = (new LineInputComm(1, 7, "textbox"));
 			testSimpleText = (new SimpleText(1,9,"hmm"));
@@ -54,7 +55,7 @@ package UI
 			
 			testInput2 = (new LineInputComm(11, 7, "textbox"));
 			testSimpleText2 = (new SimpleText(11,9,"ummm"));
-			testSubmitButton2 = (new SubmitButton(11, 8, "submit", testInput2, testSimpleText2));
+			testSubmitButton2 = (new SubmitButton(11, 8, "submit", testInput2, testSimpleText2, true));
 			add (testInput2);
 			add (testSimpleText2);
 			add (testSubmitButton2);

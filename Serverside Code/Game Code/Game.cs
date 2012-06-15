@@ -8,6 +8,7 @@ using System.Drawing;
 namespace MyGame {
 	public class Player : BasePlayer {
 		public string Name;
+        public string TestVar;
 	}
 
 	[RoomType("MyCode")]
@@ -62,6 +63,10 @@ namespace MyGame {
 				case "MyNameIs":
 					player.Name = message.GetString(0);
 					break;
+                case "test":
+                    player.TestVar = message.GetString(0)+" is from server";
+                    player.Send("testrecieved", player.TestVar);
+                    break;
 			}
 		}
 

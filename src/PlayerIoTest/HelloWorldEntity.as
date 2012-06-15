@@ -13,6 +13,9 @@ package PlayerIoTest
 	{
 		protected var gameID:String = playerioserver.gameID;
 		protected var gameStage:Stage;
+		protected var testMessage:Message;
+		protected var testConnection:Connection;
+		protected var testComm:playerioComm;
 		
 		public function HelloWorldEntity():void
 		{
@@ -21,13 +24,29 @@ package PlayerIoTest
 		
 		override public function added():void
 		{
-			PlayerIO.connect(FP.stage, gameID, "public", "Guest", "", "", handleConnect, handleError);
+			if (playerioserver.isConnected == false)
+			{
+				trace("connecting to player.io...");
+				PlayerIO.connect(FP.stage, gameID, "public", "Guest", "", "", handleConnect, handleError);
+			}
+			else trace("already connected to player.io");
+		}
+		
+		public function sendTest(_testComm:playerioComm, sentVariable:String):void
+		{
+			testComm = _testComm;
+			testConnection.send("test", sentVariable);
+			trace ("blahblah", sentVariable);
+		}
+		
+		public function returnTest():void
+		{
+			//testComm.phpVar1 = 
 		}
 
 		private function handleConnect(client:Client):void
 		{
-			trace("Sucessfully connected to player.io");
-
+			trace("handling connection attempt");
 			//Set developmentsever (Comment out to connect to your server online)
 			client.multiplayer.developmentServer = "localhost:8184";
 
@@ -37,13 +56,21 @@ package PlayerIoTest
 
 		private function handleJoin(connection:Connection):void
 		{
+			
+			
 			trace("Sucessfully connected to the multiplayer server");
+			playerioserver.isConnected = true;
+			
+			testConnection = connection;
 
 			//Add disconnect listener
 			connection.addDisconnectHandler(handleDisconnect);
 
 			//Add listener for messages of the type "hello"
 			connection.addMessageHandler("hello", Hello);
+			
+			//Add listener for messages of the type "hello"
+			connection.addMessageHandler("testrecieved", TestRecieved);
 
 			//Add message listener for users joining the room
 			connection.addMessageHandler("UserJoined", UserJoined);
@@ -60,6 +87,13 @@ package PlayerIoTest
 			trace("Recived a message with the type hello from the server");
 		}
 
+		private function TestRecieved(m:Message):void
+		{
+			trace("Test message Recieved from server");
+			trace(m.getString(0));
+			testComm.valueReturn(m.getString(0));
+		}
+
 		private function UserJoined(m:Message, userid:uint):void
 		{
 			trace("Player with the userid", userid, "just joined the room");
@@ -72,7 +106,7 @@ package PlayerIoTest
 
 		private function handleMessages(m:Message):void
 		{
-			trace("Recived the message", m);
+			//trace("Recived the message", m);
 		}
 
 		private function handleDisconnect():void

@@ -61,15 +61,14 @@ package Menu.Character
 			charIcon.y = boxBg.y + (boxBg.height - charIcon.height) / 2;
 			charIcon.x = boxBg.x;
 			//text for button
-			charName = new Text("Name: " + charNameStr, charIcon.x + charIcon.width + boxBg.width / 20, charIcon.y);
+			charClass = new Text(charClassStr, charIcon.x + charIcon.width + boxBg.width / 20, charIcon.y);
 			charLevel = new Text("Lvl: " + charLevelStr, charIcon.x + charIcon.width + (boxBg.width / 20 * 14), charIcon.y + boxBg.height / 2);
-			charClass = new Text("Class: " + charClassStr, charIcon.x + charIcon.width + boxBg.width / 20, charIcon.y + boxBg.height / 2);
-			charName.size = 20;
+			
 			charLevel.size = 20;
 			charClass.size = 20;
 			
-			graphiclist = new Graphiclist(boxBg, charIcon, charName, charLevel, charClass);
-			hoverGraphiclist = new Graphiclist(outline, boxBg, charIcon, charName, charLevel, charClass);
+			graphiclist = new Graphiclist(boxBg, charIcon, charLevel, charClass);
+			hoverGraphiclist = new Graphiclist(outline, boxBg, charIcon, charLevel, charClass);
 			
 			graphic = graphiclist
 			

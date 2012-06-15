@@ -23,11 +23,15 @@ package Menu
 		var gameVersion:Text;
 		//protected var loginBox:LoginBox;
 		
+		public var testInput2:LineInputComm;
+		public var testSubmitButton2:SubmitButton;
+		public var testSimpleText2:SimpleText;
+		public static var testHelloWorldEntity:HelloWorldEntity = new HelloWorldEntity;
 		
 		public function MainMenu():void
 		{
 			super(); //not sure what this does, but it needs to be here.
-			add (new HelloWorldEntity());
+			add (testHelloWorldEntity);
 			//new HelloWorld();
 			
 			add (new LoginBox(0, 0));
@@ -46,6 +50,15 @@ package Menu
 			trace ("Menu loaded");
 			
 			add (new MouseCursorEntity());
+			
+			/*
+			testInput2 = (new LineInputComm(11, 7, "textbox"));
+			testSimpleText2 = (new SimpleText(11,9,"ummm"));
+			testSubmitButton2 = (new SubmitButton(11, 8, "submit", testInput2, testSimpleText2, true));
+			add (testInput2);
+			add (testSimpleText2);
+			add (testSubmitButton2);
+			*/
 			
 		}
 		
