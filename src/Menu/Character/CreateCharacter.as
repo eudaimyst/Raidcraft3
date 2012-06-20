@@ -14,7 +14,7 @@ package Menu.Character
 	 */
 	public class CreateCharacter extends World 
 	{
-		public var numberOfChars:int = 3; //used by Character selecter to determine spacing
+		public var numberOfChars:int = 4; //used by Character selecter to determine spacing
 		
 		protected var mageSelect:CharacterSelecter;
 		protected var rogueSelect:CharacterSelecter;

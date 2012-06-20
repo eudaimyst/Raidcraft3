@@ -1,9 +1,12 @@
 package Menu.Character 
 {
+	import GameWorld.Level;
+	import GameWorld.Player;
 	import Menu.Login.LoginBox;
 	import Menu.MainMenu;
 	import UI.MenuButton;
 	import net.flashpunk.World;
+	import UI.PlayButton;
 	import UI.SimpleText;
 	import user.UserVariables;
 	
@@ -21,17 +24,26 @@ package Menu.Character
 		protected var rogueSelect:CharacterSelecter;
 		protected var warriorSelect:CharacterSelecter;
 		
+		public var newPlayer:Player;
+		public var newLeveL:Level;
+		
 		
 		
 		public function SelectCharacter(_newChar:Class = null) 
 		{
-
+			if (_newChar != null)
+			{
+				newPlayer = new Player(_newChar);
+				newLeveL = new Level(newPlayer);
+			}
+			
+			
 			
 			add (new LoginBox());
 			add (new MouseCursorEntity());
 			add (new MenuButton("create", 8, 9, false, CreateCharacter));
 			add (new MenuButton("back", 2, 9, false, MainMenu));
-			add (new MenuButton("play", 2, 9, true, null));
+			add (new PlayButton("play", 2, 9, true, newLeveL));
 			
 			add (new SimpleText(1, 2, "Select Character:"));
 			

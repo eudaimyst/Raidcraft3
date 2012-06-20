@@ -63,6 +63,19 @@ package
 		public static const GFX_SELECT_WANDERER:Class;
 		public static const TEXT_SELECT_WANDERER:String = "WANDERER";
 		
+		///////////////////////////////////////
+		//WEAPONS
+		///////////////////////////////////////
+		
+		[Embed(source="../assets/char/weapons/mage_staff.png")]
+		public static const GFX_WEAPON_MAGE:Class;
+		
+		[Embed(source="../assets/char/weapons/warrior_sword.png")]
+		public static const GFX_WEAPON_WARRIOR:Class;
+		
+		[Embed(source = "../assets/char/weapons/rogue_dagger.png")]
+		public static const GFX_WEAPON_WANDERER:Class;
+		
 		
 		///////////////////////////////////////
 		//UI
