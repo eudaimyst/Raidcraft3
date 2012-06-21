@@ -1,7 +1,6 @@
 package Menu.Character 
 {
 	import GameWorld.Level;
-	import GameWorld.Player;
 	import Menu.Login.LoginBox;
 	import Menu.MainMenu;
 	import UI.MenuButton;
@@ -24,7 +23,6 @@ package Menu.Character
 		protected var rogueSelect:CharacterSelecter;
 		protected var warriorSelect:CharacterSelecter;
 		
-		public var newPlayer:Player;
 		public var newLeveL:Level;
 		
 		
@@ -33,8 +31,7 @@ package Menu.Character
 		{
 			if (_newChar != null)
 			{
-				newPlayer = new Player(_newChar);
-				newLeveL = new Level(newPlayer);
+				newLeveL = new Level(_newChar);
 			}
 			
 			

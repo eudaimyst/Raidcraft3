@@ -5,10 +5,10 @@ package GameWorld.Characters
 	 * ...
 	 * @author skipgamer
 	 */
-	public class Friendly extends Unit 
+	public class Enemy extends Unit 
 	{
 		
-		public function Friendly() 
+		public function Enemy() 
 		{
 			
 		}

@@ -2,6 +2,7 @@ package GameWorld
 {
 	import GameWorld.Characters.Hero;
 	import GameWorld.Characters.Unit;
+	import GameWorld.Controllers.PlayerInputController;
 	import net.flashpunk.World;
 	
 	/**
@@ -10,20 +11,19 @@ package GameWorld
 	 */
 	public class Level extends World 
 	{
-		public var playerClass:Player;
+		public var playerInputController:PlayerInputController = new PlayerInputController;
 		
-		public function Level(_player:Player) 
+		public function Level(_char:Class) 
 		{
 			add (new MouseCursorEntity());
 			
-			playerClass = _player;
-			playerClass.currentWorld = this;
-			SpawnPlayer();
+			SpawnPlayer(_char);
 		}
 		
-		public function SpawnPlayer():void
+		public function SpawnPlayer(_char:Class):void
 		{
-			add (new Hero(playerClass));
+			add (playerInputController);
+			add (new Hero(playerInputController, _char));
 		}
 		
 		

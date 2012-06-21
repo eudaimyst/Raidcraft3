@@ -4,7 +4,6 @@ package GameWorld.Characters
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Spritemap;
-	import GameWorld.Controllers.UnitController;
 	
 	/**
 	 * ...
@@ -12,7 +11,6 @@ package GameWorld.Characters
 	 */
 	public class Unit extends Entity 
 	{
-		public var unitController:UnitController;
 		public var graphiclist:Graphiclist;
 		public var unitSprite:Spritemap;
 		public var weaponSprite:Spritemap;
@@ -24,8 +22,6 @@ package GameWorld.Characters
 		
 		public function SpriteMap():void
 		{
-			
-			
 			AddSprites(unitSprite);
 			AddSprites(weaponSprite);
 			
@@ -62,6 +58,7 @@ package GameWorld.Characters
 				weaponSprite.play("walkDown");
 				this.y += 1;
 			}
+			
 			if (_direction == "right")
 			{
 				unitSprite.play("walkRight");
@@ -80,6 +77,37 @@ package GameWorld.Characters
 				weaponSprite.play("walkUp");
 				this.y -= 1;
 			}
+			
+			if (_direction == "upright")
+			{
+				unitSprite.play("walkRight");
+				weaponSprite.play("walkRight");
+				this.y -= .66;
+				this.x += .66;
+			}
+			
+			if (_direction == "upleft")
+			{
+				unitSprite.play("walkLeft");
+				weaponSprite.play("walkLeft");
+				this.y -= .66;
+				this.x -= .66;
+			}
+			if (_direction == "downright")
+			{
+				unitSprite.play("walkRight");
+				weaponSprite.play("walkRight");
+				this.y += .66;
+				this.x += .66;
+			}
+			if (_direction == "downleft")
+			{
+				unitSprite.play("walkLeft");
+				weaponSprite.play("walkLeft");
+				this.y += .66;
+				this.x -= .66;
+			}
+			
 		}
 		
 		public function Stand(_direction:String = ""):void
