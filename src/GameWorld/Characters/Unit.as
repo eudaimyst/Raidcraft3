@@ -82,30 +82,30 @@ package GameWorld.Characters
 			{
 				unitSprite.play("walkRight");
 				weaponSprite.play("walkRight");
-				this.y -= .66;
-				this.x += .66;
+				this.y -= .7;
+				this.x += .7;
 			}
 			
 			if (_direction == "upleft")
 			{
 				unitSprite.play("walkLeft");
 				weaponSprite.play("walkLeft");
-				this.y -= .66;
-				this.x -= .66;
+				this.y -= .7;
+				this.x -= .7;
 			}
 			if (_direction == "downright")
 			{
 				unitSprite.play("walkRight");
 				weaponSprite.play("walkRight");
-				this.y += .66;
-				this.x += .66;
+				this.y += .7;
+				this.x += .7;
 			}
 			if (_direction == "downleft")
 			{
 				unitSprite.play("walkLeft");
 				weaponSprite.play("walkLeft");
-				this.y += .66;
-				this.x -= .66;
+				this.y += .7;
+				this.x -= .7;
 			}
 			
 		}

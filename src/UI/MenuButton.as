@@ -10,6 +10,7 @@ package UI
 	{
 		
 		protected var selectedWorld:Class;
+		protected var classtoPass:Class;
 		
 		/**
 		 * Constructor. Can be used to create a hoverable button.
@@ -19,8 +20,9 @@ package UI
 		 * @param	_centered	should button be centered on x-axis.
 		 * @param	_world		world to go to when button is pressed. defaults to main menu
 		 * @param	_small		should the button use a small graphic?
+		 * @param	_classtoPassclass to pass to the selected world
 		 */
-		public function MenuButton(_text:String = "", _xpos:int = 3, _ypos:int = 1, _centered:Boolean = false, _world:Class = null, _small:Boolean = false) 
+		public function MenuButton(_text:String = "", _xpos:int = 3, _ypos:int = 1, _centered:Boolean = false, _world:Class = null, _small:Boolean = false, _classtoPass:Class = null) 
 		{
 			this.text = _text;
 			this.xpos = _xpos;
@@ -29,6 +31,7 @@ package UI
 			this.smallButton = _small;
 			
 			selectedWorld = _world;
+			classtoPass = _classtoPass;
 		}
 		
 		override public function onPress():void
@@ -36,7 +39,11 @@ package UI
 			trace("menu button pressed");
 			if (selectedWorld != null)
 			{
-				FP.world = new selectedWorld;
+				if (classtoPass != null)
+				{
+					FP.world = new selectedWorld(classtoPass);
+				}
+				else FP.world = new selectedWorld;
 			}
 		}
 		

@@ -6,16 +6,13 @@ package user
 	 */
 	public class UserCharacter 
 	{
+		public static var charClass:Class;
 		
 		public function UserCharacter() 
 		{
 			
 		}
-
-		public function CreateCharacter():void
-		{
-			
-		}
+		
 		
 	}
 

@@ -20,7 +20,7 @@ package Menu
 	 */
 	public class MainMenu extends World 
 	{
-		var gameVersion:Text;
+		public var gameVersion:Text;
 		//protected var loginBox:LoginBox;
 		
 		public var testInput2:LineInputComm;
@@ -31,8 +31,7 @@ package Menu
 		public function MainMenu():void
 		{
 			super(); //not sure what this does, but it needs to be here.
-			add (testHelloWorldEntity);
-			//new HelloWorld();
+			//add (testHelloWorldEntity);
 			
 			add (new LoginBox(0, 0));
 			add (new TitleGraphic());
