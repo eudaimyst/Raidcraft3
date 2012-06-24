@@ -6,6 +6,7 @@ package Menu.Lobby
 	import UI.MenuButton;
 	import UI.*;
 	import user.UserCharacter;
+	import net.flashpunk.FP;
 	/**
 	 * ...
 	 * @author skipgamer
@@ -47,12 +48,18 @@ package Menu.Lobby
 		
 		private function updateRooms():void
 		{
+			var removeArray:Object
 			numOfRooms.text = String(lobbyController.currentRooms.length) + " rooms";
-			for (var i:Number = 0; i <= lobbyController.currentRooms.length; i++) 
+			FP.world.getClass(RoomBox, removeArray);
+			if (removeArray != null) removeList(removeArray);
+			
+			for (var i:Number = 0; i < lobbyController.currentRooms.length; i++) 
 			{
 				roomInfo = lobbyController.currentRooms[i];
-				trace ("room name: " + roomInfo.id + " " + "players: " + roomInfo.onlineUsers + "type: " + roomInfo.roomType);
+				trace ("room name: " + roomInfo.id + " players: " + roomInfo.onlineUsers + " type: " + roomInfo.roomType);
+				add (new RoomBox(i, roomInfo.id, roomInfo.onlineUsers, roomInfo.roomType, ""));
 				//trace ("room names", lobbyController.currentRooms[i]);
+
 			}
 		}
 	}
