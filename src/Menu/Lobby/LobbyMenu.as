@@ -20,6 +20,8 @@ package Menu.Lobby
 		
 		public var roomInfo:RoomInfo;
 		
+		public var removeArray:Array;
+		
 		public function LobbyMenu() 
 		{
 			add (new MouseCursorEntity);
@@ -48,10 +50,11 @@ package Menu.Lobby
 		
 		private function updateRooms():void
 		{
-			var removeArray:Object
 			numOfRooms.text = String(lobbyController.currentRooms.length) + " rooms";
-			FP.world.getClass(RoomBox, removeArray);
-			if (removeArray != null) removeList(removeArray);
+			//FP.world.getClass(RoomBox, removeArray);
+			FP.world.getType("roombox", removeArray);
+			trace (removeArray.length);
+			if (removeArray != null) FP.world.removeList(removeArray);
 			
 			for (var i:Number = 0; i < lobbyController.currentRooms.length; i++) 
 			{

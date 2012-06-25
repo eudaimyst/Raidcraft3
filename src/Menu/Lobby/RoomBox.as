@@ -54,6 +54,8 @@ package Menu.Lobby
 			
 			this.x = FP.screen.width / 12;
 			this.y = FP.screen.height / 6 * (_roomNum + 1);
+			
+			type = "roombox"; //so it can be removed in loby menu on update
 		}
 		
 		override public function update():void 
