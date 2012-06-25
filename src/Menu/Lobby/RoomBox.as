@@ -1,11 +1,14 @@
 package Menu.Lobby 
 {
+	import GameWorld.Controllers.NetworkController;
+	import GameWorld.Level;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.utils.Input;
+	import user.UserCharacter;
 	
 	/**
 	 * ...
@@ -18,18 +21,23 @@ package Menu.Lobby
 		protected var graphiclist:Graphiclist;
 		protected var hoverGraphiclist:Graphiclist;
 		protected var roomName:Text;
+		protected var roomNameString:String;//to be passed on to level
 		protected var roomUsers:Text;
 		protected var roomType:Text;
 		protected var roomLevel:Text;
 		
 		protected var isHover:Boolean = false;
+		protected var isPressed:Boolean = true;
 		
-		public function RoomBox(_roomNum:int, _roomName:String, _roomUsers:int, _roomType:String, _roomLevel:String) 
+		private var lobbycontroller:NetworkController;
+		
+		public function RoomBox(_roomNum:int, _roomName:String, _roomUsers:int, _roomType:String, _roomLevel:String, _lobbycontroller:NetworkController) 
 		{
+			roomNameString = _roomName;
+			lobbycontroller = _lobbycontroller;
 			//bg box for button
 			boxBg = Image.createRect(FP.screen.width - FP.screen.width / 2, FP.screen.height / 8 - FP.screen.height / 50, 0x000000, 1);
 			
-			boxBg.alpha = .5;
 			//outline
 			outline = Image.createRect(boxBg.width + 4, boxBg.height + 4, 0xffffff, 1);
 			outline.x = boxBg.x - 2;
@@ -55,7 +63,7 @@ package Menu.Lobby
 			this.x = FP.screen.width / 12;
 			this.y = FP.screen.height / 6 * (_roomNum + 1);
 			
-			type = "roombox"; //so it can be removed in loby menu on update
+			this.type = "roombox"; //so it can be removed in loby menu on update
 		}
 		
 		override public function update():void 
@@ -80,7 +88,8 @@ package Menu.Lobby
 					
 					if (Input.mousePressed) //on mouseclick
 					{
-						trace("mousepressed");
+						FP.world = new Level(UserCharacter.charClass, lobbycontroller, roomNameString);
+						
 					}
 				}
 				else 

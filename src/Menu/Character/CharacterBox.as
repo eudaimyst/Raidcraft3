@@ -1,6 +1,7 @@
 package Menu.Character 
 {
 	import flash.events.TextEvent;
+	import GameWorld.Characters.Heroes.*;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image
@@ -33,17 +34,17 @@ package Menu.Character
 			//charNameStr = _charName;
 			if (_charClass != null) //get name from class
 			{
-				if (_charClass == GC.GFX_SELECT_MAGE)
+				if (_charClass == Mage.GFX_SELECT)
 				{
-					charClassStr = GC.TEXT_SELECT_MAGE
+					charClassStr = Mage.TEXT_SELECT;
 				}
-				if (_charClass == GC.GFX_SELECT_WANDERER)
+				if (_charClass == Rogue.GFX_SELECT)
 				{
-					charClassStr = GC.TEXT_SELECT_WANDERER
+					charClassStr = Rogue.TEXT_SELECT;
 				}
-				if (_charClass == GC.GFX_SELECT_WARRIOR)
+				if (_charClass == Warrior.GFX_SELECT)
 				{
-					charClassStr = GC.TEXT_SELECT_WARRIOR
+					charClassStr = Warrior.TEXT_SELECT;
 				}
 			}
 			

@@ -1,5 +1,6 @@
 package Menu.Lobby 
 {
+	import GameWorld.Controllers.NetworkController;
 	import UI.Button;
 	
 	/**
@@ -8,7 +9,7 @@ package Menu.Lobby
 	 */
 	public class CreateRoomButton extends Button 
 	{
-		protected var controller:LobbyController;
+		protected var controller:NetworkController;
 		protected var roomCounter:int = 0;
 		
 		public var functionToRun:Function;
@@ -20,7 +21,7 @@ package Menu.Lobby
 		 * @param	_text		text to display on button.
 		 * @param	_centered	should button be centered on x-axis.
 		 */
-		public function CreateRoomButton(_xpos:int = 3, _ypos:int = 1, _text:String = "", _centered:Boolean = false, _controller:LobbyController = null, _functionToRun:Function = null) 
+		public function CreateRoomButton(_xpos:int = 3, _ypos:int = 1, _text:String = "", _centered:Boolean = false, _controller:NetworkController = null, _functionToRun:Function = null) 
 		{
 			functionToRun = _functionToRun;
 			this.text = _text;

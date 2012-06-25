@@ -1,5 +1,6 @@
 package Menu.Lobby 
 {
+	import GameWorld.Controllers.NetworkController;
 	import Menu.Character.SelectCharacter;
 	import net.flashpunk.World;
 	import playerio.RoomInfo;
@@ -13,14 +14,12 @@ package Menu.Lobby
 	 */
 	public class LobbyMenu extends World 
 	{
-		public var lobbyController:LobbyController = new LobbyController();
+		public var lobbyController:NetworkController = new NetworkController();
 		public var numOfRooms:SimpleText = new SimpleText(1, 2, "rooms");
 		public var roomNameInput:CreateRoomInput = new CreateRoomInput(5, 5, "room name");
 		public var okButton:CreateRoomButton = new CreateRoomButton (5, 6, "OK", true, null, okPressed);
 		
 		public var roomInfo:RoomInfo;
-		
-		public var removeArray:Array;
 		
 		public function LobbyMenu() 
 		{
@@ -29,12 +28,13 @@ package Menu.Lobby
 			add (new MenuButton("back", 2, 9, false, SelectCharacter, false, UserCharacter.charClass));
 			//add (new PlayButton("play", 2, 9, true, JoinLobby));
 			add (lobbyController);
-			add (new CreateRoomButton(9, 1, "create", false, null, createRooms));
+			add (new CreateRoomButton(9, 1, "create", false, null, createRoom));
 			add (new CreateRoomButton(9, 2, "refresh", false, null, updateRooms));
+			add (new CreateRoomButton(9, 3, "join", false, null, joinRoom));
 			add (numOfRooms);
 		}
 		
-		private function createRooms():void
+		private function createRoom():void
 		{
 			add (roomNameInput);
 			add (okButton);
@@ -48,19 +48,26 @@ package Menu.Lobby
 			lobbyController.refreshList();
 		}
 		
+		private function joinRoom():void
+		{
+			
+		}
+		
 		private function updateRooms():void
 		{
+			var removeArray:Array = new Array;
+			
 			numOfRooms.text = String(lobbyController.currentRooms.length) + " rooms";
-			//FP.world.getClass(RoomBox, removeArray);
-			FP.world.getType("roombox", removeArray);
-			trace (removeArray.length);
+			FP.world.getClass(RoomBox, removeArray);
 			if (removeArray != null) FP.world.removeList(removeArray);
+			
+			lobbyController.refreshList();
 			
 			for (var i:Number = 0; i < lobbyController.currentRooms.length; i++) 
 			{
 				roomInfo = lobbyController.currentRooms[i];
 				trace ("room name: " + roomInfo.id + " players: " + roomInfo.onlineUsers + " type: " + roomInfo.roomType);
-				add (new RoomBox(i, roomInfo.id, roomInfo.onlineUsers, roomInfo.roomType, ""));
+				add (new RoomBox(i, roomInfo.id, roomInfo.onlineUsers, roomInfo.roomType, "", lobbyController));
 				//trace ("room names", lobbyController.currentRooms[i]);
 
 			}

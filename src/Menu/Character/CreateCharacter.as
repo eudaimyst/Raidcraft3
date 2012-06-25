@@ -1,5 +1,6 @@
 package Menu.Character 
 {
+	import GameWorld.Characters.Heroes.*;
 	import Menu.Login.LoginBox;
 	import Menu.MainMenu;
 	import UI.MenuButton;
@@ -16,9 +17,9 @@ package Menu.Character
 	{
 		public var numberOfChars:int = 4; //used by Character selecter to determine spacing
 		
-		protected var mageSelect:CharacterSelecter;
-		protected var rogueSelect:CharacterSelecter;
-		protected var warriorSelect:CharacterSelecter;
+		protected var mageSelect:NewCharacterChooser;
+		protected var rogueSelect:NewCharacterChooser;
+		protected var warriorSelect:NewCharacterChooser;
 		
 		public var selectedChar:Class = null;
 		
@@ -34,9 +35,9 @@ package Menu.Character
 			
 			selectButton = new CharacterButton("select", 9, this, 8);
 			
-			mageSelect = new CharacterSelecter(GC.GFX_SELECT_MAGE, GC.TEXT_SELECT_MAGE, 1, this);
-			rogueSelect = new CharacterSelecter(GC.GFX_SELECT_WANDERER, GC.TEXT_SELECT_WANDERER, 3, this);
-			warriorSelect = new CharacterSelecter(GC.GFX_SELECT_WARRIOR, GC.TEXT_SELECT_WARRIOR, 2, this);
+			mageSelect = new NewCharacterChooser(Mage.GFX_SELECT, Mage.TEXT_SELECT, 1, this);
+			rogueSelect = new NewCharacterChooser(Rogue.GFX_SELECT, Rogue.TEXT_SELECT, 3, this);
+			warriorSelect = new NewCharacterChooser(Warrior.GFX_SELECT, Warrior.TEXT_SELECT, 2, this);
 			
 			add (mageSelect);
 			add (rogueSelect);

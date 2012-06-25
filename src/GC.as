@@ -48,9 +48,9 @@ package
 		public static const GFX_ENEMY_DRAGON:Class;
 		
 		///////////////////////////////////////
-		//Character
+		//Character - moved to specific character classes
 		///////////////////////////////////////
-		
+		/*
 		[Embed(source = '../assets/char/select_mage.png')]
 		public static const GFX_SELECT_MAGE:Class;
 		public static const TEXT_SELECT_MAGE:String = "MAGE";
@@ -62,7 +62,7 @@ package
 		[Embed(source = '../assets/char/select_rogue.png')]
 		public static const GFX_SELECT_WANDERER:Class;
 		public static const TEXT_SELECT_WANDERER:String = "WANDERER";
-		
+		*/
 		///////////////////////////////////////
 		//WEAPONS
 		///////////////////////////////////////

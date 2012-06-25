@@ -14,7 +14,7 @@ package Menu.Character
 	 * ...
 	 * @author skipgamer
 	 */
-	public class CharacterSelecter extends Entity 
+	public class NewCharacterChooser extends Entity 
 	{
 		public var passedClass:Class;
 		protected var passedWorld:CreateCharacter;
@@ -25,7 +25,7 @@ package Menu.Character
 		protected var isHover:Boolean = false;
 		public var isSelected:Boolean = false;
 		
-		public function CharacterSelecter(_gfx:Class, _text:String, _num:int, _world:CreateCharacter) 
+		public function NewCharacterChooser(_gfx:Class, _text:String, _num:int, _world:CreateCharacter) 
 		{
 			passedWorld = _world;
 			passedClass = _gfx;

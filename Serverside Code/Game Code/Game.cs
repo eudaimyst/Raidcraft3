@@ -109,7 +109,7 @@ namespace MyGame {
 		}
 	}
 
-    [RoomType("MyLobby")]
+    [RoomType("raid")]
     public class LobbyCode : Game<Player>
     {
         // This method is called when an instance of your the game is created

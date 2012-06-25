@@ -1,5 +1,6 @@
 package Menu.Character 
 {
+	import GameWorld.Characters.Heroes.*;
 	import GameWorld.Level;
 	import Menu.Lobby.LobbyMenu;
 	import Menu.Login.LoginBox;
@@ -21,17 +22,12 @@ package Menu.Character
 		
 		protected var numOfChars:int = 0;
 		
-		protected var mageSelect:CharacterSelecter;
-		protected var rogueSelect:CharacterSelecter;
-		protected var warriorSelect:CharacterSelecter;
+		protected var mageSelect:NewCharacterChooser;
+		protected var rogueSelect:NewCharacterChooser;
+		protected var warriorSelect:NewCharacterChooser;
 		
 		public function SelectCharacter(_newChar:Class = null) 
 		{
-			if (_newChar != null)
-			{
-				UserCharacter.charClass = _newChar;
-			}
-			
 			
 			
 			add (new LoginBox());
@@ -49,13 +45,28 @@ package Menu.Character
 			}
 			if (UserVariables.loggedIn == true)
 			{
-				AddCharacter(GC.GFX_SELECT_MAGE);
-				AddCharacter(GC.GFX_SELECT_MAGE);
-				AddCharacter(GC.GFX_SELECT_WARRIOR);
+				AddCharacter(Mage.GFX_SELECT);
+				AddCharacter(Warrior.GFX_SELECT);
+				AddCharacter(Rogue.GFX_SELECT);
 			}
 			
 			if (_newChar != null)
 			{
+				if (_newChar == Mage.GFX_SELECT)
+				{
+					trace ("magemagemage");
+					UserCharacter.charClass = Mage;
+				}
+				if (_newChar == Warrior.GFX_SELECT)
+				{
+					trace ("warriorwarrior");
+					UserCharacter.charClass = Warrior;
+				}
+				if (_newChar == Rogue.GFX_SELECT)
+				{
+					trace ("rogueogueogue");
+					UserCharacter.charClass = Rogue;
+				}
 				AddCharacter(_newChar);
 			}
 		}
@@ -64,11 +75,6 @@ package Menu.Character
 		{
 			add (new CharacterBox(numOfChars + 1, _class));
 			numOfChars += 1;
-		}
-		
-		public function GenericButton():void
-		{
-			
 		}
 		
 	}
