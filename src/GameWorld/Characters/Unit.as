@@ -15,6 +15,13 @@ package GameWorld.Characters
 		public var unitSprite:Spritemap;
 		public var weaponSprite:Spritemap;
 		
+		public var walkUp:Boolean;
+		public var walkDown:Boolean;
+		public var walkLeft:Boolean;
+		public var walkRight:Boolean;
+		public var isMoving:Boolean;
+		public var direction:String = "down";
+		
 		public function Unit() 
 		{
 			
@@ -50,89 +57,128 @@ package GameWorld.Characters
 			_spritemap.add("standUp", [i + 0], 1);
 		}
 		
-		public function Walk(_direction:String = ""):void
+		override public function update():void
 		{
-			if (_direction == "down")
+			if (!isMoving) //if not moving
 			{
-				unitSprite.play("walkDown");
-				weaponSprite.play("walkDown");
-				this.y += 1;
+				PlayAnim(direction, 2); //play stand animation
 			}
-			
-			if (_direction == "right")
+			else
 			{
-				unitSprite.play("walkRight");
-				weaponSprite.play("walkRight");
-				this.x += 1;
+				if (walkUp && !walkLeft && !walkRight && !walkDown) //up
+				{
+					this.y -= 1;
+				}
+				if (walkDown && !walkLeft && !walkRight && !walkUp) //down
+				{
+					this.y += 1;
+				}
+				if (walkLeft && !walkUp && !walkDown && !walkRight) //left
+				{
+					this.x -= 1;
+				}
+				if (walkRight && !walkUp && !walkDown && !walkLeft) //right
+				{
+					this.x += 1;
+				}
+				if (walkUp && walkLeft && !walkRight && !walkDown) //upleft
+				{
+					this.y -= .7;
+					this.x -= .7;
+				}
+				if (walkUp && walkRight && !walkLeft && !walkDown) //upright
+				{
+					this.y -= .7;
+					this.x += .7;
+				}
+				if (walkDown && walkLeft && !walkRight && !walkUp) //downleft
+				{
+					this.y += .7;
+					this.x -= .7;
+				}
+				if (walkDown && walkRight && !walkLeft && !walkUp) //downright
+				{
+					this.y += .7;
+					this.x += .7;
+				}
+			PlayAnim(direction, 1);
 			}
-			if (_direction == "left")
-			{
-				unitSprite.play("walkLeft");
-				weaponSprite.play("walkLeft");
-				this.x -= 1;
-			}
-			if (_direction == "up")
-			{
-				unitSprite.play("walkUp");
-				weaponSprite.play("walkUp");
-				this.y -= 1;
-			}
-			
-			if (_direction == "upright")
-			{
-				unitSprite.play("walkRight");
-				weaponSprite.play("walkRight");
-				this.y -= .7;
-				this.x += .7;
-			}
-			
-			if (_direction == "upleft")
-			{
-				unitSprite.play("walkLeft");
-				weaponSprite.play("walkLeft");
-				this.y -= .7;
-				this.x -= .7;
-			}
-			if (_direction == "downright")
-			{
-				unitSprite.play("walkRight");
-				weaponSprite.play("walkRight");
-				this.y += .7;
-				this.x += .7;
-			}
-			if (_direction == "downleft")
-			{
-				unitSprite.play("walkLeft");
-				weaponSprite.play("walkLeft");
-				this.y += .7;
-				this.x -= .7;
-			}
-			
 		}
 		
-		public function Stand(_direction:String = ""):void
+		//// actions
+		// 1 = walk
+		// 2 = stand
+		public function PlayAnim(_direction:String = "", _action:int = 0):void
 		{
-			if (_direction == "down")
+			if (_action == 1)
 			{
-				unitSprite.play("standDown");
-				weaponSprite.play("standDown");
+				unitSprite.play("walk" + _direction);
+				weaponSprite.play("walk" + _direction);
 			}
-			if (_direction == "right")
+			if (_action == 2)
 			{
-				unitSprite.play("standRight");
-				weaponSprite.play("standRight");
+				unitSprite.play("stand" + _direction);
+				weaponSprite.play("stand" + _direction);
 			}
-			if (_direction == "left")
-			{
-				unitSprite.play("standLeft");
-				weaponSprite.play("standLeft");
-			}
-			if (_direction == "up")
-			{
-				unitSprite.play("standUp");
-				weaponSprite.play("standUp");
-			}
+		}
+		
+		public function RecieveInput(_direction:String = "", _action:int = 0):void
+		{
+			trace("input recieved");
 			
+			if (_action == 1)
+			{
+				direction = _direction;
+				isMoving = true;
+				if (_direction == "Down")
+				{
+					walkDown = true;
+				}
+				if (_direction == "Right")
+				{
+					walkRight = true;
+				}
+				if (_direction == "Left")
+				{
+					walkLeft = true;
+				}
+				if (_direction == "Up")
+				{
+					walkUp = true;
+				}
+			}
+			if (_action == 2)
+			{
+				if (_direction == "Down")
+				{
+					walkDown = false;
+					if (walkLeft == true) direction = "Left";
+					if (walkRight == true) direction = "Right";
+				}
+				if (_direction == "Right")
+				{
+					walkRight = false;
+					if (walkUp == true) direction = "Up";
+					if (walkDown == true) direction = "Down";
+				}
+				if (_direction == "Left")
+				{
+					walkLeft = false;
+					if (walkUp == true) direction = "Up";
+					if (walkDown == true) direction = "Down";
+				}
+				if (_direction == "Up")
+				{
+					walkUp = false;
+					if (walkLeft == true) direction = "Left";
+					if (walkRight == true) direction = "Right";
+				}
+				if (!walkUp && !walkDown && !walkLeft && !walkRight)
+				{
+					direction = _direction;
+					isMoving = false;
+				}
+			}
 		}
 		
 		

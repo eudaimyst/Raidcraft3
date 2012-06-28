@@ -15,6 +15,8 @@ package GameWorld.Characters.Heroes
 		public function Warrior() 
 		{
 			
+			
+			
 		}
 		
 	}

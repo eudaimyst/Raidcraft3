@@ -10,10 +10,12 @@ package GameWorld.Characters.Heroes
 		public static const GFX_SELECT:Class;
 		[Embed(source = '../../../../assets/char/sprite_rogue.png')]
 		public static const GFX_SPRITE:Class;
-		public static const TEXT_SELECT:String = "WANDERER";
+		public static const TEXT_SELECT:String = "ROGUE";
 		
 		public function Rogue() 
 		{
+			
+			
 			
 		}
 		

@@ -13,6 +13,11 @@ package GameWorld.Controllers
 	{
 		public var attachedHero:Hero;
 		
+		public var upKey:Boolean;
+		public var downKey:Boolean;
+		public var leftKey:Boolean;
+		public var rightKey:Boolean;
+		
 		
 		public function PlayerInputController() 
 		{
@@ -24,100 +29,54 @@ package GameWorld.Controllers
 			attachedHero = _hero;
 		}
 		
-		public function movement(_direction:String):void
-		{
-			attachedHero.Walk(_direction)
-			if (attachedHero.direction != _direction) attachedHero.direction = _direction;
-		}
-		
 		override public function update():void
 		{
-			if (Input.check("MovePlayer"))
+			if (Input.pressed("MovePlayer"))
 			{
-				attachedHero.isMoving = true;
-				if (Input.check(Key.W))
+				trace("wasd pressed");
+				if (Input.pressed(Key.W))
 				{
-					if (Input.check(Key.A))
-					{
-						movement("upleft");
-					}
-					else if (Input.check(Key.D))
-					{
-						movement("upright");
-					}
-					else if (Input.check(Key.S))
-					{
-						//do nothing if up+down pressed
-					}
-					else
-					{
-						movement("up");
-					}
+					attachedHero.RecieveInput("Up", 1);
+					attachedHero.networkController.sendWalkMessage(1);
 				}
-				if (Input.check(Key.A))
+				if (Input.pressed(Key.A))
 				{
-					if (Input.check(Key.W))
-					{
-						//upleft movement handled by up key check
-					}
-					else if (Input.check(Key.D))
-					{
-						//do nothing if left+right pressed
-					}
-					else if (Input.check(Key.S))
-					{
-						//downleft movement handled by down key check
-					}
-					else
-					{
-					movement("left");
-					}
+					attachedHero.RecieveInput("Left", 1);
+					attachedHero.networkController.sendWalkMessage(2);
 				}
-				if (Input.check(Key.S))
+				if (Input.pressed(Key.S))
 				{
-					if (Input.check(Key.W))
-					{
-						//do nothing if up+down pressed
-					}
-					else if (Input.check(Key.A))
-					{
-						movement("downleft");
-					}
-					else if (Input.check(Key.D))
-					{
-						movement("downright");
-					}
-					else
-					{
-					movement("down");
-					}
+					attachedHero.RecieveInput("Down", 1);
+					attachedHero.networkController.sendWalkMessage(3);
 				}
-				if (Input.check(Key.D))
+				if (Input.pressed(Key.D))
 				{
-					if (Input.check(Key.W))
-					{
-						//upright movement handled by up key check
-					}
-					else if (Input.check(Key.A))
-					{
-						//do nothing if left+right pressed
-					}
-					else if (Input.check(Key.S))
-					{
-						//downright movement handled by down key check
-					}
-					else
-					{
-					movement("right");
-					}
+					attachedHero.RecieveInput("Right", 1);
+					attachedHero.networkController.sendWalkMessage(4);
 				}
 			}
-			else
+			if (Input.released("MovePlayer"))
 			{
-				if (attachedHero.isMoving == true)
+				trace("wasd released");
+				if (Input.released(Key.W))
 				{
-					attachedHero.isMoving = false;
-					attachedHero.Stand(attachedHero.direction);
+					attachedHero.RecieveInput("Up", 2);
+					attachedHero.networkController.sendStopWalkMessage(1);
+				}
+				if (Input.released(Key.A))
+				{
+					attachedHero.RecieveInput("Left", 2);
+					attachedHero.networkController.sendStopWalkMessage(1);
+				}
+				if (Input.released(Key.S))
+				{
+					attachedHero.RecieveInput("Down", 2);
+					attachedHero.networkController.sendStopWalkMessage(1);
+				}
+				if (Input.released(Key.D))
+				{
+					attachedHero.RecieveInput("Right", 2);
+					attachedHero.networkController.sendStopWalkMessage(1);
 				}
 			}
 			

@@ -1,5 +1,6 @@
 package GameWorld.Controllers 
 {
+	import GameWorld.Characters.Hero;
 	import GameWorld.Level;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
@@ -16,7 +17,8 @@ package GameWorld.Controllers
 		protected var testConnection:Connection;
 		protected var client:Client;
 		
-		private var currentLevel:Level;
+		private var currentLevel:Level; //current level (world) that this instance of networkController belongs to
+		private var currentHero:Hero; //user controlled hero communicating with this instance of Network Controller.
 		
 		public var currentRooms:Array = new Array("test");
 		
@@ -53,6 +55,11 @@ package GameWorld.Controllers
 			currentLevel = _level;
 		}
 		
+		public function setHero(_hero:Hero):void
+		{
+			currentHero = _hero;
+		}
+		
 		public function createRaid(_roomName:String):void //called by CreateRoomButton onPress function
 		{
 			client.multiplayer.createRoom(_roomName, "raid", true, { }, handleCreate, handleError); //creates a room with the name from onPress(from lineinput)
@@ -66,6 +73,17 @@ package GameWorld.Controllers
 		public function refreshList():void
 		{
 			client.multiplayer.listRooms("raid", null, 128, 0, handleRoomList, handleError); //updates number of rooms on server, and calls handleRoomList
+		}
+		public function sendWalkMessage(_direction:int):void
+		{
+			trace("Sent walk message to server");
+			testConnection.send("walk", _direction);
+		}
+		
+		public function sendStopWalkMessage(_direction:int)
+		{
+			trace("Sent stopwalk message to server");
+			testConnection.send("stopwalk");
 		}
 		
 		private function handleCreate(roomID:String):void //called when createRaid succeeds
@@ -104,6 +122,12 @@ package GameWorld.Controllers
 
 			//Add message listener for users leaving the room
 			_connection.addMessageHandler("UserLeft", UserLeft);
+			
+			//Add message listener for walk commands
+			_connection.addMessageHandler("SendWalk", RecieveWalk);
+			
+			//Add message listener for stopwalk commands
+			_connection.addMessageHandler("StopWalk", StopWalk);
 
 			//Listen to all messages using a private function
 			_connection.addMessageHandler("*", handleMessages);
@@ -112,6 +136,18 @@ package GameWorld.Controllers
 		private function Hello(m:Message):void
 		{
 			trace("Recived a message with the type hello from the server");
+		}
+		
+		private function RecieveWalk(_message:Message, userid:uint, _direction:uint):void
+		{
+			trace("Recieved walk message from server", _direction);
+			var direction:int;
+			direction = _message.getInt(0);
+		}
+		
+		private function StopWalk(_message:Message, userid:uint):void
+		{
+			trace("Recieved StopWalk message from server");
 		}
 
 		private function UserJoined(m:Message, userid:uint):void //new user has joined

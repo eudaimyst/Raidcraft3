@@ -1,6 +1,7 @@
 package GameWorld.Characters 
 {
 	import GameWorld.Characters.Heroes.*;
+	import GameWorld.Controllers.NetworkController;
 	import GameWorld.Controllers.PlayerInputController;
 	import net.flashpunk.graphics.Spritemap;
 
@@ -12,14 +13,12 @@ package GameWorld.Characters
 	public class Hero extends Unit  
 	{
 		public var playerInputController:PlayerInputController;
+		public var networkController:NetworkController;
 		
-		
-		public var direction:String = "down";
-		public var isMoving:Boolean = false;
-		
-	public function Hero(_playerInputController:PlayerInputController, _char:Class) 
+	public function Hero(_playerInputController:PlayerInputController, _networkController:NetworkController, _char:Class) 
 		{
 			playerInputController = _playerInputController;
+			networkController = _networkController;
 			
 			if (_char == Mage)
 			{
@@ -42,11 +41,7 @@ package GameWorld.Characters
 			SpriteMap();
 			
 			playerInputController.setHero(this);
-		}
-		
-		override public function update():void
-		{
-			
+			networkController.setHero(this);
 		}
 		
 		

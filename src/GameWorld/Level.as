@@ -30,7 +30,7 @@ package GameWorld
 		public function SpawnPlayer(_char:Class):void
 		{
 			add (playerInputController);
-			add (new Hero(playerInputController, _char));
+			add (new Hero(playerInputController, networkController, _char));
 		}
 		
 		public function SpawnFriendlyPlayer(_char:Class = null):void
