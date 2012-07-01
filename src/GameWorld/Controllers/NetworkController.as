@@ -166,12 +166,12 @@ package GameWorld.Controllers
 			trace("Recived a message with the type hello from the server");
 		}
 		
-		private function RecieveSpawn(_message:Message, _userid:uint, _char:uint = 0):void
+		private function RecieveSpawn(_message:Message, _userid:uint, _char:uint = 0, _origX:int = 0, _origY:int = 0):void
 		{
 			trace("Recieved spawn message from server");
-			if (_userid != userID) //if the user sending spawn message is not self
+			if (_userid != userID) //if the user sending spawn message is not self (to prevent spawning a friendly player for the users own hero)
 			{
-			currentLevel.SpawnFriendlyPlayer(_userid, _char);
+			currentLevel.SpawnFriendlyPlayer(_userid, _char, _origX, _origY); 
 			}
 		}
 		
@@ -229,17 +229,7 @@ package GameWorld.Controllers
 		private function UserJoined(m:Message, _userid:uint, _char:int = 0):void //new user has joined
 		{
 			trace("Player with the userid", _userid, "and class", _char, "just joined the room");
-			if (_userid != userID) //if a user other than self has joined
-			{
-				trace("if works");
-				//currentLevel.SpawnFriendlyPlayer(_userid, _char);
-				connection.send("SendSpawn", userID); //spawns heroes already in the world
-			}
-			else //if the user has joined
-			{
-				connection.send("SendSpawn", userID)
-			}
-			trace("blah");
+			connection.send("SendSpawn", userID, currentHero.x, currentHero.y)
 		}
 
 		private function UserLeft(m:Message, userid:uint):void

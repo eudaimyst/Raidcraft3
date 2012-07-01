@@ -4,7 +4,7 @@ package GameWorld.Characters.Heroes
 	 * ...
 	 * @author skipgamer
 	 */
-	public class Mage 
+	public class Mage extends BaseHero
 	{
 		[Embed(source = '../../../../assets/char/select_mage.png')]
 		public static const GFX_SELECT:Class;

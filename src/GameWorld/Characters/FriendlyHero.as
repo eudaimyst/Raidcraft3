@@ -40,11 +40,15 @@ package GameWorld.Characters
 				unitSprite = new Spritemap(Rogue.GFX_SPRITE, 40, 60);
 				weaponSprite = new Spritemap(GC.GFX_WEAPON_WANDERER, 40, 60);
 			}
-			
-			
 			SpriteMap();
 		}
 		
+		
+		public function MoveToLocation(origX:int, origY:int):void ///called when unit is spawned by level
+		{
+			this.x = origX;
+			this.y = origY;
+		}
 	}
 
 }

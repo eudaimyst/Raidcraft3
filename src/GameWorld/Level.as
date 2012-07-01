@@ -34,12 +34,14 @@ package GameWorld
 			add (new Hero(playerInputController, networkController, _char));
 		}
 		
-		public function SpawnFriendlyPlayer(_userid:int, _char:int = 0):void
+		public function SpawnFriendlyPlayer(_userid:int, _char:int = 0, _origX:int = 0, _origY:int = 0):void
 		{
-			if (friendlyPlayerArray[_userid] == null)
+			if (friendlyPlayerArray[_userid] == null) //if there is no friendly player already for this userid
 			{
 				friendlyPlayerArray[_userid] = new FriendlyHero(networkController, _userid, _char);
 				add (friendlyPlayerArray[_userid]);
+				var friendlyPlayer:FriendlyHero = friendlyPlayerArray[_userid];
+				friendlyPlayer.MoveToLocation(_origX, _origY);
 			}
 			else
 			{
