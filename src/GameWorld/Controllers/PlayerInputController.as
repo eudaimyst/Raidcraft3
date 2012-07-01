@@ -33,7 +33,7 @@ package GameWorld.Controllers
 		{
 			if (Input.pressed("MovePlayer"))
 			{
-				trace("wasd pressed");
+				//trace("wasd pressed");
 				if (Input.pressed(Key.W))
 				{
 					attachedHero.RecieveInput("Up", 1);
@@ -57,7 +57,7 @@ package GameWorld.Controllers
 			}
 			if (Input.released("MovePlayer"))
 			{
-				trace("wasd released");
+				//trace("wasd released");
 				if (Input.released(Key.W))
 				{
 					attachedHero.RecieveInput("Up", 2);
@@ -66,17 +66,17 @@ package GameWorld.Controllers
 				if (Input.released(Key.A))
 				{
 					attachedHero.RecieveInput("Left", 2);
-					attachedHero.networkController.sendStopWalkMessage(1);
+					attachedHero.networkController.sendStopWalkMessage(2);
 				}
 				if (Input.released(Key.S))
 				{
 					attachedHero.RecieveInput("Down", 2);
-					attachedHero.networkController.sendStopWalkMessage(1);
+					attachedHero.networkController.sendStopWalkMessage(3);
 				}
 				if (Input.released(Key.D))
 				{
 					attachedHero.RecieveInput("Right", 2);
-					attachedHero.networkController.sendStopWalkMessage(1);
+					attachedHero.networkController.sendStopWalkMessage(4);
 				}
 			}
 			

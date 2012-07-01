@@ -1,10 +1,12 @@
 package GameWorld.Controllers 
 {
+	import GameWorld.Characters.FriendlyHero;
 	import GameWorld.Characters.Hero;
 	import GameWorld.Level;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import playerio.*;
+	import user.UserCharacter;
 	import user.UserVariables;
 	
 	/**
@@ -14,11 +16,12 @@ package GameWorld.Controllers
 	public class NetworkController extends Entity 
 	{
 		protected var gameID:String = playerioserver.gameID;
-		protected var testConnection:Connection;
+		protected var connection:Connection;
 		protected var client:Client;
 		
-		private var currentLevel:Level; //current level (world) that this instance of networkController belongs to
-		private var currentHero:Hero; //user controlled hero communicating with this instance of Network Controller.
+		public var currentLevel:Level; //current level (world) that this instance of networkController belongs to
+		public var currentHero:Hero; //user controlled hero communicating with this instance of Network Controller.
+		public var userID:int;
 		
 		public var currentRooms:Array = new Array("test");
 		
@@ -44,7 +47,7 @@ package GameWorld.Controllers
 			client = _client;
 			trace("handling connection attempt");
 			//Set developmentsever (Comment out to connect to your server online)
-			_client.multiplayer.developmentServer = "localhost:8184";
+			client.multiplayer.developmentServer = "localhost:8184";
 			
 			refreshList(); //gets number of rooms
 			
@@ -53,6 +56,10 @@ package GameWorld.Controllers
 		public function setLevel(_level:Level):void
 		{
 			currentLevel = _level;
+			trace ("********************");
+			trace ("level set");
+			trace ("***********************");
+			currentLevel.Test();
 		}
 		
 		public function setHero(_hero:Hero):void
@@ -68,6 +75,7 @@ package GameWorld.Controllers
 		public function joinRaid(_roomName:String):void //called by GameWorld.Level
 		{
 			client.multiplayer.joinRoom(_roomName, null, handleJoin, handleError); //joins room with passed roomname (from roombox)
+			
 		}
 		
 		public function refreshList():void
@@ -77,13 +85,14 @@ package GameWorld.Controllers
 		public function sendWalkMessage(_direction:int):void
 		{
 			trace("Sent walk message to server");
-			testConnection.send("walk", _direction);
+			if (connection == null) {}
+			else connection.send("walk", _direction);
 		}
 		
-		public function sendStopWalkMessage(_direction:int)
+		public function sendStopWalkMessage(_direction:int):void
 		{
 			trace("Sent stopwalk message to server");
-			testConnection.send("stopwalk");
+			connection.send("stopwalk", _direction);
 		}
 		
 		private function handleCreate(roomID:String):void //called when createRaid succeeds
@@ -104,15 +113,24 @@ package GameWorld.Controllers
 			return currentRooms;
 		}
 		
+		public function setClass(_char:int):void
+		{
+			connection.send("SetClass", _char);
+		}
+		
 		private function handleJoin(_connection:Connection):void
 		{
-			trace("Sucessfully connected to the multiplayer server");
+			trace("Sucessfully connected to the room");
 			playerioserver.isConnected = true;
 			
-			testConnection = _connection;
+			connection = _connection;
+			
+			currentHero.setClass();
 
 			//Add disconnect listener
 			_connection.addDisconnectHandler(handleDisconnect);
+			
+			_connection.addMessageHandler("setUserID", SetUserID);
 
 			//Add listener for messages of the type "hello"
 			_connection.addMessageHandler("hello", Hello);
@@ -129,31 +147,99 @@ package GameWorld.Controllers
 			//Add message listener for stopwalk commands
 			_connection.addMessageHandler("StopWalk", StopWalk);
 
+			//Add message listener for send spawn commands
+			_connection.addMessageHandler("SendSpawn", RecieveSpawn);
+			
 			//Listen to all messages using a private function
 			_connection.addMessageHandler("*", handleMessages);
 		}
 
+		private function SetUserID(m:Message, _userid:uint):void
+		{
+			trace("Recived a message with SetUserID from the server");
+			trace("your user id = " + _userid);
+			userID = _userid;
+		}
+		
 		private function Hello(m:Message):void
 		{
 			trace("Recived a message with the type hello from the server");
 		}
 		
-		private function RecieveWalk(_message:Message, userid:uint, _direction:uint):void
+		private function RecieveSpawn(_message:Message, _userid:uint, _char:uint = 0):void
 		{
-			trace("Recieved walk message from server", _direction);
-			var direction:int;
-			direction = _message.getInt(0);
+			trace("Recieved spawn message from server");
+			if (_userid != userID) //if the user sending spawn message is not self
+			{
+			currentLevel.SpawnFriendlyPlayer(_userid, _char);
+			}
 		}
 		
-		private function StopWalk(_message:Message, userid:uint):void
+		
+		private function RecieveWalk(_message:Message, _userid:uint, _direction:uint):void
+		{
+			trace("Recieved walk message from server", _direction);
+			if (_userid != userID)
+			{
+				var friendlyPlayer:FriendlyHero = currentLevel.friendlyPlayerArray[_userid];
+				if (_direction == 1)
+				{
+					friendlyPlayer.RecieveInput("Up", 1);
+				}
+				if (_direction == 2)
+				{
+					friendlyPlayer.RecieveInput("Left", 1);
+				}
+				if (_direction == 3)
+				{
+					friendlyPlayer.RecieveInput("Down", 1);
+				}
+				if (_direction == 4)
+				{
+					friendlyPlayer.RecieveInput("Right", 1);
+				}
+			}
+		}
+		
+		private function StopWalk(_message:Message, _userid:uint, _direction:uint):void
 		{
 			trace("Recieved StopWalk message from server");
+			if (_userid != userID)
+			{
+			var friendlyPlayer:FriendlyHero = currentLevel.friendlyPlayerArray[_userid];
+			if (_direction == 1)
+			{
+				friendlyPlayer.RecieveInput("Up", 2);
+			}
+			if (_direction == 2)
+			{
+				friendlyPlayer.RecieveInput("Left", 2);
+			}
+			if (_direction == 3)
+			{
+				friendlyPlayer.RecieveInput("Down", 2);
+			}
+			if (_direction == 4)
+			{
+				friendlyPlayer.RecieveInput("Right", 2);
+			}
+			}
 		}
 
-		private function UserJoined(m:Message, userid:uint):void //new user has joined
+		private function UserJoined(m:Message, _userid:uint, _char:int = 0):void //new user has joined
 		{
-			if (userid != 1) currentLevel.SpawnFriendlyPlayer();
-			trace("Player with the userid", userid, "just joined the room");
+			trace("Player with the userid", _userid, "and class", _char, "just joined the room");
+			if (_userid != userID) //if a user other than self has joined
+			{
+				trace("if works");
+				//currentLevel.SpawnFriendlyPlayer(_userid, _char);
+				connection.send("SendSpawn", userID); //spawns heroes already in the world
+			}
+			else //if the user has joined
+			{
+				connection.send("SendSpawn", userID)
+			}
+			trace("blah");
 		}
 
 		private function UserLeft(m:Message, userid:uint):void

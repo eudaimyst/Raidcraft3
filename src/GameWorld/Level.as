@@ -15,6 +15,7 @@ package GameWorld
 	{
 		public var playerInputController:PlayerInputController = new PlayerInputController;
 		public var networkController:NetworkController;
+		public var friendlyPlayerArray:Array = new Array; //stores an array of friendly players, with player.io player.id 's as indexes.
 		
 		public function Level(_char:Class, _networkController:NetworkController, _roomName:String) 
 		{
@@ -33,12 +34,23 @@ package GameWorld
 			add (new Hero(playerInputController, networkController, _char));
 		}
 		
-		public function SpawnFriendlyPlayer(_char:Class = null):void
+		public function SpawnFriendlyPlayer(_userid:int, _char:int = 0):void
 		{
-			add (new FriendlyHero());
+			if (friendlyPlayerArray[_userid] == null)
+			{
+				friendlyPlayerArray[_userid] = new FriendlyHero(networkController, _userid, _char);
+				add (friendlyPlayerArray[_userid]);
+			}
+			else
+			{
+				trace("friendlyPlayer for this userid is already spawned");
+			}
 		}
 		
-		
+		public function Test():void
+		{
+			trace("test function in level");
+		}
 		
 	}
 

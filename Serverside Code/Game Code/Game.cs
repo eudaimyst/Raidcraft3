@@ -10,6 +10,7 @@ namespace MyGame {
 		public string Name;
         public string TestVar;
         public int Walk;
+        public int Class;
 	}
     [RoomType("raid")]
     public class LobbyCode : Game<Player>
@@ -51,10 +52,11 @@ namespace MyGame {
         {
             // this is how you send a player a message
             player.Send("hello");
-
+            player.Send("setUserID", player.Id);
+            
 
             // this is how you broadcast a message to all players connected to the game
-            Broadcast("UserJoined", player.Id);
+            Broadcast("UserJoined", player.Id, player.Class);
         }
 
         // This method is called when a player leaves the game
@@ -82,8 +84,14 @@ namespace MyGame {
                     Broadcast("SendWalk", player.Id, player.Walk);
                     break;
                 case "stopwalk":
-                    player.Walk = 0;
-                    Broadcast("StopWalk", player.Id);
+                    player.Walk = message.GetInt(0);
+                    Broadcast("StopWalk", player.Id, player.Walk);
+                    break;
+                case "SendSpawn":
+                    Broadcast("SendSpawn", message.GetInt(0), player.Class);
+                    break;
+                case "SetClass":
+                    player.Class = message.GetInt(0);
                     break;
             }
         }
