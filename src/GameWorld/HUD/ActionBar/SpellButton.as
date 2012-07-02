@@ -2,6 +2,7 @@ package GameWorld.HUD.ActionBar
 {
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.*;
+	import net.flashpunk.FP;
 	/**
 	 * ...
 	 * @author skipgamer
@@ -23,12 +24,14 @@ package GameWorld.HUD.ActionBar
 		{
 			trace("added spell button");
 			buttonBG = new Image(spellButtonGFX);
+			buttonBG.scale = 2;
 			graphicList = new Graphiclist(buttonBG);
 			
 			graphic = Graphiclist(graphicList);
 			
-			this.x = (buttonBG.width + 4) * actionBarNum;
-			this.y = 200;
+			this.x = (buttonBG.scaledWidth + 5) * actionBarNum + 20;
+			this.y = FP.screen.height - (buttonBG.scaledHeight + 20);
+			
 		}
 		
 	}

@@ -28,11 +28,13 @@ package GameWorld
 			
 			add (new MouseCursorEntity());
 			
-			trace ("LEVEL LOADED**************************************");
-			var j:Number;
-			for (j = 0; j < 10 , j++;){
-				trace ("should spawn button");
-				add (new SpellButton(j));
+			//spawn spell buttons
+			var i:Number = 0; 
+			while (i <= 7)
+			{
+				spellButtons[i] = new SpellButton(i);
+				add (spellButtons[i]);
+				i++; 
 			}
 			
 			SpawnPlayer(_char);
