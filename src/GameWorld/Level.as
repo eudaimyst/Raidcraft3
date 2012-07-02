@@ -5,6 +5,8 @@ package GameWorld
 	import GameWorld.Characters.Unit;
 	import GameWorld.Controllers.NetworkController;
 	import GameWorld.Controllers.PlayerInputController;
+	import GameWorld.HUD.ActionBar.ActionBar;
+	import GameWorld.HUD.ActionBar.SpellButton;
 	import net.flashpunk.World;
 	
 	/**
@@ -16,6 +18,7 @@ package GameWorld
 		public var playerInputController:PlayerInputController = new PlayerInputController;
 		public var networkController:NetworkController;
 		public var friendlyPlayerArray:Array = new Array; //stores an array of friendly players, with player.io player.id 's as indexes.
+		public var spellButtons:Array = new Array;
 		
 		public function Level(_char:Class, _networkController:NetworkController, _roomName:String) 
 		{
@@ -24,6 +27,13 @@ package GameWorld
 			networkController.setLevel(this);
 			
 			add (new MouseCursorEntity());
+			
+			trace ("LEVEL LOADED**************************************");
+			var j:Number;
+			for (j = 0; j < 10 , j++;){
+				trace ("should spawn button");
+				add (new SpellButton(j));
+			}
 			
 			SpawnPlayer(_char);
 		}

@@ -119,7 +119,7 @@ package
 		///////////////////////////////////////
 		
 		
-		// spell buttons
+/*		// spell buttons
 		
 		[Embed(source = '../assets/spell_button_normal.png')]
 		public static const GFX_SPELL_BUTTON_NORMAL:Class;
@@ -148,7 +148,7 @@ package
 		
 		[Embed(source = '../assets/spell_icon_lightning.png')]
 		public static const GFX_SPELL_ICON_LIGHTNING:Class;
-		
+		*/
 		//sound effects
 		
 		[Embed(source = '../assets/rc-cast-test.mp3')]
