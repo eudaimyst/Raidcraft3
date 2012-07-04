@@ -10,11 +10,11 @@ package Menu.Character
 	 * ...
 	 * @author skipgamer
 	 */
-	public class CharacterButton extends Button 
+	public class SelectCharacterButton extends Button 
 	{
 		protected var passedWorld:CreateCharacter;
 		
-		public function CharacterButton(_text:String, _ypos:int, _passedWorld:CreateCharacter, _xpos:int) 
+		public function SelectCharacterButton(_text:String, _ypos:int, _passedWorld:CreateCharacter, _xpos:int) 
 		{
 			passedWorld = _passedWorld;
 			

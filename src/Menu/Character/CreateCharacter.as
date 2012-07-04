@@ -3,6 +3,7 @@ package Menu.Character
 	import GameWorld.Characters.Heroes.*;
 	import Menu.Login.LoginBox;
 	import Menu.MainMenu;
+	import Menu.Spells.SpellWorld;
 	import UI.MenuButton;
 	import net.flashpunk.World;
 	import UI.SimpleText;
@@ -23,7 +24,7 @@ package Menu.Character
 		
 		public var selectedChar:Class = null;
 		
-		protected var selectButton:CharacterButton;
+		protected var selectButton:SelectCharacterButton;
 		
 		public function CreateCharacter() 
 		{
@@ -33,7 +34,7 @@ package Menu.Character
 			
 			add (new SimpleText(7, 2, "Create Character"));
 			
-			selectButton = new CharacterButton("select", 9, this, 8);
+			selectButton = new SelectCharacterButton("select", 9, this, 8);
 			
 			mageSelect = new NewCharacterChooser(Mage.GFX_SELECT, Mage.TEXT_SELECT, 1, this);
 			rogueSelect = new NewCharacterChooser(Rogue.GFX_SELECT, Rogue.TEXT_SELECT, 3, this);
@@ -45,15 +46,16 @@ package Menu.Character
 			add (selectButton);
 		}
 		
-		public function Select(_selected:Class = null):void
+		public function Select(_selected:Class = null):void //whats this called by?
 		{
 			selectedChar = _selected;
 			trace (String(selectedChar));
 		}
 		
-		public function SelectButtonPressed(_tempClass:Class):void
+		public function SelectButtonPressed(_tempClass:Class):void //when a character is chosen
 		{
-			FP.world = new SelectCharacter(_tempClass);
+			FP.world = new SpellWorld(_tempClass);
+			//FP.world = new SelectCharacter(_tempClass);
 		}
 		
 	}
