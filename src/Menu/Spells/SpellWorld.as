@@ -33,9 +33,26 @@ package Menu.Spells
 				add (specChooser[i]);
 				i++;
 			}
+			//spawn spec chooser bg
+			i = 0;
+			while (i < 4)
+			{
+				add (new SpecChooserBG(i));
+				i++;
+			}
 			
+			
+			
+			//spawn chosen class display
 			add (new SimpleText(1, 1, String(_selectedClass)));
 		}
+		
+		public function chooseSpec(chosenSpec)
+		{
+			
+		}
+		
+		//public function displaySpells():void;
 		
 	}
 

@@ -47,7 +47,7 @@ package Menu.Character
 			
 			graphic = Graphiclist(graphicList);
 			
-			this.x = FP.stage.width / (passedWorld.numberOfChars + 1) * _num - gfx.scaledWidth / 2;
+			this.x = FP.stage.width / (passedWorld.numberOfChars) * _num - gfx.scaledWidth / 2;
 			this.y = 200;
 			
 			this.setHitbox(gfx.scaledWidth, gfx.scaledHeight);

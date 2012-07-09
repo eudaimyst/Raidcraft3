@@ -31,7 +31,8 @@ package Menu.Spells
 		
 		[Embed(source = "../../../assets/spells/specs/spec_chooser_bg.png")]
 		public static const SpecChooserBG:Class;
-		
+		[Embed(source = "../../../assets/spells/specs/spec_chooser_bg_hover.png")]
+		public static const SpecChooserBGHover:Class;
 		
 		public function SpecGFX() 
 		{

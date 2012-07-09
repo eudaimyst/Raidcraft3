@@ -10,21 +10,22 @@ package Menu.Spells
 	 * ...
 	 * @author skipgamer
 	 */
-	public class SpecChooserButton extends Entity 
+	public class SpellChooserButton extends Entity 
 	{
-		protected var specChooserBG:Image;
-		protected var specChooserBGHover:Image;
-		protected var specImage:Image;
+		protected var spellChooserBG:Image;
+		protected var spellChooserBGPressed:Image;
+		protected var spellImage:Image;
 		protected var graphicList:Graphiclist;
-		protected var graphicHover:Graphiclist;
+		protected var graphicPressed:Graphiclist;
 		protected var isHover:Boolean;
+		protected var isPressed:Boolean;
 		protected var xpos:int;
 		protected var ypos:int;
 		
-		public function SpecChooserButton(i:int, _class:Class)
+		public function SpellChooserButton(i:int, _class:Class)
 		{
 			specChooserBG = new Image(SpecGFX.SpecChooserBG);
-			specChooserBGHover = new Image(SpecGFX.SpecChooserBGHover);
+			specChooserBGPressed = new Image(SpecGFX.SpecChooserBGHover);
 			trace(String(i));
 			trace(String(_class));
 			
