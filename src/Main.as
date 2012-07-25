@@ -2,6 +2,7 @@ package
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import GameWorld.Characters.Heroes.Mage;
 	import Menu.MainMenu;
 	import net.flashpunk.Engine;
 	import net.flashpunk.FP;
@@ -20,6 +21,7 @@ package
 		public function Main():void 
 		{
 			trace("engine loaded");
+			trace(Mage.mageSpells);
 			super(800, 600, 60, false);
 			setWorld(new MainMenu);
 			//FP.console.enable();

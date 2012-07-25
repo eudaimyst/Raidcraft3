@@ -1,6 +1,7 @@
 package Menu.Spells 
 {
 	import GameWorld.Characters.Heroes.*;
+	import GameWorld.Spells.BaseSpell;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.*;
@@ -12,6 +13,11 @@ package Menu.Spells
 	 */
 	public class SpellChooserButton extends Entity 
 	{
+		[Embed(source = '../../../assets/spells/spell_button_normal.png')]
+		public static const spellButtonGFX:Class;
+		[Embed(source = '../../../assets/spells/spell_button_pressed.png')]
+		public static const spellButtonPressedGFX:Class;
+		
 		protected var spellChooserBG:Image;
 		protected var spellChooserBGPressed:Image;
 		protected var spellImage:Image;
@@ -19,107 +25,80 @@ package Menu.Spells
 		protected var graphicPressed:Graphiclist;
 		protected var isHover:Boolean;
 		protected var isPressed:Boolean;
-		protected var xpos:int;
-		protected var ypos:int;
+		private var buttonActive:Boolean = false;
+		private var mouseOrigX:Number;
+		private var mouseOrigY:Number;
+		private var origXpos:Number;
+		private var origYpos:Number;
 		
-		public function SpellChooserButton(i:int, _class:Class)
+		public var passedSpell:BaseSpell;
+		public var inHolder:Boolean = false; //set this to true when button is in holder, is checked when button is removed
+		
+		public function SpellChooserButton(_passedSpell:BaseSpell)
 		{
-			specChooserBG = new Image(SpecGFX.SpecChooserBG);
-			specChooserBGPressed = new Image(SpecGFX.SpecChooserBGHover);
-			trace(String(i));
-			trace(String(_class));
+			origXpos = _passedSpell.xPosition - 1;
+			origYpos = _passedSpell.yPosition;
+			spellChooserBG = new Image(spellButtonGFX);
+			spellChooserBG.scale = 2;
+			spellChooserBGPressed = new Image(spellButtonPressedGFX);
+			spellChooserBGPressed.scale = 2;
 			
-			if (_class == Mage.GFX_SELECT)
-			{
-				if (i == 0)
-				{
-					specImage = new Image(SpecGFX.SpecChooserElement);
-				}
-				if (i == 1)
-				{
-					specImage = new Image(SpecGFX.SpecChooserHoly);
-				}
-				if (i == 2)
-				{
-					specImage = new Image(SpecGFX.SpecChooserNecro);
-				}
-			}
-			if (_class == Warrior.GFX_SELECT)
-			{
-				trace("blah");
-				if (i == 0)
-				{
-					specImage = new Image(SpecGFX.SpecChooserGuard);
-					trace("blah");
-				}
-				if (i == 1)
-				{
-					specImage = new Image(SpecGFX.SpecChooserPaladin);
-				}
-				if (i == 2)
-				{
-					specImage = new Image(SpecGFX.SpecChooserKnight);
-				}
-			}
-			if (_class == Rogue.GFX_SELECT)
-			{
-				if (i == 0)
-				{
-					specImage = new Image(SpecGFX.SpecChooserRogue);
-				}
-				if (i == 1)
-				{
-					specImage = new Image(SpecGFX.SpecChooserHunter);
-				}
-				if (i == 2)
-				{
-					specImage = new Image(SpecGFX.SpecChooserAssassin);
-				}
-			}
+			passedSpell = _passedSpell;
+			spellImage = new Image(_passedSpell.SPELL_ICON);
+			spellImage.scale = 2;
 			
-			if (specImage == null)
-			{
-				specImage = new Image(SpecGFX.SpecChooserElement);
-			}
-			
-			graphicList = new Graphiclist(specChooserBG, specImage);
-			graphicHover= new Graphiclist(specChooserBGHover, specImage);
+			graphicList = new Graphiclist(spellChooserBG, spellImage);
+			graphicPressed= new Graphiclist(spellChooserBGPressed, spellImage);
 			graphic = graphicList;
 			
-			this.x = FP.screen.width - 60;
-			this.y = FP.screen.height / 4 * i + 60;
-			setHitboxTo(specImage);
+			this.x = 50 + (FP.screen.width / 13 * (_passedSpell.xPosition - 1));
+			this.y = 105 + 100 * (_passedSpell.yPosition - 1);
+			
+			setHitbox(spellChooserBG.scaledWidth, spellChooserBG.scaledHeight);
 		}
 		
 		override public function update():void 
 		{
 			super.update();
-			
+			if (buttonActive)
+			{
+				this.x = SpellChooserWorld.thisWorld.mousecurser.x - mouseOrigX;
+				this.y = SpellChooserWorld.thisWorld.mousecurser.y - mouseOrigY;
+				if (Input.mouseReleased)
+				{
+					buttonActive = false;
+					graphic = graphicList;
+					this.x = 50 + (FP.screen.width/13 * origXpos);
+					this.y = 105 + 100 * (origYpos - 1);
+				}
+			}
 			//if mouse is colliding with this entities hit box
-			if (this.collide("popupbox", x, y)) //if this is colliding with popupbox do nothing;
+			if (this.collide(GC.TYPE_MOUSE, x, y))
 			{
+				//change this entities graphic to the hover button, set hovering flag to false so else knows to change it back
+				if (isHover == false) trace("changed to hover true");
+				isHover = true;
 				
-			}
-			else
-			{
-				if (this.collide(GC.TYPE_MOUSE, x, y))
+				if (Input.mousePressed) //on mouseclick
 				{
-					//change this entities graphic to the hover button, set hovering flag to false so else knows to change it back
-					if (isHover == false) {graphic = graphicHover; trace("changed to hover true");}
-					isHover = true;
-					
-					if (Input.mousePressed) //on mouseclick
+					if (isHover == true)
 					{
-						//onPress(); //call onpress function which is over-riden by classes which extend this.
+						buttonActive = true;
+						mouseOrigX = SpellChooserWorld.thisWorld.mousecurser.x - this.x;
+						mouseOrigY = SpellChooserWorld.thisWorld.mousecurser.y - this.y;
+						trace ("button active");
+						graphic = graphicPressed;
 					}
-				}
-				else 
-				{
-					//return this entities graphic to normal button, set hovering flag to true so if statement above knows to change it back
-					if (isHover == true) {graphic = graphicList; trace("changed to hover false");}
-					isHover = false;
+					//onPress(); //call onpress function which is over-riden by classes which extend this.
 				}
 			}
+			else 
+			{
+				//return this entities graphic to normal button, set hovering flag to true so if statement above knows to change it back
+				if (isHover == true) trace("changed to hover false");
+				isHover = false;
+			}
+			
 		}
 		
 	}

@@ -35,6 +35,8 @@ package Menu.Spells
 			
 			this.x = (buttonBG.scaledWidth + 5) * actionBarNum + 20;
 			this.y = FP.screen.height - (buttonBG.scaledHeight + 20);
+			
+			type = "spellHolder";
 		}
 		
 	}

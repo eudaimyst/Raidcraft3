@@ -20,9 +20,12 @@ package Menu.Spells
 		protected var isHover:Boolean;
 		protected var xpos:int;
 		protected var ypos:int;
+		protected var spellChooserWorld:SpellChooserWorld;
+		protected var chosenSpec:int;
 		
-		public function SpecChooserButton(i:int, _class:Class)
+		public function SpecChooserButton(i:int, _class:Class, _world:SpellChooserWorld)
 		{
+			spellChooserWorld = _world;
 			specChooserBG = new Image(SpecGFX.SpecChooserBG);
 			specChooserBGHover = new Image(SpecGFX.SpecChooserBGHover);
 			trace(String(i));
@@ -33,14 +36,17 @@ package Menu.Spells
 				if (i == 0)
 				{
 					specImage = new Image(SpecGFX.SpecChooserElement);
+					chosenSpec = 1;
 				}
 				if (i == 1)
 				{
 					specImage = new Image(SpecGFX.SpecChooserHoly);
+					chosenSpec = 2;
 				}
 				if (i == 2)
 				{
 					specImage = new Image(SpecGFX.SpecChooserNecro);
+					chosenSpec = 3;
 				}
 			}
 			if (_class == Warrior.GFX_SELECT)
@@ -49,15 +55,17 @@ package Menu.Spells
 				if (i == 0)
 				{
 					specImage = new Image(SpecGFX.SpecChooserGuard);
-					trace("blah");
+					chosenSpec = 4;
 				}
 				if (i == 1)
 				{
 					specImage = new Image(SpecGFX.SpecChooserPaladin);
+					chosenSpec = 5;
 				}
 				if (i == 2)
 				{
 					specImage = new Image(SpecGFX.SpecChooserKnight);
+					chosenSpec = 6;
 				}
 			}
 			if (_class == Rogue.GFX_SELECT)
@@ -65,14 +73,17 @@ package Menu.Spells
 				if (i == 0)
 				{
 					specImage = new Image(SpecGFX.SpecChooserRogue);
+					chosenSpec = 7;
 				}
 				if (i == 1)
 				{
 					specImage = new Image(SpecGFX.SpecChooserHunter);
+					chosenSpec = 8;
 				}
 				if (i == 2)
 				{
 					specImage = new Image(SpecGFX.SpecChooserAssassin);
+					chosenSpec = 9;
 				}
 			}
 			
@@ -110,6 +121,7 @@ package Menu.Spells
 					if (Input.mousePressed) //on mouseclick
 					{
 						//onPress(); //call onpress function which is over-riden by classes which extend this.
+						spellChooserWorld.refreshChoosers(chosenSpec);
 					}
 				}
 				else 

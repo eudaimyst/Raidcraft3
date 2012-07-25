@@ -3,7 +3,7 @@ package Menu.Character
 	import GameWorld.Characters.Heroes.*;
 	import Menu.Login.LoginBox;
 	import Menu.MainMenu;
-	import Menu.Spells.SpellWorld;
+	import Menu.Spells.SpellChooserWorld;
 	import UI.MenuButton;
 	import net.flashpunk.World;
 	import UI.SimpleText;
@@ -54,7 +54,7 @@ package Menu.Character
 		
 		public function SelectButtonPressed(_tempClass:Class):void //when a character is chosen
 		{
-			FP.world = new SpellWorld(_tempClass);
+			FP.world = new SpellChooserWorld(_tempClass);
 			//FP.world = new SelectCharacter(_tempClass);
 		}
 		
