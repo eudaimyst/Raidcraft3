@@ -1,6 +1,5 @@
 package GameWorld.Characters.Heroes 
 {
-	import GameWorld.Spells.Mage.Fireball;
 	/**
 	 * ...
 	 * @author skipgamer
@@ -12,8 +11,6 @@ package GameWorld.Characters.Heroes
 		[Embed(source = '../../../../assets/char/sprite_mage.png')]
 		public static const GFX_SPRITE:Class;
 		public static const TEXT_SELECT:String = "MAGE";
-		
-		public static const mageSpells:Array = new Array(Fireball, Fireball, Fireball);
 		
 		
 		

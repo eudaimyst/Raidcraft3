@@ -14,7 +14,7 @@ package GameWorld.Spells
 			
 		}
 		
-		public function loadData(_spellID):BaseSpell
+		public function loadData(_spellID:int):BaseSpell
 		{
 			
 			var spell:BaseSpell = new BaseSpell;

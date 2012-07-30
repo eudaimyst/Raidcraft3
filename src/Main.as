@@ -21,10 +21,9 @@ package
 		public function Main():void 
 		{
 			trace("engine loaded");
-			trace(Mage.mageSpells);
 			super(800, 600, 60, false);
 			setWorld(new MainMenu);
-			//FP.console.enable();
+			FP.console.enable();
 		}
 		
 		public function setWorld(_world:World):void

@@ -2,7 +2,6 @@ package Menu.Spells
 {
 	import GameWorld.Spells.BaseSpell;
 	import GameWorld.Spells.GS;
-	import GameWorld.Spells.Mage.Fireball;
 	import UI.SimpleText;
 	import GameWorld.Spells.SpellData;
 	import GameWorld.Characters.Heroes.*;
@@ -26,7 +25,7 @@ package Menu.Spells
 			
 			add (mousecurser);
 			
-			//spawn spell buttons
+			//spawn spell holders
 			var i:int = 0; 
 			while (i < 8)
 			{
@@ -106,7 +105,7 @@ package Menu.Spells
 			if (_chosenSpec == 9)  spellID = 160;
 			
 			var getSpellData:SpellData = new SpellData;
-			while (spellID < 12)
+			while (spellID < 12) //spawn chooser buttons
 			{
 				add (new SpellChooserButton(getSpellData.loadData(spellID)));
 				spellID++;

@@ -18,14 +18,16 @@ package Menu.Spells
 		protected var text:Text;
 		protected var buttonBG:Image;
 		protected var graphicList:Graphiclist;
-		protected var actionBarNum:int;
+		public var actionBarNum:int;
 		protected var spellID:int;
 		protected var isHover:Boolean;
 		
 		protected var keyText:String;
 		
-		public function SpellHolder(actionBarNum:int) 
+		public function SpellHolder(_actionBarNum:int) 
 		{
+			actionBarNum = _actionBarNum;
+			
 			trace("added spell button");
 			buttonBG = new Image(emptySpellHolderGFX);
 			buttonBG.scale = 2;
@@ -35,6 +37,7 @@ package Menu.Spells
 			
 			this.x = (buttonBG.scaledWidth + 5) * actionBarNum + 20;
 			this.y = FP.screen.height - (buttonBG.scaledHeight + 20);
+			setHitbox(buttonBG.scaledWidth, buttonBG.scaledHeight);
 			
 			type = "spellHolder";
 		}

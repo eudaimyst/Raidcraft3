@@ -31,8 +31,12 @@ package Menu.Spells
 		private var origXpos:Number;
 		private var origYpos:Number;
 		
+		private var spellSelected:Boolean;
+		
 		public var passedSpell:BaseSpell;
 		public var inHolder:Boolean = false; //set this to true when button is in holder, is checked when button is removed
+		
+		private var allSpellHolders:Array;
 		
 		public function SpellChooserButton(_passedSpell:BaseSpell)
 		{
@@ -60,16 +64,47 @@ package Menu.Spells
 		override public function update():void 
 		{
 			super.update();
+			
 			if (buttonActive)
 			{
 				this.x = SpellChooserWorld.thisWorld.mousecurser.x - mouseOrigX;
 				this.y = SpellChooserWorld.thisWorld.mousecurser.y - mouseOrigY;
 				if (Input.mouseReleased)
 				{
+					if (this.collide("spellHolder", x, y)) //store each colliding spell holder, check distance to each, store closest one
+					{
+						allSpellHolders = new Array;
+						collideInto("spellHolder", x + spellChooserBG.scaledWidth/2, y + spellChooserBG.scaledHeight/2, allSpellHolders);
+						
+						var i:int = 0;
+						var bestSpellHolder:SpellHolder;
+						var currentSpellHolderToCheck:SpellHolder; 
+						
+						while (i < allSpellHolders.length)
+						{
+							currentSpellHolderToCheck = allSpellHolders[i];
+							if (i == 0) bestSpellHolder = currentSpellHolderToCheck
+							else {
+								var distance:Number;
+								distance = distanceFrom(currentSpellHolderToCheck);
+								if (distance < distanceFrom(bestSpellHolder)) bestSpellHolder = currentSpellHolderToCheck;
+							}
+							i++;
+						}
+						trace ("closest spell holder = ", bestSpellHolder.actionBarNum);
+						this.x = bestSpellHolder.x;
+						this.y = bestSpellHolder.y;
+						spellSelected = true;
+					}
+					else spellSelected = false;
+					
 					buttonActive = false;
 					graphic = graphicList;
-					this.x = 50 + (FP.screen.width/13 * origXpos);
-					this.y = 105 + 100 * (origYpos - 1);
+					if (!spellSelected)
+					{
+						this.x = 50 + (FP.screen.width/13 * origXpos);
+						this.y = 105 + 100 * (origYpos - 1);
+					}
 				}
 			}
 			//if mouse is colliding with this entities hit box
@@ -91,11 +126,15 @@ package Menu.Spells
 					}
 					//onPress(); //call onpress function which is over-riden by classes which extend this.
 				}
+				if (Input.mouseReleased)
+				{
+					
+				}
 			}
-			else 
+			else //if mouse is not colliding with entity
 			{
 				//return this entities graphic to normal button, set hovering flag to true so if statement above knows to change it back
-				if (isHover == true) trace("changed to hover false");
+				if (isHover == true) trace("changed to hover false");//only called when 
 				isHover = false;
 			}
 			
