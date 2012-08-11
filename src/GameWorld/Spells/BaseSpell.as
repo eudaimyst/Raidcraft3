@@ -8,6 +8,7 @@ package GameWorld.Spells
 	{
 		public var SPELL_ICON:Class = GS.ERROR;
 		public var SPELL_NAME:String = "no spell exists";
+		public var id:Number;
 		
 		public var xPosition:Number = 10;
 		public var yPosition:Number = 0;

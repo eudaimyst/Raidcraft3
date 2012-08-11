@@ -6,6 +6,7 @@ package Menu.Spells
 	import GameWorld.Spells.SpellData;
 	import GameWorld.Characters.Heroes.*;
 	import net.flashpunk.World;
+	import UI.MenuButton;
 	
 	/**
 	 * ...
@@ -18,6 +19,8 @@ package Menu.Spells
 		public var spellLoader:SpellData;
 		public var mousecurser:MouseCursorEntity = new MouseCursorEntity();
 		public static var thisWorld:SpellChooserWorld;
+		
+		public static var chosenSpells:Array = new Array;
 		
 		public function SpellChooserWorld(_selectedClass:Class) 
 		{
@@ -68,30 +71,38 @@ package Menu.Spells
 			
 			//spawn chosen class display
 			add (new SimpleText(0, 1, String(_selectedClass)));
-		}
-		
-		public function chooseSpec(chosenSpec):void
-		{
 			
+			add (new MenuButton("play", 2, 9, true, SelectCharacter));
 		}
 		
 		public function refreshChoosers(_chosenSpec:int):void
 		{
-			var refreshArray:Array = new Array;
-			getClass (SpellChooserButton, refreshArray); //get all instances of spellchooser button, store them in refresh arrray
+			var choosersArray:Array = new Array;
+			var remnantsArray:Array = new Array;
+			getClass (SpellChooserButton, choosersArray); //get all instances of spellchooser button, store them in choosersArray
+			getClass (SpellChooserRemnant, remnantsArray); //get all instances of spellchooser button, store them in remnantsArray
 			var i:int = 0;
-			var currentButton:SpellChooserButton = null;
-			while (i < refreshArray.length)
+			var currentButton:SpellChooserButton;
+			var currentRemnant:SpellChooserRemnant;
+			while (i < remnantsArray.length)
 			{
-				currentButton = refreshArray[i];
-				trace (currentButton.inHolder);
+				currentRemnant = remnantsArray[i];
+				remove(currentRemnant);
+				i++;
+			}
+			i = 0;
+			while (i < choosersArray.length)
+			{
+				currentButton = choosersArray[i];
 				if (currentButton.inHolder == false)
 				{
 					remove(currentButton);
 				}
+				remove(currentRemnant);
 				i++;
 			}
-			refreshArray = null; //reset array
+			choosersArray = null; //reset arrays
+			remnantsArray = null;
 			
 			var spellID:int;
 			if (_chosenSpec == 1)  spellID = 0;
@@ -105,8 +116,10 @@ package Menu.Spells
 			if (_chosenSpec == 9)  spellID = 160;
 			
 			var getSpellData:SpellData = new SpellData;
-			while (spellID < 12) //spawn chooser buttons
+			var spellID2:Number = spellID; //temporary variable for while loop only
+			while (spellID < spellID2 + 12) //spawn chooser buttons
 			{
+				add (new SpellChooserRemnant(getSpellData.loadData(spellID)));
 				add (new SpellChooserButton(getSpellData.loadData(spellID)));
 				spellID++;
 			}

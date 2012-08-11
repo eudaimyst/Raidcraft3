@@ -29,6 +29,7 @@ package GameWorld.Spells
 			{
 				spell.SPELL_ICON = GS.FIREBALL;
 				spell.SPELL_NAME = "fireball";
+				spell.id = 0;
 				trace (spell.SPELL_NAME);
 				spell.isCastTime = true;
 				spell.xPosition = 1; //x position on the spell selection screen (starts at 1)
@@ -46,6 +47,7 @@ package GameWorld.Spells
 			{
 				spell.SPELL_ICON = GS.FROSTBOLT;
 				spell.SPELL_NAME = "frostbolt";
+				spell.id = 1;
 				trace (spell.SPELL_NAME);
 				spell.isCastTime = true;
 				spell.xPosition = 3; //x position on the spell selection screen (starts at 1)
@@ -63,6 +65,7 @@ package GameWorld.Spells
 			{
 				spell.SPELL_ICON = GS.LIGHTNING_BOLT;
 				spell.SPELL_NAME = "lightning strike";
+				spell.id = 2;
 				trace (spell.SPELL_NAME);
 				spell.isCastTime = true;
 				spell.xPosition = 5; //x position on the spell selection screen (starts at 1)
@@ -80,6 +83,7 @@ package GameWorld.Spells
 			{
 				spell.SPELL_ICON = GS.BONEFREEZE;
 				spell.SPELL_NAME = "bone freeze";
+				spell.id = 3;
 				trace (spell.SPELL_NAME);
 				spell.isCastTime = true;
 				spell.xPosition = 4; //x position on the spell selection screen (starts at 1)
@@ -97,6 +101,7 @@ package GameWorld.Spells
 			{
 				spell.SPELL_ICON = GS.ARCANE_POWER;
 				spell.SPELL_NAME = "arcane power";
+				spell.id = 4;
 				trace (spell.SPELL_NAME);
 				spell.isCastTime = true;
 				spell.xPosition = 3; //x position on the spell selection screen (starts at 1)
@@ -114,6 +119,7 @@ package GameWorld.Spells
 			{
 				spell.SPELL_ICON = GS.CHAIN_LIGHTNING;
 				spell.SPELL_NAME = "chain lightning";
+				spell.id = 5;
 				trace (spell.SPELL_NAME);
 				spell.isCastTime = true;
 				spell.xPosition = 6; //x position on the spell selection screen (starts at 1)
@@ -128,6 +134,24 @@ package GameWorld.Spells
 				spell.spellCoolDown = 3.5;
 			}
 			//spell ID 20 - 39 = necro
+			if (_spellID == 20)
+			{
+				spell.SPELL_ICON = GS.CHAIN_LIGHTNING;
+				spell.SPELL_NAME = "chain lightning";
+				spell.id = 20;
+				trace (spell.SPELL_NAME);
+				spell.isCastTime = true;
+				spell.xPosition = 6; //x position on the spell selection screen (starts at 1)
+				spell.yPosition = 1; //y position on the spell selection screen (starts at 1)
+			
+				spell.isActive = true;
+				spell.isCastTime = true;
+				spell.isCoolDown = true;
+				spell.isDamage = true;
+			
+				spell.spellCastTime = 1.5;
+				spell.spellCoolDown = 3.5;
+			}
 			//spell ID 40 - 59 = holy
 			
 			//spell ID 60 - 119 = warrior

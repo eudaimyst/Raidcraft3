@@ -31,10 +31,10 @@ package Menu.Spells
 		private var origXpos:Number;
 		private var origYpos:Number;
 		
-		private var spellSelected:Boolean;
-		
 		public var passedSpell:BaseSpell;
 		public var inHolder:Boolean = false; //set this to true when button is in holder, is checked when button is removed
+		
+		public var bestSpellHolder:SpellHolder;
 		
 		private var allSpellHolders:Array;
 		
@@ -55,10 +55,15 @@ package Menu.Spells
 			graphicPressed= new Graphiclist(spellChooserBGPressed, spellImage);
 			graphic = graphicList;
 			
-			this.x = 50 + (FP.screen.width / 13 * (_passedSpell.xPosition - 1));
-			this.y = 105 + 100 * (_passedSpell.yPosition - 1);
+			gotoOrigLoc();
 			
 			setHitbox(spellChooserBG.scaledWidth, spellChooserBG.scaledHeight);
+		}
+		
+		public function gotoOrigLoc():void
+		{
+			this.x = 50 + (FP.screen.width / 13 * (passedSpell.xPosition - 1));
+			this.y = 105 + 100 * (passedSpell.yPosition - 1);
 		}
 		
 		override public function update():void 
@@ -71,13 +76,14 @@ package Menu.Spells
 				this.y = SpellChooserWorld.thisWorld.mousecurser.y - mouseOrigY;
 				if (Input.mouseReleased)
 				{
+					
+					
 					if (this.collide("spellHolder", x, y)) //store each colliding spell holder, check distance to each, store closest one
 					{
 						allSpellHolders = new Array;
 						collideInto("spellHolder", x + spellChooserBG.scaledWidth/2, y + spellChooserBG.scaledHeight/2, allSpellHolders);
 						
 						var i:int = 0;
-						var bestSpellHolder:SpellHolder;
 						var currentSpellHolderToCheck:SpellHolder; 
 						
 						while (i < allSpellHolders.length)
@@ -92,19 +98,21 @@ package Menu.Spells
 							i++;
 						}
 						trace ("closest spell holder = ", bestSpellHolder.actionBarNum);
-						this.x = bestSpellHolder.x;
-						this.y = bestSpellHolder.y;
-						spellSelected = true;
+						
+						if (bestSpellHolder.hasSpell == false)
+						{
+							this.x = bestSpellHolder.x;
+							this.y = bestSpellHolder.y;
+							bestSpellHolder.SetSpell(passedSpell);
+							SpellChooserWorld.chosenSpells[bestSpellHolder.actionBarNum] = passedSpell;
+							inHolder = true;
+						}
+						else gotoOrigLoc(); //if spell holder is full
 					}
-					else spellSelected = false;
+					else gotoOrigLoc(); //if not colliding with a holder
 					
 					buttonActive = false;
 					graphic = graphicList;
-					if (!spellSelected)
-					{
-						this.x = 50 + (FP.screen.width/13 * origXpos);
-						this.y = 105 + 100 * (origYpos - 1);
-					}
 				}
 			}
 			//if mouse is colliding with this entities hit box
@@ -123,6 +131,12 @@ package Menu.Spells
 						mouseOrigY = SpellChooserWorld.thisWorld.mousecurser.y - this.y;
 						trace ("button active");
 						graphic = graphicPressed;
+						
+						if (inHolder == true)
+						{
+							bestSpellHolder.RemoveSpell();
+						}
+						inHolder = false;
 					}
 					//onPress(); //call onpress function which is over-riden by classes which extend this.
 				}

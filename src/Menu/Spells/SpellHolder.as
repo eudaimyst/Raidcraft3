@@ -1,5 +1,6 @@
 package Menu.Spells 
 {
+	import GameWorld.Spells.BaseSpell;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.*;
 	import net.flashpunk.FP;
@@ -22,6 +23,8 @@ package Menu.Spells
 		protected var spellID:int;
 		protected var isHover:Boolean;
 		
+		public var hasSpell:Boolean; //set to true when this spell holder is holding a spell;
+		
 		protected var keyText:String;
 		
 		public function SpellHolder(_actionBarNum:int) 
@@ -40,6 +43,18 @@ package Menu.Spells
 			setHitbox(buttonBG.scaledWidth, buttonBG.scaledHeight);
 			
 			type = "spellHolder";
+		}
+		
+		public function SetSpell(_passedSpell:BaseSpell):void
+		{
+			hasSpell = true;
+			trace(_passedSpell.SPELL_NAME, "added to holder #" + actionBarNum);
+		}
+		
+		public function RemoveSpell():void
+		{
+			hasSpell = false;
+			trace("spell removed from holder #" + actionBarNum);
 		}
 		
 	}
