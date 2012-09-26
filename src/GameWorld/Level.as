@@ -7,6 +7,7 @@ package GameWorld
 	import GameWorld.Controllers.PlayerInputController;
 	import GameWorld.HUD.ActionBar.ActionBar;
 	import GameWorld.HUD.ActionBar.SpellButton;
+	import GameWorld.Spells.SpellData;
 	import net.flashpunk.World;
 	import user.UserCharacter;
 	
@@ -33,7 +34,10 @@ package GameWorld
 			var i:Number = 0; 
 			while (i <= 7)
 			{
-				spellButtons[i] = new SpellButton(i);
+				var spellID:Number = i;
+				var getSpellData:SpellData = new SpellData;
+				
+				spellButtons[i] = new SpellButton(getSpellData.loadData(i), i);
 				add (spellButtons[i]);
 				i++; 
 			}
@@ -44,7 +48,7 @@ package GameWorld
 		public function SpawnPlayer(_char:Class):void
 		{
 			add (playerInputController);
-			add (new Hero(playerInputController, networkController, _char));
+			add (new Hero(playerInputController, networkController, UserCharacter.charClass));
 		}
 		
 		public function SpawnFriendlyPlayer(_userid:int, _char:int = 0, _origX:int = 0, _origY:int = 0):void //called by network controller

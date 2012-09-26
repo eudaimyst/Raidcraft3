@@ -7,6 +7,7 @@ package Menu.Character
 	import UI.MenuButton;
 	import net.flashpunk.World;
 	import UI.SimpleText;
+	import user.UserCharacter;
 	import user.UserVariables;
 	import net.flashpunk.FP;
 	
@@ -55,6 +56,8 @@ package Menu.Character
 		public function SelectButtonPressed(_tempClass:Class):void //when a character is chosen
 		{
 			FP.world = new SpellChooserWorld(_tempClass);
+			UserCharacter.charClass = _tempClass;
+			UserVariables.newCharClass = _tempClass;
 			//FP.world = new SelectCharacter(_tempClass);
 		}
 		

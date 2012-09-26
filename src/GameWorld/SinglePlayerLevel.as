@@ -6,6 +6,7 @@ package GameWorld
 	import GameWorld.Controllers.PlayerInputController;
 	import GameWorld.HUD.ActionBar.ActionBar;
 	import GameWorld.HUD.ActionBar.SpellButton;
+	import GameWorld.Spells.SpellData;
 	import net.flashpunk.World;
 	
 	/**
@@ -25,7 +26,11 @@ package GameWorld
 			var i:Number = 0; 
 			while (i <= 7)
 			{
-				spellButtons[i] = new SpellButton(i);
+				var spellID:Number = i;
+				var getSpellData:SpellData = new SpellData;
+				
+				spellButtons[i] = new SpellButton(getSpellData.loadData(i), i);
+				
 				add (spellButtons[i]);
 				i++; 
 			}

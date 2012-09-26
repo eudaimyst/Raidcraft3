@@ -52,27 +52,24 @@ package Menu.Character
 				AddCharacter(Rogue.GFX_SELECT);
 			}
 			
-			if (_newChar != null)
+			if (UserCharacter.charClass != null)
 			{
-				if (_newChar == Mage.GFX_SELECT)
+				if (UserCharacter.charClass == Mage)
 				{
+					selectedChar = Mage.GFX_SELECT;
 					trace ("magemagemage");
-					UserCharacter.charClass = Mage;
-					UserVariables.newCharClass = Mage;
 				}
-				if (_newChar == Warrior.GFX_SELECT)
+				if (UserCharacter.charClass == Warrior)
 				{
+					selectedChar = Warrior.GFX_SELECT;
 					trace ("warriorwarrior");
-					UserCharacter.charClass = Warrior;
-					UserVariables.newCharClass = Warrior;
 				}
-				if (_newChar == Rogue.GFX_SELECT)
+				if (UserCharacter.charClass == Rogue)
 				{
+					selectedChar = Rogue.GFX_SELECT;
 					trace ("rogueogueogue");
-					UserCharacter.charClass = Rogue;
-					UserVariables.newCharClass = Rogue;
 				}
-				AddCharacter(_newChar);
+				AddCharacter(selectedChar);
 			}
 		}
 		
