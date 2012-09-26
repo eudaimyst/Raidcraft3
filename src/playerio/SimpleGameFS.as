@@ -1,8 +1,6 @@
-﻿package playerio
-{
+﻿package playerio{
 	//Local GameFS implamentation
 	import playerio.GameFS
-	
 	internal class SimpleGameFS implements GameFS{
 		private var gameId:String
 		private var wo:Object

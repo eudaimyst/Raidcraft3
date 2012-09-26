@@ -8,6 +8,7 @@ package GameWorld
 	import GameWorld.HUD.ActionBar.ActionBar;
 	import GameWorld.HUD.ActionBar.SpellButton;
 	import net.flashpunk.World;
+	import user.UserCharacter;
 	
 	/**
 	 * ...
@@ -37,7 +38,7 @@ package GameWorld
 				i++; 
 			}
 			
-			SpawnPlayer(_char);
+			SpawnPlayer(UserCharacter.charClass);
 		}
 		
 		public function SpawnPlayer(_char:Class):void
@@ -46,7 +47,7 @@ package GameWorld
 			add (new Hero(playerInputController, networkController, _char));
 		}
 		
-		public function SpawnFriendlyPlayer(_userid:int, _char:int = 0, _origX:int = 0, _origY:int = 0):void
+		public function SpawnFriendlyPlayer(_userid:int, _char:int = 0, _origX:int = 0, _origY:int = 0):void //called by network controller
 		{
 			if (friendlyPlayerArray[_userid] == null) //if there is no friendly player already for this userid
 			{

@@ -46,7 +46,7 @@ package Menu.Character
 			add (selectButton);
 		}
 		
-		public function Select(_selected:Class = null):void //whats this called by?
+		public function Select(_selected:Class = null):void //called by new character chooser when a class is selected
 		{
 			selectedChar = _selected;
 			trace (String(selectedChar));

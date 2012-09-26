@@ -12,8 +12,8 @@ package GameWorld.Characters
 	public class Unit extends Entity 
 	{
 		public var graphiclist:Graphiclist;
-		public var unitSprite:Spritemap;
-		public var weaponSprite:Spritemap;
+		public var unitSprite:Spritemap; //set in hero.as
+		public var weaponSprite:Spritemap; //set in hero.as
 		
 		public var walkUp:Boolean;
 		public var walkDown:Boolean;

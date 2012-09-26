@@ -1,5 +1,4 @@
-package playerio
-{
+package playerio{
 	/**
 	* Error object for most PlayerIO related errors
 	* This class is auto generated

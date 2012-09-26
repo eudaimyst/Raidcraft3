@@ -69,7 +69,10 @@ package GameWorld.Controllers
 		
 		public function createRaid(_roomName:String):void //called by CreateRoomButton onPress function
 		{
-			client.multiplayer.createRoom(_roomName, "raid", true, { }, handleCreate, handleError); //creates a room with the name from onPress(from lineinput)
+			if (client == null) { }
+			else
+ 			client.multiplayer.createRoom(_roomName, "raid", true, { }, handleCreate, handleError); //creates a room with the name from onPress(from lineinput)
+			
 		}
 		
 		public function joinRaid(_roomName:String):void //called by GameWorld.Level

@@ -7,6 +7,8 @@ package Menu.Spells
 	import GameWorld.Characters.Heroes.*;
 	import net.flashpunk.World;
 	import UI.MenuButton;
+	import Menu.Character.SelectCharacter;
+	import user.UserVariables;
 	
 	/**
 	 * ...
@@ -58,21 +60,25 @@ package Menu.Spells
 			if (_selectedClass == Mage.GFX_SELECT)
 			{
 				refreshChoosers(1);
+				UserVariables.newCharClass = Mage;
+				
 			}
 			if (_selectedClass == Warrior.GFX_SELECT)
 			{
 				refreshChoosers(4);
+				UserVariables.newCharClass = Warrior;
 			}
 			if (_selectedClass == Rogue.GFX_SELECT)
 			{
 				refreshChoosers(7);
+				UserVariables.newCharClass = Rogue;
 			}
 			
 			
 			//spawn chosen class display
 			add (new SimpleText(0, 1, String(_selectedClass)));
 			
-			add (new MenuButton("play", 2, 9, true, SelectCharacter));
+			add (new MenuButton("save", 8.5, 9, false, SelectCharacter, UserVariables.newCharClass));
 		}
 		
 		public function refreshChoosers(_chosenSpec:int):void

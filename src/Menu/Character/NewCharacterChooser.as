@@ -1,5 +1,6 @@
 package Menu.Character 
 {
+	import GameWorld.Characters.Heroes.*;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;
@@ -8,6 +9,7 @@ package Menu.Character
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.utils.Input;
+	import user.UserCharacter;
 	import user.UserVariables;
 	
 	/**
@@ -28,7 +30,26 @@ package Menu.Character
 		public function NewCharacterChooser(_gfx:Class, _text:String, _num:int, _world:CreateCharacter) 
 		{
 			passedWorld = _world;
-			passedClass = _gfx;
+			gfx = new Image(_gfx); //for legacy with this class
+			if (_gfx == Mage.GFX_SELECT)
+			{	
+				passedClass = Mage;
+				UserCharacter.charClass = Mage;
+				UserVariables.newCharClass = Mage;
+			}
+			if (_gfx == Warrior.GFX_SELECT)
+			{	
+				passedClass = Warrior;
+				UserCharacter.charClass = Warrior;
+				UserVariables.newCharClass = Warrior;
+			}
+			if (_gfx == Rogue.GFX_SELECT)
+			{	
+				passedClass = Rogue;
+				UserCharacter.charClass = Rogue;
+				UserVariables.newCharClass = Rogue;
+			}
+			
 			
 			trace("character" + String(_gfx) + "drawn");
 			gfx = new Image(_gfx);

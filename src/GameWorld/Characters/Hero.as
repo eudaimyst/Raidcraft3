@@ -4,6 +4,7 @@ package GameWorld.Characters
 	import GameWorld.Controllers.NetworkController;
 	import GameWorld.Controllers.PlayerInputController;
 	import net.flashpunk.graphics.Spritemap;
+	import user.UserCharacter;
 
 	
 	/**
@@ -22,21 +23,21 @@ package GameWorld.Characters
 			networkController = _networkController;
 			char = _char;
 			
-			if (_char == Mage)
+			if (UserCharacter.charClass == Mage)
 			{
 				unitSprite = new Spritemap(Mage.GFX_SPRITE, 40, 60);
 				weaponSprite = new Spritemap(GC.GFX_WEAPON_MAGE, 40, 60);
 				
 			}
 			
-			if (_char == Warrior)
+			if (UserCharacter.charClass == Warrior)
 			{
 				unitSprite = new Spritemap(Warrior.GFX_SPRITE, 40, 60);
 				weaponSprite = new Spritemap(GC.GFX_WEAPON_WARRIOR, 40, 60);
 				
 			}
 			
-			if (_char == Rogue)
+			if (UserCharacter.charClass == Rogue)
 			{
 				unitSprite = new Spritemap(Rogue.GFX_SPRITE, 40, 60);
 				weaponSprite = new Spritemap(GC.GFX_WEAPON_WANDERER, 40, 60);

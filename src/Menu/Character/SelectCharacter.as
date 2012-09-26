@@ -2,6 +2,7 @@ package Menu.Character
 {
 	import GameWorld.Characters.Heroes.*;
 	import GameWorld.Level;
+	import GameWorld.SinglePlayerLevel;
 	import Menu.Lobby.LobbyMenu;
 	import Menu.Login.LoginBox;
 	import Menu.MainMenu;
@@ -35,6 +36,7 @@ package Menu.Character
 			add (new MenuButton("create", 8, 9, false, CreateCharacter));
 			add (new MenuButton("back", 2, 9, false, MainMenu));
 			add (new MenuButton("play", 2, 9, true, LobbyMenu));
+			add (new MenuButton("play single", 2, 8, true, SinglePlayerLevel));
 			
 			add (new SimpleText(1, 2, "Select Character:"));
 			
@@ -56,16 +58,19 @@ package Menu.Character
 				{
 					trace ("magemagemage");
 					UserCharacter.charClass = Mage;
+					UserVariables.newCharClass = Mage;
 				}
 				if (_newChar == Warrior.GFX_SELECT)
 				{
 					trace ("warriorwarrior");
 					UserCharacter.charClass = Warrior;
+					UserVariables.newCharClass = Warrior;
 				}
 				if (_newChar == Rogue.GFX_SELECT)
 				{
 					trace ("rogueogueogue");
 					UserCharacter.charClass = Rogue;
+					UserVariables.newCharClass = Rogue;
 				}
 				AddCharacter(_newChar);
 			}
