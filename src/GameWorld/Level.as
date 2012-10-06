@@ -7,6 +7,7 @@ package GameWorld
 	import GameWorld.Controllers.PlayerInputController;
 	import GameWorld.HUD.ActionBar.ActionBar;
 	import GameWorld.HUD.ActionBar.SpellButton;
+	import GameWorld.HUD.UnitFrame.PlayerFrame;
 	import GameWorld.Spells.SpellData;
 	import net.flashpunk.World;
 	import user.UserCharacter;
@@ -21,6 +22,7 @@ package GameWorld
 		public var networkController:NetworkController;
 		public var friendlyPlayerArray:Array = new Array; //stores an array of friendly players, with player.io player.id 's as indexes.
 		public var spellButtons:Array = new Array;
+		public var playerHero:Hero;
 		
 		public function Level(_char:Class, _networkController:NetworkController, _roomName:String) 
 		{
@@ -48,7 +50,9 @@ package GameWorld
 		public function SpawnPlayer(_char:Class):void
 		{
 			add (playerInputController);
-			add (new Hero(playerInputController, networkController, UserCharacter.charClass));
+			playerHero = new Hero(playerInputController, networkController, UserCharacter.charClass)
+			add (playerHero);
+			add (new PlayerFrame(playerHero));
 		}
 		
 		public function SpawnFriendlyPlayer(_userid:int, _char:int = 0, _origX:int = 0, _origY:int = 0):void //called by network controller

@@ -45,7 +45,7 @@ package Menu.Lobby
 			remove (roomNameInput);
 			remove (okButton);
 			lobbyController.createRaid(roomNameInput.text);
-			lobbyController.refreshList();
+			updateRooms;
 		}
 		
 		private function joinRoom():void

@@ -11,6 +11,7 @@ package GameWorld.Characters.Heroes
 		[Embed(source = '../../../../assets/char/sprite_warrior.png')]
 		public static const GFX_SPRITE:Class;
 		public static const TEXT_SELECT:String = "WARRIOR";
+		public static const MAX_HEALTH:Number = 1200;
 		
 		public function Warrior() 
 		{

@@ -15,6 +15,11 @@ package GameWorld.Characters
 		public var unitSprite:Spritemap; //set in hero.as
 		public var weaponSprite:Spritemap; //set in hero.as
 		
+		public var unitHealth:Number;
+		public var maxHealth:Number;
+		public var unitPower:Number;
+		public var maxPower:Number;
+		
 		public var walkUp:Boolean;
 		public var walkDown:Boolean;
 		public var walkLeft:Boolean;

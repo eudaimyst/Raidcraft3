@@ -27,20 +27,30 @@ package GameWorld.Characters
 			{
 				unitSprite = new Spritemap(Mage.GFX_SPRITE, 40, 60);
 				weaponSprite = new Spritemap(GC.GFX_WEAPON_MAGE, 40, 60);
-				
+				unitHealth = 400;
+				maxHealth = 400;
+				unitPower = 1200;
+				maxPower = 1200;
 			}
 			
 			if (UserCharacter.charClass == Warrior)
 			{
 				unitSprite = new Spritemap(Warrior.GFX_SPRITE, 40, 60);
 				weaponSprite = new Spritemap(GC.GFX_WEAPON_WARRIOR, 40, 60);
-				
+				unitHealth = 1200;
+				maxHealth = 1200;
+				unitPower = 400;
+				maxPower = 400;
 			}
 			
 			if (UserCharacter.charClass == Rogue)
 			{
 				unitSprite = new Spritemap(Rogue.GFX_SPRITE, 40, 60);
 				weaponSprite = new Spritemap(GC.GFX_WEAPON_WANDERER, 40, 60);
+				unitHealth = 600;
+				maxHealth = 600;
+				unitPower = 600;
+				maxPower = 600;
 				
 			}
 			

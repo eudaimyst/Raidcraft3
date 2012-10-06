@@ -11,6 +11,7 @@ package GameWorld.Characters.Heroes
 		[Embed(source = '../../../../assets/char/sprite_rogue.png')]
 		public static const GFX_SPRITE:Class;
 		public static const TEXT_SELECT:String = "ROGUE";
+		public static const MAX_HEALTH:Number = 600;
 		
 		public function Rogue() 
 		{
