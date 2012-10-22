@@ -34,7 +34,7 @@ package
 			Image(this.graphic).scaleX = 2;
 			Image(this.graphic).scaleY = 2;
 			
-			this.layer = -2;
+			this.layer = -9001;
 			
 
 		}

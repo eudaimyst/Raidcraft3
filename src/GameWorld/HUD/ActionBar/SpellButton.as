@@ -41,8 +41,6 @@ package GameWorld.HUD.ActionBar
 			
 			
 			graphic = Graphiclist(graphicList);
-			graphic.scrollX = 0;
-			graphic.scrollY = 0;
 			
 			this.x = (buttonBG.scaledWidth + 5) * actionBarNum + 20;
 			this.y = FP.screen.height - (buttonBG.scaledHeight + 20);

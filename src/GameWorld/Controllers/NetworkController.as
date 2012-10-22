@@ -93,6 +93,8 @@ package GameWorld.Controllers
 		
 		public function refreshList():void
 		{
+			if (client == null) { }
+			else
 			client.multiplayer.listRooms("raid", null, 128, 0, handleRoomList, handleError); //updates number of rooms on server, and calls handleRoomList
 		}
 		
@@ -177,6 +179,8 @@ package GameWorld.Controllers
 			trace("Recived a message with SetUserID from the server");
 			trace("your user id = " + _userid);
 			userID = _userid;
+			currentHero.heroID = userID;
+			currentHero.updateUserID();
 		}
 		
 		private function Hello(m:Message):void
@@ -246,7 +250,8 @@ package GameWorld.Controllers
 		private function UserJoined(m:Message, _userid:uint, _char:int = 0):void //new user has joined
 		{
 			trace("Player with the userid", _userid, "and class", _char, "just joined the room");
-			connection.send("SendSpawn", userID, currentHero.x, currentHero.y)
+			connection.send("SendSpawn", userID, currentHero.x, currentHero.y);
+			
 		}
 
 		private function UserLeft(m:Message, userid:uint):void

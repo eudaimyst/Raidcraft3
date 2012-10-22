@@ -19,12 +19,7 @@ package GameWorld
 	 * @author skipgamer
 	 */
 	public class GameWorld extends World 
-	{
-		public var walkUp:Boolean;
-		public var walkDown:Boolean;
-		public var walkLeft:Boolean;
-		public var walkRight:Boolean;
-		
+	{	
 		public var playerInputController:PlayerInputController = new PlayerInputController;
 		public var networkController:NetworkController;
 		public var friendlyPlayerArray:Array = new Array; //stores an array of friendly players, with player.io player.id 's as indexes.
@@ -62,11 +57,9 @@ package GameWorld
 		public function SpawnPlayer(_char:Class):void
 		{
 			add (playerInputController);
-			playerHero = new Hero(playerInputController, networkController, UserCharacter.charClass, this)
+			playerHero = new Hero(playerInputController, networkController, UserCharacter.charClass, this, loadedLevel.playerSpawnLocationsX, loadedLevel.playerSpawnLocationsY)
 			add (playerHero);
 			add (new PlayerFrame(playerHero));
-			FP.camera.x -= FP.halfWidth;
-			FP.camera.y -= FP.halfHeight;
 		}
 		
 		public function SpawnFriendlyPlayer(_userid:int, _char:int = 0, _origX:int = 0, _origY:int = 0):void //called by network controller
@@ -89,89 +82,12 @@ package GameWorld
 			trace("test function in level");
 		}
 		
-		public function RecieveInput(_direction:String = "", _action:int = 0):void
+		public function updateCamera():void
 		{
-			trace("input recieved");
-			
-			if (_action == 1)
-			{
-				if (_direction == "Down")
-				{
-					walkDown = true;
-				}
-				if (_direction == "Right")
-				{
-					walkRight = true;
-				}
-				if (_direction == "Left")
-				{
-					walkLeft = true;
-				}
-				if (_direction == "Up")
-				{
-					walkUp = true;
-				}
-			}
-			if (_action == 2)
-			{
-				if (_direction == "Down")
-				{
-					walkDown = false;
-				}
-				if (_direction == "Right")
-				{
-					walkRight = false;
-				}
-				if (_direction == "Left")
-				{
-					walkLeft = false;
-				}
-				if (_direction == "Up")
-				{
-					walkUp = false;
-				}
-			}
-		}
-		
-		override public function update():void
-		{
-			if (walkUp && !walkLeft && !walkRight && !walkDown) //up
-			{
-				FP.camera.y -= 1;
-			}
-			if (walkDown && !walkLeft && !walkRight && !walkUp) //down
-			{
-				FP.camera.y += 1;
-			}
-			if (walkLeft && !walkUp && !walkDown && !walkRight) //left
-			{
-				FP.camera.x -= 1;
-			}
-			if (walkRight && !walkUp && !walkDown && !walkLeft) //right
-			{
-				FP.camera.x += 1;
-			}
-			if (walkUp && walkLeft && !walkRight && !walkDown) //upleft
-			{
-				FP.camera.y -= .7;
-				FP.camera.x -= .7;
-			}
-			if (walkUp && walkRight && !walkLeft && !walkDown) //upright
-			{
-				FP.camera.y -= .7;
-				FP.camera.x += .7;
-			}
-			if (walkDown && walkLeft && !walkRight && !walkUp) //downleft
-			{
-				FP.camera.y += .7;
-				FP.camera.x -= .7;
-			}
-			if (walkDown && walkRight && !walkLeft && !walkUp) //downright
-			{
-				FP.camera.y += .7;
-				FP.camera.x += .7;
-			}
-			super.update()
+			if (playerHero.x < FP.halfWidth || playerHero.x > (loadedLevel.levelWidth - FP.halfWidth)) {}
+			else {FP.camera.x = playerHero.x - FP.halfWidth;}
+			if (playerHero.y < FP.halfHeight || playerHero.y > (loadedLevel.levelHeight - FP.halfHeight)) { }
+			else {FP.camera.y = playerHero.y - FP.halfHeight;}
 		}
 		
 		

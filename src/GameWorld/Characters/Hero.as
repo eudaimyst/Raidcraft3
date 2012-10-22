@@ -19,8 +19,9 @@ package GameWorld.Characters
 		public var networkController:NetworkController;
 		public var gameWorld:GameWorld;
 		public var char:Class;
+		public var heroID:int;
 		
-		public function Hero(_playerInputController:PlayerInputController, _networkController:NetworkController, _char:Class, _gameWorld:GameWorld) 
+		public function Hero(_playerInputController:PlayerInputController, _networkController:NetworkController, _char:Class, _gameWorld:GameWorld, _spawnLocationX:Array, _spawnlocationY:Array) 
 		{
 			playerInputController = _playerInputController;
 			networkController = _networkController;
@@ -62,8 +63,8 @@ package GameWorld.Characters
 			
 			playerInputController.setHero(this);
 			networkController.setHero(this);
-			x = FP.halfWidth;
-			y = FP.halfHeight;
+			x = _spawnLocationX[1];
+			y = _spawnlocationY[1];
 		}
 		public function setClass():void
 		{
@@ -79,6 +80,13 @@ package GameWorld.Characters
 			{
 				networkController.setClass(3);
 			}
+		}
+		
+		public function updateUserID():void
+		{
+			x = gameWorld.loadedLevel.playerSpawnLocationsX[networkController.userID];
+			y = gameWorld.loadedLevel.playerSpawnLocationsY[networkController.userID];
+			gameWorld.updateCamera();
 		}
 		
 	}

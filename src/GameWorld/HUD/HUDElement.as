@@ -15,6 +15,14 @@ package GameWorld.HUD
 
 		}
 		
+		override public function added():void
+		{
+			super.added();
+			layer = -9000; //the higher the number the lower the object
+			
+			graphic.scrollX = 0;
+			graphic.scrollY = 0;
+		}
 	}
 
 }

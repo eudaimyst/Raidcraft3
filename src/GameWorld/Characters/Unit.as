@@ -107,6 +107,7 @@ package GameWorld.Characters
 					this.x += .7;
 				}
 			PlayAnim(direction, 1);
+			layer = -y; //the higher the number the lower the object
 			}
 		}
 		

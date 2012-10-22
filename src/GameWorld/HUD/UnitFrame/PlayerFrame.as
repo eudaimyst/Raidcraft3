@@ -44,8 +44,6 @@ package GameWorld.HUD.UnitFrame
 			graphiclist = new Graphiclist(maxHealthBar, maxPowerBar, currentHealthBar, currentPowerBar, maxHealthText, maxPowerText);
 			
 			graphic = graphiclist;
-			graphic.scrollX = 0;
-			graphic.scrollY = 0;
 		}
 		
 	}

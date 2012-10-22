@@ -12,11 +12,15 @@ package GameWorld.Levels
 	{
 		private var _tiles:Tilemap;
 		private var xml:Class;
+		public var playerSpawnLocationsX:Array = new Array;
+		public var playerSpawnLocationsY:Array = new Array;
+		public var levelWidth:Number = 2560;
+		public var levelHeight:Number = 1920;
 		
 		public function Level(_xml:Class) 
 		{
 			xml = _xml;
-			_tiles = new Tilemap(GC.GFX_TILES, 1280, 960, 32, 32);
+			_tiles = new Tilemap(GC.GFX_TILES, levelWidth, levelHeight, 32, 32);
 			graphic = _tiles;
 			layer = 1; //the higher the number the lower the object
 			
@@ -36,10 +40,17 @@ package GameWorld.Levels
 			var dataList:XMLList;
 			var dataElement:XML;
 			
-			dataList = xmlData.NewLayer1.tile; //newLayer1 is defined in ogmo
+			dataList = xmlData.Ground.tile; //newLayer1 is defined in ogmo
 			for each(dataElement in dataList)
 			{
 				_tiles.setTile(int(dataElement.@x), int(dataElement.@y), int(dataElement.@tx));
+			}
+			dataList = xmlData.Objects.PlayerSpawn;
+			for each(dataElement in dataList)
+			{
+				trace(int(dataElement.@id), int(dataElement.@x), int(dataElement.@y));
+				playerSpawnLocationsX[int(dataElement.@id)] = int(dataElement.@x);
+				playerSpawnLocationsY[int(dataElement.@id)] = int(dataElement.@y);
 			}
 		}
 		
