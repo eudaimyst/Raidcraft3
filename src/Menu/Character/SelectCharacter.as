@@ -35,8 +35,8 @@ package Menu.Character
 			add (new MouseCursorEntity());
 			add (new MenuButton("create", 8, 9, false, CreateCharacter));
 			add (new MenuButton("back", 2, 9, false, MainMenu));
-			add (new MenuButton("play", 2, 9, true, LobbyMenu));
-			add (new MenuButton("play single", 2, 8, true, SinglePlayerLevel));
+			
+			//add (new MenuButton("play single", 2, 8, true, SinglePlayerLevel));
 			
 			add (new SimpleText(1, 2, "Select Character:"));
 			
@@ -54,6 +54,7 @@ package Menu.Character
 			
 			if (UserCharacter.charClass != null)
 			{
+				add (new MenuButton("play", 2, 9, true, LobbyMenu));
 				if (UserCharacter.charClass == Mage)
 				{
 					selectedChar = Mage.GFX_SELECT;

@@ -3,6 +3,7 @@ package GameWorld.Controllers
 	import GameWorld.Characters.FriendlyHero;
 	import GameWorld.Characters.Hero;
 	import GameWorld.Level;
+	import Menu.Lobby.LobbyMenu;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import playerio.*;
@@ -19,7 +20,8 @@ package GameWorld.Controllers
 		protected var connection:Connection;
 		protected var client:Client;
 		
-		public var currentLevel:Level; //current level (world) that this instance of networkController belongs to
+		public var currentLevel:Level; //current level (world) that this instance of networkController is referenced in
+		public var currentLobby:LobbyMenu; //current lobby (world) that this instance of networkController is referenced in
 		public var currentHero:Hero; //user controlled hero communicating with this instance of Network Controller.
 		public var userID:int;
 		
@@ -37,12 +39,12 @@ package GameWorld.Controllers
 			if (playerioserver.isConnected == false)
 			{
 				trace("connecting to player.io...");
-				PlayerIO.connect(FP.stage, gameID, "public", "Guest", "", "", handleConnect, handleError);
+				PlayerIO.connect(FP.stage, gameID, "public", "Guest", "", "", handleConnect, handleError);//////////function to connect to the server
 			}
 			else trace("already connected to player.io");
 		}
 		
-		private function handleConnect(_client:Client):void
+		private function handleConnect(_client:Client):void 
 		{
 			client = _client;
 			trace("handling connection attempt");
@@ -60,6 +62,14 @@ package GameWorld.Controllers
 			trace ("level set");
 			trace ("***********************");
 			currentLevel.Test();
+		}
+		
+		public function setLobby(_lobby:LobbyMenu):void
+		{
+			currentLobby = _lobby;
+			trace ("********************");
+			trace ("lobby set");
+			trace ("***********************");
 		}
 		
 		public function setHero(_hero:Hero):void
@@ -85,6 +95,7 @@ package GameWorld.Controllers
 		{
 			client.multiplayer.listRooms("raid", null, 128, 0, handleRoomList, handleError); //updates number of rooms on server, and calls handleRoomList
 		}
+		
 		public function sendWalkMessage(_direction:int):void
 		{
 			trace("Sent walk message to server");
@@ -109,6 +120,7 @@ package GameWorld.Controllers
 			trace("handeRoomList: rooms listed");
 			trace(_rooms.length);
 			currentRooms = _rooms;
+			currentLobby.updateRooms();
 		}
 		
 		public function getRooms():Array //returns the current rooms array, called by lobbymenu
@@ -123,7 +135,10 @@ package GameWorld.Controllers
 		
 		private function handleJoin(_connection:Connection):void
 		{
-			trace("Sucessfully connected to the room");
+			trace("Sucessfully joined the room");
+			
+			
+			
 			playerioserver.isConnected = true;
 			
 			connection = _connection;
@@ -177,7 +192,6 @@ package GameWorld.Controllers
 			currentLevel.SpawnFriendlyPlayer(_userid, _char, _origX, _origY); 
 			}
 		}
-		
 		
 		private function RecieveWalk(_message:Message, _userid:uint, _direction:uint):void
 		{

@@ -29,9 +29,11 @@ package Menu.Lobby
 			//add (new PlayButton("play", 2, 9, true, JoinLobby));
 			add (lobbyController);
 			add (new CreateRoomButton(9, 1, "create", false, null, createRoom));
-			add (new CreateRoomButton(9, 2, "refresh", false, null, updateRooms));
+			add (new CreateRoomButton(9, 2, "refresh", false, null, requestNewRoom));
 			add (new CreateRoomButton(9, 3, "join", false, null, joinRoom));
 			add (numOfRooms);
+			
+			lobbyController.setLobby(this);
 		}
 		
 		private function createRoom():void
@@ -45,7 +47,7 @@ package Menu.Lobby
 			remove (roomNameInput);
 			remove (okButton);
 			lobbyController.createRaid(roomNameInput.text);
-			updateRooms;
+			updateRooms();
 		}
 		
 		private function joinRoom():void
@@ -53,15 +55,23 @@ package Menu.Lobby
 			
 		}
 		
-		private function updateRooms():void
+		public function connectionError():void
+		{
+			add new PopupBox("unable to connect to server");
+		}
+		
+		private function requestNewRoom():void
+		{
+			lobbyController.refreshList();
+		}
+		
+		public function updateRooms():void
 		{
 			var removeArray:Array = new Array;
 			
 			numOfRooms.text = String(lobbyController.currentRooms.length) + " rooms";
 			FP.world.getClass(RoomBox, removeArray);
 			if (removeArray != null) FP.world.removeList(removeArray);
-			
-			lobbyController.refreshList();
 			
 			for (var i:Number = 0; i < lobbyController.currentRooms.length; i++) 
 			{
@@ -72,6 +82,7 @@ package Menu.Lobby
 
 			}
 		}
+		
 	}
 
 }

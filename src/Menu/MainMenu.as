@@ -30,7 +30,7 @@ package Menu
 		
 		public function MainMenu():void
 		{
-			super(); //not sure what this does, but it needs to be here.
+			super(); //not sure what this does, but it needs to be here?
 			//add (testHelloWorldEntity);
 			
 			add (new LoginBox(0, 0));
