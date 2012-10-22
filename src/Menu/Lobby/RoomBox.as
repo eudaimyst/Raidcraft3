@@ -1,7 +1,7 @@
 package Menu.Lobby 
 {
 	import GameWorld.Controllers.NetworkController;
-	import GameWorld.Level;
+	import GameWorld.GameWorld;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;
@@ -88,7 +88,7 @@ package Menu.Lobby
 					
 					if (Input.mousePressed) //on mouseclick
 					{
-						FP.world = new Level(UserCharacter.charClass, lobbycontroller, roomNameString);
+						FP.world = new GameWorld(UserCharacter.charClass, lobbycontroller, roomNameString);
 						
 					}
 				}

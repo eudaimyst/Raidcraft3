@@ -1,7 +1,7 @@
 package Menu.Character 
 {
 	import GameWorld.Characters.Heroes.*;
-	import GameWorld.Level;
+	import GameWorld.GameWorld;
 	import GameWorld.SinglePlayerLevel;
 	import Menu.Lobby.LobbyMenu;
 	import Menu.Login.LoginBox;

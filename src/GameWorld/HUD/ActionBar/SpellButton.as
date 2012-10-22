@@ -1,5 +1,6 @@
 package GameWorld.HUD.ActionBar 
 {
+	import GameWorld.HUD.HUDElement;
 	import GameWorld.Spells.BaseSpell;
 	import GameWorld.Spells.SpellData;
 	import net.flashpunk.Entity;
@@ -9,7 +10,7 @@ package GameWorld.HUD.ActionBar
 	 * ...
 	 * @author skipgamer
 	 */
-	public class SpellButton extends Entity 
+	public class SpellButton extends HUDElement 
 	{
 		[Embed(source = '../../../../assets/spells/spell_button_normal.png')]
 		public static const spellButtonGFX:Class;
@@ -40,6 +41,8 @@ package GameWorld.HUD.ActionBar
 			
 			
 			graphic = Graphiclist(graphicList);
+			graphic.scrollX = 0;
+			graphic.scrollY = 0;
 			
 			this.x = (buttonBG.scaledWidth + 5) * actionBarNum + 20;
 			this.y = FP.screen.height - (buttonBG.scaledHeight + 20);

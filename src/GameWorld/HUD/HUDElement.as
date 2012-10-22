@@ -1,6 +1,7 @@
 package GameWorld.HUD 
 {
 	import net.flashpunk.Entity;
+	import net.flashpunk.FP;
 	
 	/**
 	 * ...
@@ -11,7 +12,7 @@ package GameWorld.HUD
 		
 		public function HUDElement() 
 		{
-			
+
 		}
 		
 	}

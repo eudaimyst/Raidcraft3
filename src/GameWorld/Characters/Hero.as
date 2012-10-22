@@ -3,6 +3,8 @@ package GameWorld.Characters
 	import GameWorld.Characters.Heroes.*;
 	import GameWorld.Controllers.NetworkController;
 	import GameWorld.Controllers.PlayerInputController;
+	import GameWorld.GameWorld;
+	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Spritemap;
 	import user.UserCharacter;
 
@@ -15,13 +17,15 @@ package GameWorld.Characters
 	{
 		public var playerInputController:PlayerInputController;
 		public var networkController:NetworkController;
+		public var gameWorld:GameWorld;
 		public var char:Class;
 		
-		public function Hero(_playerInputController:PlayerInputController, _networkController:NetworkController, _char:Class) 
+		public function Hero(_playerInputController:PlayerInputController, _networkController:NetworkController, _char:Class, _gameWorld:GameWorld) 
 		{
 			playerInputController = _playerInputController;
 			networkController = _networkController;
 			char = _char;
+			gameWorld = _gameWorld;
 			
 			if (UserCharacter.charClass == Mage)
 			{
@@ -58,6 +62,8 @@ package GameWorld.Characters
 			
 			playerInputController.setHero(this);
 			networkController.setHero(this);
+			x = FP.halfWidth;
+			y = FP.halfHeight;
 		}
 		public function setClass():void
 		{

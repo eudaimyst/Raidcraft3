@@ -9,8 +9,10 @@ package
 	public class GC 
 	{
 		//Tilemaps
-		[Embed(source = '../assets/tilemaps/TestLevel.oel', mimeType = "application/octet-stream")]
+		[Embed(source = '../assets/levels/TestLevel.oel', mimeType = "application/octet-stream")]
 		public static const TILEMAP_TEST_LEVEL:Class;
+		[Embed(source = '../assets/levels/TestLevelOgmo2.oel', mimeType = "application/octet-stream")]
+		public static const TILEMAP_TEST_LEVEL_2:Class;
 		
 		//Text
 		public static const TEXT_GAME_NAME:String = "RaidCraft";
@@ -34,7 +36,7 @@ package
 		public static const GFX_PLAYER:Class;
 		
 		[Embed(source = '../assets/tileset.png')]
-		public static const GFX_TILE_TEST:Class;
+		public static const GFX_TILES:Class;
 		
 		[Embed(source = '../assets/cooldown_spritesheet.png')]
 		public static const GFX_COOLDOWN:Class;

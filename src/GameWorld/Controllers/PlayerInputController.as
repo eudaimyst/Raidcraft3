@@ -4,6 +4,7 @@ package GameWorld.Controllers
 	import net.flashpunk.Entity;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
+	import net.flashpunk.FP;
 	
 	/**
 	 * ...
@@ -37,22 +38,26 @@ package GameWorld.Controllers
 				if (Input.pressed(Key.W))
 				{
 					attachedHero.RecieveInput("Up", 1);
-					attachedHero.networkController.sendWalkMessage(1);
+					attachedHero.networkController.sendWalkMessage(1); 
+					attachedHero.gameWorld.RecieveInput("Up", 1);
 				}
 				if (Input.pressed(Key.A))
 				{
 					attachedHero.RecieveInput("Left", 1);
 					attachedHero.networkController.sendWalkMessage(2);
+					attachedHero.gameWorld.RecieveInput("Left", 1);
 				}
 				if (Input.pressed(Key.S))
 				{
 					attachedHero.RecieveInput("Down", 1);
 					attachedHero.networkController.sendWalkMessage(3);
+					attachedHero.gameWorld.RecieveInput("Down", 1);
 				}
 				if (Input.pressed(Key.D))
 				{
 					attachedHero.RecieveInput("Right", 1);
 					attachedHero.networkController.sendWalkMessage(4);
+					attachedHero.gameWorld.RecieveInput("Right", 1);
 				}
 			}
 			if (Input.released("MovePlayer"))
@@ -62,21 +67,25 @@ package GameWorld.Controllers
 				{
 					attachedHero.RecieveInput("Up", 2);
 					attachedHero.networkController.sendStopWalkMessage(1);
+					attachedHero.gameWorld.RecieveInput("Up", 2);
 				}
 				if (Input.released(Key.A))
 				{
 					attachedHero.RecieveInput("Left", 2);
 					attachedHero.networkController.sendStopWalkMessage(2);
+					attachedHero.gameWorld.RecieveInput("Left", 2);
 				}
 				if (Input.released(Key.S))
 				{
 					attachedHero.RecieveInput("Down", 2);
 					attachedHero.networkController.sendStopWalkMessage(3);
+					attachedHero.gameWorld.RecieveInput("Down", 2);
 				}
 				if (Input.released(Key.D))
 				{
 					attachedHero.RecieveInput("Right", 2);
 					attachedHero.networkController.sendStopWalkMessage(4);
+					attachedHero.gameWorld.RecieveInput("Right", 2);
 				}
 			}
 			

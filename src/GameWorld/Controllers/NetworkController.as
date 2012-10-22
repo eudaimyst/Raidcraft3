@@ -2,7 +2,7 @@ package GameWorld.Controllers
 {
 	import GameWorld.Characters.FriendlyHero;
 	import GameWorld.Characters.Hero;
-	import GameWorld.Level;
+	import GameWorld.GameWorld;
 	import Menu.Lobby.LobbyMenu;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
@@ -20,7 +20,7 @@ package GameWorld.Controllers
 		protected var connection:Connection;
 		protected var client:Client;
 		
-		public var currentLevel:Level; //current level (world) that this instance of networkController is referenced in
+		public var currentGameWorld:GameWorld; //current level (world) that this instance of networkController is referenced in
 		public var currentLobby:LobbyMenu; //current lobby (world) that this instance of networkController is referenced in
 		public var currentHero:Hero; //user controlled hero communicating with this instance of Network Controller.
 		public var userID:int;
@@ -55,13 +55,13 @@ package GameWorld.Controllers
 			
 		}
 		
-		public function setLevel(_level:Level):void
+		public function setGameWorld(_gameWorld:GameWorld):void
 		{
-			currentLevel = _level;
+			currentGameWorld = _gameWorld;
 			trace ("********************");
-			trace ("level set");
+			trace ("GameWorld set");
 			trace ("***********************");
-			currentLevel.Test();
+			currentGameWorld.Test();
 		}
 		
 		public function setLobby(_lobby:LobbyMenu):void
@@ -189,7 +189,7 @@ package GameWorld.Controllers
 			trace("Recieved spawn message from server");
 			if (_userid != userID) //if the user sending spawn message is not self (to prevent spawning a friendly player for the users own hero)
 			{
-			currentLevel.SpawnFriendlyPlayer(_userid, _char, _origX, _origY); 
+			currentGameWorld.SpawnFriendlyPlayer(_userid, _char, _origX, _origY); 
 			}
 		}
 		
@@ -198,7 +198,7 @@ package GameWorld.Controllers
 			trace("Recieved walk message from server", _direction);
 			if (_userid != userID)
 			{
-				var friendlyPlayer:FriendlyHero = currentLevel.friendlyPlayerArray[_userid];
+				var friendlyPlayer:FriendlyHero = currentGameWorld.friendlyPlayerArray[_userid];
 				if (_direction == 1)
 				{
 					friendlyPlayer.RecieveInput("Up", 1);
@@ -223,7 +223,7 @@ package GameWorld.Controllers
 			trace("Recieved StopWalk message from server");
 			if (_userid != userID)
 			{
-			var friendlyPlayer:FriendlyHero = currentLevel.friendlyPlayerArray[_userid];
+			var friendlyPlayer:FriendlyHero = currentGameWorld.friendlyPlayerArray[_userid];
 			if (_direction == 1)
 			{
 				friendlyPlayer.RecieveInput("Up", 2);
