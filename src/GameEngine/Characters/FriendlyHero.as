@@ -22,8 +22,6 @@ package GameEngine.Characters
 			networkController = _networkController;
 			userid = _userid;
 			
-			username = new Text(_name);
-			
 			if (_char == 0)
 			{
 				unitSprite = new Spritemap(Mage.GFX_SPRITE, 40, 60);
@@ -47,6 +45,10 @@ package GameEngine.Characters
 				weaponSprite = new Spritemap(GC.GFX_WEAPON_WANDERER, 40, 60);
 			}
 			SpriteMap();
+			
+			username = new Text(_name);
+			username.y = -20;
+			username.x = (unitSprite.width / 2) - (username.width / 2);
 			
 			graphiclist = new Graphiclist(unitSprite, weaponSprite, username);
 			graphic = graphiclist;

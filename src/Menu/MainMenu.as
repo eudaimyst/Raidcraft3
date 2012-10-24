@@ -2,6 +2,7 @@ package Menu
 {
 	import flash.net.SharedObject;
 	import flash.ui.MouseCursor;
+	import Menu.Character.CreateCharacter;
 	import Menu.Character.SelectCharacter;
 	import net.flashpunk.World;
 	import net.flashpunk.FP;
@@ -47,7 +48,8 @@ package Menu
 			//add (new LoginBox(0, 0));
 			add (new TitleGraphic());
 			
-			add (new MenuButton("play", 1, 4, true, SelectCharacter));
+			//add (new MenuButton("play", 1, 4, true, SelectCharacter)); //old character screen
+			add (new MenuButton("play", 1, 4, true, CreateCharacter));
 			add (new MenuButton("options", 1, 5, true, OptionsMenu));
 			add (new MenuButton("UI test", 1, 6, true, UITest));
 			add (new MenuButton("exit", 1, 9, true, null, true));

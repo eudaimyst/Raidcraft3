@@ -1,7 +1,7 @@
 package Menu.Lobby 
 {
 	import GameEngine.Controllers.NetworkController;
-	import Menu.Character.SelectCharacter;
+	import Menu.Character.CreateCharacter;
 	import net.flashpunk.World;
 	import playerio.RoomInfo;
 	import UI.MenuButton;
@@ -25,7 +25,7 @@ package Menu.Lobby
 		{
 			add (new MouseCursorEntity);
 			add (new SimpleText(1, 1, "Lobby - Select Room"));
-			add (new MenuButton("back", 2, 9, false, SelectCharacter, false, UserCharacter.charClass));
+			add (new MenuButton("back", 2, 9, false, CreateCharacter, false));
 			//add (new PlayButton("play", 2, 9, true, JoinLobby));
 			add (lobbyController);
 			add (new CreateRoomButton(9, 1, "create", false, null, createRoom));

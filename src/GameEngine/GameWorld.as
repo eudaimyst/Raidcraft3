@@ -7,6 +7,7 @@ package GameEngine
 	import GameEngine.Controllers.PlayerInputController;
 	import GameEngine.HUD.ActionBar.SpellButton;
 	import GameEngine.HUD.CastBar.CastBar;
+	import GameEngine.HUD.Logs.ChatLog;
 	import GameEngine.HUD.UnitFrame.PlayerFrame;
 	import GameEngine.Levels.Level;
 	import GameEngine.Spells.BaseSpell;
@@ -29,6 +30,8 @@ package GameEngine
 		
 		public var castBar:CastBar;
 		
+		public var chatLog:ChatLog = new ChatLog;
+		
 		public var loadedLevel:Level = new Level(GC.TILEMAP_TEST_LEVEL_2);//choose what tilemap to use for the level
 		
 		public function GameWorld(_char:Class, _networkController:NetworkController, _roomName:String) 
@@ -50,6 +53,9 @@ package GameEngine
 				add (spellButtons[i]);
 				i++; 
 			}
+			//spawn chatlog
+			
+			add (chatLog);
 			
 			add (loadedLevel);
 			
