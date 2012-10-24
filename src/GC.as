@@ -32,15 +32,6 @@ package
 		[Embed(source = '../assets/raidcraft_title.png')]
 		public static const GFX_TITLE:Class;
 		
-		[Embed(source = '../assets/player.png')]
-		public static const GFX_PLAYER:Class;
-		
-		[Embed(source = '../assets/tileset.png')]
-		public static const GFX_TILES:Class;
-		
-		[Embed(source = '../assets/cooldown_spritesheet.png')]
-		public static const GFX_COOLDOWN:Class;
-		
 		// enemies
 		
 		[Embed(source = '../assets/portal.png')]

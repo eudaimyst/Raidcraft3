@@ -1,6 +1,6 @@
 package Menu.Lobby 
 {
-	import GameWorld.Controllers.NetworkController;
+	import GameEngine.Controllers.NetworkController;
 	import Menu.Character.SelectCharacter;
 	import net.flashpunk.World;
 	import playerio.RoomInfo;
@@ -47,7 +47,7 @@ package Menu.Lobby
 			remove (roomNameInput);
 			remove (okButton);
 			lobbyController.createRaid(roomNameInput.text);
-			updateRooms();
+			//updateRooms(); <causing errors trying to update rooms before connection is established
 		}
 		
 		private function joinRoom():void
@@ -57,7 +57,7 @@ package Menu.Lobby
 		
 		public function connectionError():void
 		{
-			add new PopupBox("unable to connect to server");
+			add (new PopupBox("unable to connect to server"));
 		}
 		
 		private function requestNewRoom():void

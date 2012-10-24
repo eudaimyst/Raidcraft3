@@ -1,7 +1,7 @@
 package Menu.Spells 
 {
-	import GameWorld.Characters.Heroes.*;
-	import GameWorld.Spells.BaseSpell;
+	import GameEngine.Characters.Heroes.*;
+	import GameEngine.Spells.BaseSpell;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.*;

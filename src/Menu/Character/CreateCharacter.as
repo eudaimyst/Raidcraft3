@@ -1,6 +1,6 @@
 package Menu.Character 
 {
-	import GameWorld.Characters.Heroes.*;
+	import GameEngine.Characters.Heroes.*;
 	import Menu.Login.LoginBox;
 	import Menu.MainMenu;
 	import Menu.Spells.SpellChooserWorld;

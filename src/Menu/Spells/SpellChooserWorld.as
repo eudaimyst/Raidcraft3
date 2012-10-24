@@ -1,10 +1,10 @@
 package Menu.Spells 
 {
-	import GameWorld.Spells.BaseSpell;
-	import GameWorld.Spells.GS;
+	import GameEngine.Spells.BaseSpell;
+	import GameEngine.Spells.GS;
 	import UI.SimpleText;
-	import GameWorld.Spells.SpellData;
-	import GameWorld.Characters.Heroes.*;
+	import GameEngine.Spells.SpellData;
+	import GameEngine.Characters.Heroes.*;
 	import net.flashpunk.World;
 	import UI.MenuButton;
 	import Menu.Character.SelectCharacter;
@@ -78,7 +78,7 @@ package Menu.Spells
 			//spawn chosen class display
 			add (new SimpleText(0, 1, String(_selectedClass)));
 			
-			add (new MenuButton("save", 8.5, 9, false, SelectCharacter, UserVariables.newCharClass));
+			add (new MenuButton("save", 8.5, 9, false, SelectCharacter, false, UserVariables.newCharClass));
 		}
 		
 		public function refreshChoosers(_chosenSpec:int):void

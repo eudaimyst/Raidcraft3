@@ -1,8 +1,8 @@
 package Menu.Character 
 {
-	import GameWorld.Characters.Heroes.*;
-	import GameWorld.GameWorld;
-	import GameWorld.SinglePlayerLevel;
+	import GameEngine.Characters.Heroes.*;
+	import GameEngine.GameWorld;
+	import GameEngine.SinglePlayerLevel;
 	import Menu.Lobby.LobbyMenu;
 	import Menu.Login.LoginBox;
 	import Menu.MainMenu;

@@ -1,7 +1,7 @@
 package Menu.Lobby 
 {
-	import GameWorld.Controllers.NetworkController;
-	import GameWorld.GameWorld;
+	import GameEngine.Controllers.NetworkController;
+	import GameEngine.GameWorld;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;

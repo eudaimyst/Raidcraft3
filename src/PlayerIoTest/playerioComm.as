@@ -26,7 +26,7 @@ package PlayerIoTest
 		public function getphp(sentVariable:String, _pressedButton:SubmitButton):void
 		{
 			trace("3xblah", sentVariable);
-			MainMenu.testHelloWorldEntity.sendTest(this, sentVariable);
+			//MainMenu.testHelloWorldEntity.sendTest(this, sentVariable);
 			pressedButton = _pressedButton
 			pressedButton.setresult();
 			

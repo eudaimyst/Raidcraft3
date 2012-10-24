@@ -88,10 +88,13 @@ namespace MyGame {
                     Broadcast("StopWalk", player.Id, player.Walk);
                     break;
                 case "SendSpawn":
-                    Broadcast("SendSpawn", message.GetInt(0), player.Class, message.GetInt(1), message.GetInt(2));
+                    Broadcast("SendSpawn", message.GetInt(0), player.Class, player.Name, message.GetInt(1), message.GetInt(2));
                     break;
                 case "SetClass":
                     player.Class = message.GetInt(0);
+                    break;
+                case "SetName":
+                    player.Name = message.GetString(0);
                     break;
             }
         }

@@ -1,7 +1,7 @@
 package Menu.Character 
 {
 	import flash.events.TextEvent;
-	import GameWorld.Characters.Heroes.*;
+	import GameEngine.Characters.Heroes.*;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image

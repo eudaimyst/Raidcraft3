@@ -2,7 +2,6 @@ package
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import GameWorld.Characters.Heroes.Mage;
 	import Menu.MainMenu;
 	import net.flashpunk.Engine;
 	import net.flashpunk.FP;

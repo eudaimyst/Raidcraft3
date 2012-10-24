@@ -26,7 +26,7 @@ package
 			this.y = Input.mouseY - mouseFlash.scaledHeight / 2;
 			graphic.scrollX = 0; //locks this entities graphic to camera
 			graphic.scrollY = 0;
-			this.layer = -3;
+			this.layer = -9002;
 			
 			
 		}

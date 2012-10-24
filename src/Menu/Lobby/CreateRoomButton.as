@@ -1,6 +1,6 @@
 package Menu.Lobby 
 {
-	import GameWorld.Controllers.NetworkController;
+	import GameEngine.Controllers.NetworkController;
 	import UI.Button;
 	
 	/**
