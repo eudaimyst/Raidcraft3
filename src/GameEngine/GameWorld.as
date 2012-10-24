@@ -3,11 +3,14 @@ package GameEngine
 	import GameEngine.*;
 	import GameEngine.Characters.FriendlyHero;
 	import GameEngine.Characters.Hero;
+	import GameEngine.Characters.Heroes.Mage;
+	import GameEngine.Characters.Heroes.Rogue;
+	import GameEngine.Characters.Heroes.Warrior;
 	import GameEngine.Controllers.NetworkController;
 	import GameEngine.Controllers.PlayerInputController;
 	import GameEngine.HUD.ActionBar.SpellButton;
 	import GameEngine.HUD.CastBar.CastBar;
-	import GameEngine.HUD.Logs.ChatLog;
+	import GameEngine.HUD.Logs.ChatFrame;
 	import GameEngine.HUD.UnitFrame.PlayerFrame;
 	import GameEngine.Levels.Level;
 	import GameEngine.Spells.BaseSpell;
@@ -30,7 +33,7 @@ package GameEngine
 		
 		public var castBar:CastBar;
 		
-		public var chatLog:ChatLog = new ChatLog;
+		public var chatFrame:ChatFrame;
 		
 		public var loadedLevel:Level = new Level(GC.TILEMAP_TEST_LEVEL_2);//choose what tilemap to use for the level
 		
@@ -48,14 +51,16 @@ package GameEngine
 			{
 				var spellID:Number = i;
 				var getSpellData:SpellData = new SpellData;
-				
-				spellButtons[i] = new SpellButton(getSpellData.loadData(i), i, this);
+				if (_char == Mage) spellButtons[i] = new SpellButton(getSpellData.loadData(0 + i), i, this);
+				if (_char == Rogue) spellButtons[i] = new SpellButton(getSpellData.loadData(120 + i), i, this);
+				if (_char == Warrior) spellButtons[i] = new SpellButton(getSpellData.loadData(60 + i), i, this);
 				add (spellButtons[i]);
 				i++; 
 			}
-			//spawn chatlog
 			
-			add (chatLog);
+			//spawn chatlog
+			chatFrame = new ChatFrame(this);
+			add (chatFrame);
 			
 			add (loadedLevel);
 			

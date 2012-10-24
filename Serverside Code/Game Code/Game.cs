@@ -96,6 +96,9 @@ namespace MyGame {
                 case "SetName":
                     player.Name = message.GetString(0);
                     break;
+                case "SendChat":
+                    Broadcast("RecieveChat", message.GetString(0), player.Name);
+                    break;
             }
         }
 

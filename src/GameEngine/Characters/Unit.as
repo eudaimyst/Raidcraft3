@@ -114,6 +114,8 @@ package GameEngine.Characters
 			}
 		}
 		
+		
+		
 		//// actions
 		// 1 = walk
 		// 2 = stand
@@ -129,6 +131,15 @@ package GameEngine.Characters
 				unitSprite.play("stand" + _direction);
 				weaponSprite.play("stand" + _direction);
 			}
+		}
+		
+		public function RecieveStopWalk():void
+		{
+			isMoving = false;
+			walkDown = false;
+			walkRight = false;
+			walkLeft = false;
+			walkUp = false;
 		}
 		
 		public function RecieveInput(_direction:String = "", _action:int = 0):void

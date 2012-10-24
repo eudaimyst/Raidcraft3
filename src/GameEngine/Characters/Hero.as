@@ -90,6 +90,13 @@ package GameEngine.Characters
 			
 		}
 		
+		public function stopMovement():void
+		{
+			
+			RecieveStopWalk();
+			networkController.sendStopWalkMessage(5);
+		}
+		
 		public function updateUserID():void
 		{
 			x = gameWorld.loadedLevel.playerSpawnLocationsX[networkController.userID];

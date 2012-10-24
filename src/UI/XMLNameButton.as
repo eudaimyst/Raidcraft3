@@ -6,6 +6,7 @@ package UI
 	 */
 	import flash.net.SharedObject;
 	import net.flashpunk.FP;
+	import user.UserVariables
 	 
 	public class XMLNameButton extends Button 
 	{
@@ -43,14 +44,16 @@ package UI
 			//trace (attachedInput.textGraphic.text);
 			
 			var options:XML = <options></options>; //defines the options tag that contains all the options
-			var user:XML = <user/> //defines the user tag that contains all the users options
-			user.@name = attachedInput.textGraphic.text; //sets the name attribute of the user tag to the attachedInput text
-			options.appendChild(user); //sets the user tag to be a child of the options tag
+			var attachedUser:XML = <user/> //defines the user tag that contains all the users options
+			attachedUser.@name = attachedInput.textGraphic.text; //sets the name attribute of the user tag to the attachedInput text
+			options.appendChild(attachedUser); //sets the user tag to be a child of the options tag
 			trace(options); //traces the result
 			
 			//saved shared object
 			sharedOBJ.data.optionsXML = options; //saves the options tag to the shared object defined above
 			sharedOBJ.flush(); //ensures data is saved
+			
+			UserVariables.userName = attachedInput.textGraphic.text;
 		}
 		
 	}

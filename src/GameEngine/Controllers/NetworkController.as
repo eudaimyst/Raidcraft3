@@ -49,7 +49,7 @@ package GameEngine.Controllers
 			client = _client;
 			trace("handling connection attempt");
 			//Set developmentsever (Comment out to connect to your server online)
-			client.multiplayer.developmentServer = "localhost:8184";
+			//client.multiplayer.developmentServer = "localhost:8184";
 			
 			refreshList(); //gets number of rooms
 			
@@ -135,6 +135,11 @@ package GameEngine.Controllers
 			connection.send("SetClass", _char);
 		}
 		
+		public function sendChat(_text:String):void
+		{
+			connection.send("SendChat", _text);
+		}
+		
 		public function setName():void
 		{
 			trace("username is", UserVariables.userName);
@@ -176,8 +181,17 @@ package GameEngine.Controllers
 			//Add message listener for send spawn commands
 			_connection.addMessageHandler("SendSpawn", RecieveSpawn);
 			
+			//Add message listener for send chat messages
+			_connection.addMessageHandler("RecieveChat", RecieveChat);
+			
 			//Listen to all messages using a private function
 			_connection.addMessageHandler("*", handleMessages);
+		}
+		
+		private function RecieveChat(m:Message, _text:String, _name:String):void
+		{
+			trace (_name, ": ", _text);
+			currentGameWorld.chatFrame.recieveChat(_text, _name);
 		}
 
 		private function SetUserID(m:Message, _userid:uint):void
@@ -250,6 +264,10 @@ package GameEngine.Controllers
 			if (_direction == 4)
 			{
 				friendlyPlayer.RecieveInput("Right", 2);
+			}
+			if (_direction == 5)
+			{
+				friendlyPlayer.RecieveStopWalk();
 			}
 			}
 		}
