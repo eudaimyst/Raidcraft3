@@ -99,6 +99,9 @@ namespace MyGame {
                 case "SendChat":
                     Broadcast("RecieveChat", message.GetString(0), player.Name);
                     break;
+                case "ping":
+                    player.Send("pong");
+                    break;
             }
         }
 

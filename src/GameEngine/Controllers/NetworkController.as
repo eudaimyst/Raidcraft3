@@ -3,6 +3,7 @@ package GameEngine.Controllers
 	import GameEngine.Characters.FriendlyHero;
 	import GameEngine.Characters.Hero;
 	import GameEngine.GameWorld;
+	import GameEngine.HUD.LatencyDisplay;
 	import Menu.Lobby.LobbyMenu;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
@@ -27,7 +28,7 @@ package GameEngine.Controllers
 		
 		public var currentRooms:Array = new Array("test");
 		
-	
+		protected var latencyDisplay:LatencyDisplay;
 		
 		public function NetworkController():void
 		{
@@ -140,6 +141,20 @@ package GameEngine.Controllers
 			connection.send("SendChat", _text);
 		}
 		
+		public function ping(_latencyDisplay:LatencyDisplay):void
+		{
+			if (latencyDisplay == null)
+			{
+				latencyDisplay = _latencyDisplay;
+			}
+			connection.send("ping");
+		}
+		
+		public function pong(_message:Message):void
+		{
+			latencyDisplay.RecieveUpdate();
+		}
+		
 		public function setName():void
 		{
 			trace("username is", UserVariables.userName);
@@ -183,6 +198,9 @@ package GameEngine.Controllers
 			
 			//Add message listener for send chat messages
 			_connection.addMessageHandler("RecieveChat", RecieveChat);
+			
+			//Add message listener for send chat messages
+			_connection.addMessageHandler("pong", pong);
 			
 			//Listen to all messages using a private function
 			_connection.addMessageHandler("*", handleMessages);

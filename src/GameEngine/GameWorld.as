@@ -10,6 +10,7 @@ package GameEngine
 	import GameEngine.Controllers.PlayerInputController;
 	import GameEngine.HUD.ActionBar.SpellButton;
 	import GameEngine.HUD.CastBar.CastBar;
+	import GameEngine.HUD.LatencyDisplay;
 	import GameEngine.HUD.Logs.ChatFrame;
 	import GameEngine.HUD.UnitFrame.PlayerFrame;
 	import GameEngine.Levels.Level;
@@ -61,9 +62,11 @@ package GameEngine
 			//spawn chatlog
 			chatFrame = new ChatFrame(this);
 			add (chatFrame);
-			
+			//spawn latency display
+			add (new LatencyDisplay(networkController));
+			//spawn level
 			add (loadedLevel);
-			
+			//spawn hero
 			SpawnPlayer(UserCharacter.charClass);
 			
 		}

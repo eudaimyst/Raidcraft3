@@ -1,4 +1,4 @@
-package GameEngine.HUD.Logs 
+package GameEngine.HUD.Logs
 {
 	import GameEngine.GameWorld;
 	import GameEngine.HUD.HUDElementNoScroll;
@@ -30,9 +30,9 @@ package GameEngine.HUD.Logs
 		protected var gameWorld:GameWorld;
 		
 		protected var messagesRecieved:int = 0;
-		protected var newMessages:Array;
+		protected var newMessages:Array = new Array;
 		
-		public function ChatFrame(_gameWorld:GameWorld) 
+		public function ChatFrame(_gameWorld:GameWorld)
 		{
 			gameWorld = _gameWorld;
 			
@@ -58,12 +58,33 @@ package GameEngine.HUD.Logs
 		{
 			messagesRecieved += 1;
 			var newText:Text = new Text(_name + ": " + _text);
-			//newMessages[messagesRecieved] = newText;
-			newText.x = inputBackground.x;
-			newText.y = inputBackground.y - newText.height * messagesRecieved;
-			
-			graphicList.add(newText);
-			activeGraphicList.add(newText);
+			trace("num of chat msgs recieved:", messagesRecieved);
+			newMessages[messagesRecieved] = newText;
+			var i:int = 1;
+			graphicList = new Graphiclist(background, inputBackground);
+			activeGraphicList = new Graphiclist(background, inputBackground, textGraphic);
+			while (i <= messagesRecieved)
+			{
+				if (messagesRecieved >= 5)
+				{
+					var messagesToIgnore:int = messagesRecieved - 4;
+				}
+				if (i < messagesToIgnore)
+				{
+					//do nothing
+				}
+				else
+				{
+					var _newText:Text = newMessages[i];
+					_newText.y = inputBackground.y + (_newText.height * i) - _newText.height * newMessages.length;
+					_newText.x = inputBackground.x;
+					graphicList.add(newMessages[i]);
+					activeGraphicList.add(newMessages[i]);
+					graphic = graphicList;
+				}
+				i++
+			}
+		
 		}
 		
 		public function inputActive():void
@@ -75,8 +96,8 @@ package GameEngine.HUD.Logs
 			firstActiveFrame = true;
 			inputBackground.alpha = 1;
 			graphic = activeGraphicList;
-			trace ("chat input active");
-			
+			trace("chat input active");
+		
 		}
 		
 		public function inputInactive():void
@@ -88,15 +109,15 @@ package GameEngine.HUD.Logs
 		}
 		
 		public function get text():String
-        {
-            return _text;
-        }
- 
-        public function set text(value:String):void
-        {
-            _text = value;
-            textGraphic.text = value;
-        }
+		{
+			return _text;
+		}
+		
+		public function set text(value:String):void
+		{
+			_text = value;
+			textGraphic.text = value;
+		}
 		
 		override public function update():void
 		{
@@ -118,8 +139,8 @@ package GameEngine.HUD.Logs
 				{
 					trace("reduce text by 1");
 					text = text.substr(0, _text.length - 1);
-					//activeFlash.x = labelText.scaledWidth + 5 + textGraphic.textWidth;
-					//graphic = activeGraphicList;
+						//activeFlash.x = labelText.scaledWidth + 5 + textGraphic.textWidth;
+						//graphic = activeGraphicList;
 				}
 				if (Input.pressed(Key.ESCAPE))
 				{
@@ -166,13 +187,14 @@ package GameEngine.HUD.Logs
 			{
 				if (Input.mousePressed)
 				{
-					if (inputActiveVar == true) inputInactive();
-					//trace ("inputboxpressed");
-					//inputActive = false;
+					if (inputActiveVar == true)
+						inputInactive();
+						//trace ("inputboxpressed");
+						//inputActive = false;
 				}
 			}
 		}
-		
+	
 	}
 
 }
