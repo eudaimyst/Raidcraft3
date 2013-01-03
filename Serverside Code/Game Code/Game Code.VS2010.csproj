@@ -48,6 +48,7 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseEnemy.cs" />
     <Compile Include="Game.cs" />
   </ItemGroup>
   <ItemGroup>

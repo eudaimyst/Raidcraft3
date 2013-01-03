@@ -1,5 +1,6 @@
 package GameEngine.HUD.CastBar 
 {
+	import GameEngine.GameWorld;
 	import GameEngine.HUD.ActionBar.SpellButton;
 	import GameEngine.HUD.HUDElement;
 	import GameEngine.Spells.BaseSpell;
@@ -33,6 +34,7 @@ package GameEngine.HUD.CastBar
 			trace("castBar loaded")
 			maxCastBar = Image.createRect(300, 40, 0x111111, 1);
 			currentCastBar = Image.createRect(300, 40, 0xbbbbbb, 1);
+			currentCastBar.scaleX = 0;
 			spellName = new Text(String(_passedSpell.SPELL_NAME), 20, 10);
 			castTime = new Text(String(_passedSpell.spellCastTime), 150, 10);
 			
@@ -58,8 +60,14 @@ package GameEngine.HUD.CastBar
 			{
 				spellButton.gameWorld.playerHero.isCasting = false;
 				spellButton.playCooldown();
+				spellButton.gameWorld.CastSpellFinished(passedSpell);
 				FP.world.remove(this);
 			}
+		}
+		
+		public function FinishedCast():void
+		{
+			
 		}
 		
 		public function CancelCast():void

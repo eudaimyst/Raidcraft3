@@ -12,9 +12,13 @@ namespace MyGame {
         public int Walk;
         public int Class;
 	}
+    public class EnemyArray : ArrayList
+    {
+    }
     [RoomType("raid")]
     public class LobbyCode : Game<Player>
     {
+        public bool gameStartedStatus;
         // This method is called when an instance of your the game is created
         public override void GameStarted()
         {
@@ -54,7 +58,6 @@ namespace MyGame {
             player.Send("hello");
             player.Send("setUserID", player.Id);
             
-
             // this is how you broadcast a message to all players connected to the game
             Broadcast("UserJoined", player.Id, player.Class);
         }
@@ -90,6 +93,10 @@ namespace MyGame {
                 case "SendSpawn":
                     Broadcast("SendSpawn", message.GetInt(0), player.Class, player.Name, message.GetInt(1), message.GetInt(2));
                     break;
+                case "SendEnemySpawn":
+
+                    Broadcast("RecieveEnemySpawn", message.GetInt(0));
+                    break;
                 case "SetClass":
                     player.Class = message.GetInt(0);
                     break;
@@ -99,8 +106,18 @@ namespace MyGame {
                 case "SendChat":
                     Broadcast("RecieveChat", message.GetString(0), player.Name);
                     break;
+                case "LocationUpdate":
+                    Broadcast("SendLocationUpdate", player.Id, message.GetInt(0), message.GetInt(1));
+                    break;
+                case "StartLevel":
+                    gameStartedStatus = true;
+                    Broadcast("StartLevel");
+                    break;
                 case "ping":
                     player.Send("pong");
+                    break;
+                case "sendDamage":
+                    Broadcast("DamageDealtToEnemy", message.GetInt(0), message.GetInt(1), message.GetInt(2));
                     break;
             }
         }

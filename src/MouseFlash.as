@@ -17,7 +17,7 @@ package
 		
 		public function MouseFlash() 
 		{
-			trace ("mouse press function called");
+			//trace ("mouse press function called");
 			mouseFlash = new Image(GC.GFX_MOUSE_FLASH);
 
 			graphic = mouseFlash;

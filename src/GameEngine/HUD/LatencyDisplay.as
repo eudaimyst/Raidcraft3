@@ -10,15 +10,15 @@ package GameEngine.HUD
 	 */
 	public class LatencyDisplay extends HUDElement 
 	{
-		protected var latency:Number = 0;
-		protected var graphicList:Graphiclist;
-		protected var textGraphic:Text;
+		private var latency:Number = 0;
+		private var graphicList:Graphiclist;
+		private var textGraphic:Text;
 		
-		protected var timeSinceUpdate:Number = 0;
+		private var timeSinceUpdate:Number = 0;
 		
-		protected var updateRequested:Boolean;
+		private var updateRequested:Boolean;
 		
-		protected var networkController:NetworkController;
+		private var networkController:NetworkController;
 		
 		public function LatencyDisplay(_networkController:NetworkController) 
 		{

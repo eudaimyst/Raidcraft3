@@ -52,14 +52,10 @@ package GameEngine.Characters
 			
 			graphiclist = new Graphiclist(unitSprite, weaponSprite, username);
 			graphic = graphiclist;
+			
+			type = "friendlyPlayer";
 		}
 		
-		
-		public function MoveToLocation(origX:int, origY:int):void ///called when unit is spawned by level
-		{
-			this.x = origX;
-			this.y = origY;
-		}
 	}
 
 }

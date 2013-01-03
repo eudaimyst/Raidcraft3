@@ -22,6 +22,8 @@ package GameEngine.Characters
 		public var char:Class;
 		public var heroID:int;
 		
+		public var target:Unit;
+		
 		public function Hero(_playerInputController:PlayerInputController, _networkController:NetworkController, _char:Class, _gameWorld:GameWorld, _spawnLocationX:Array, _spawnlocationY:Array) 
 		{
 			playerInputController = _playerInputController;
@@ -29,13 +31,17 @@ package GameEngine.Characters
 			char = _char;
 			gameWorld = _gameWorld;
 			
+			isHero = true;
+			
+			// TODO: blah
+			
 			if (UserCharacter.charClass == Mage)
 			{
 				unitSprite = new Spritemap(Mage.GFX_SPRITE, 40, 60);
 				weaponSprite = new Spritemap(GC.GFX_WEAPON_MAGE, 40, 60);
-				unitHealth = 400;
+				health = 400;
 				maxHealth = 400;
-				unitPower = 1200;
+				power = 1200;
 				maxPower = 1200;
 			}
 			
@@ -43,9 +49,9 @@ package GameEngine.Characters
 			{
 				unitSprite = new Spritemap(Warrior.GFX_SPRITE, 40, 60);
 				weaponSprite = new Spritemap(GC.GFX_WEAPON_WARRIOR, 40, 60);
-				unitHealth = 1200;
+				health = 1200;
 				maxHealth = 1200;
-				unitPower = 400;
+				power = 400;
 				maxPower = 400;
 			}
 			
@@ -53,9 +59,9 @@ package GameEngine.Characters
 			{
 				unitSprite = new Spritemap(Rogue.GFX_SPRITE, 40, 60);
 				weaponSprite = new Spritemap(GC.GFX_WEAPON_WANDERER, 40, 60);
-				unitHealth = 600;
+				health = 600;
 				maxHealth = 600;
-				unitPower = 600;
+				power = 600;
 				maxPower = 600;
 				
 			}
@@ -70,7 +76,11 @@ package GameEngine.Characters
 			setHitboxTo(unitSprite);
 		}
 		
-		
+		public function setTarget(_passedUnit:Unit):void
+		{
+			trace("target set to", _passedUnit.unitName);
+			target = _passedUnit;
+		}
 		
 		public function setClass():void
 		{
@@ -92,16 +102,26 @@ package GameEngine.Characters
 		
 		public function stopMovement():void
 		{
-			
 			RecieveStopWalk();
 			networkController.sendStopWalkMessage(5);
 		}
 		
-		public function updateUserID():void
+		public function updateUserID(_userid:uint):void
 		{
+			heroID = _userid;
 			x = gameWorld.loadedLevel.playerSpawnLocationsX[networkController.userID];
 			y = gameWorld.loadedLevel.playerSpawnLocationsY[networkController.userID];
 			gameWorld.updateCamera();
+			if (_userid == 1)
+			{
+				gameWorld.isHost = true;
+			}
+			gameWorld.userInitialized();
+		}
+		
+		override public function UnitNotMoving():void
+		{
+			networkController.sendLocationUpdate(x, y);
 		}
 		
 	}

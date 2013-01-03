@@ -15,10 +15,12 @@ package GameEngine.Characters
 		public var graphiclist:Graphiclist;
 		public var unitSprite:Spritemap; //set in hero.as
 		public var weaponSprite:Spritemap; //set in hero.as
+		public var isHero:Boolean;
 		
-		public var unitHealth:Number;
+		public var unitName:String = "";
+		public var health:Number;
 		public var maxHealth:Number;
-		public var unitPower:Number;
+		public var power:Number;
 		public var maxPower:Number;
 		
 		public var walkUp:Boolean;
@@ -30,6 +32,8 @@ package GameEngine.Characters
 		
 		public var isCasting:Boolean;
 		
+		public var unitID:int = 0; //set by gameworld
+		
 		public function Unit() 
 		{
 			
@@ -38,9 +42,10 @@ package GameEngine.Characters
 		public function SpriteMap():void
 		{
 			AddSprites(unitSprite);
-			AddSprites(weaponSprite);
+			if (isHero) {AddSprites(weaponSprite);}
 			
-			graphiclist = new Graphiclist(unitSprite, weaponSprite);
+			if (isHero) { graphiclist = new Graphiclist(unitSprite, weaponSprite); }
+			else { graphiclist = new Graphiclist(unitSprite); }
 			graphic = graphiclist;
 		}
 		
@@ -65,11 +70,19 @@ package GameEngine.Characters
 			_spritemap.add("standUp", [i + 0], 1);
 		}
 		
+		public function UnitNotMoving():void //to be overwritten by hero
+		{
+			//do nothing 
+		}
+		
 		override public function update():void
 		{
+			
+			
 			if (!isMoving) //if not moving
 			{
-				PlayAnim(direction, 2); //play stand animation
+				//PlayAnim(direction, 2); //play stand animation
+				//UnitNotMoving();
 			}
 			else
 			{
@@ -124,12 +137,12 @@ package GameEngine.Characters
 			if (_action == 1)
 			{
 				unitSprite.play("walk" + _direction);
-				weaponSprite.play("walk" + _direction);
+				if (isHero) {weaponSprite.play("walk" + _direction);}
 			}
 			if (_action == 2)
 			{
 				unitSprite.play("stand" + _direction);
-				weaponSprite.play("stand" + _direction);
+				if (isHero) {weaponSprite.play("stand" + _direction);}
 			}
 		}
 		
@@ -197,11 +210,22 @@ package GameEngine.Characters
 				{
 					direction = _direction;
 					isMoving = false;
+					UnitNotMoving();
+					PlayAnim(direction, 2);
 				}
 			}
 		}
 		
+		public function MoveToLocation(_x:int, _y:int):void //moves the unit to a location
+		{
+			this.x = _x;
+			this.y = _y;
+		}
 		
+		public function DealDamage(_damageAmount:int, _fromid:int):void //called to deal damage to this unit (for example from game world when damage is delt), overriden by entities which extend this
+		{
+			
+		}
 	}
 
 }

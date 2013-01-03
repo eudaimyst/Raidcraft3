@@ -52,6 +52,17 @@ package GameEngine.Controllers
 				attachedHero.gameWorld.updateCamera();
 			}
 			
+			if (Input.mousePressed)
+			{
+				if (attachedHero.gameWorld.collidePoint("enemy", attachedHero.gameWorld.mouseX, attachedHero.gameWorld.mouseY) == null && attachedHero.gameWorld.collidePoint("spellButton", attachedHero.gameWorld.mouseX, attachedHero.gameWorld.mouseY) == null)
+				{
+					trace ("no enemy");
+					attachedHero.target = null;
+					attachedHero.gameWorld.targetFrame.removeTarget();
+					attachedHero.gameWorld.CancelCast();
+				}
+			}
+			
 			if (inputDisabled == true)
 			{
 				//do nothing

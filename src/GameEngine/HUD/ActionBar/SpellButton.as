@@ -102,17 +102,26 @@ package GameEngine.HUD.ActionBar
 			
 			graphic = Graphiclist(graphicList);
 			
-			origX = (buttonBG.scaledWidth + 5) * actionBarNum + 20;
-			origY = FP.screen.height - (buttonBG.scaledHeight + 20);
+			graphicList.x = (buttonBG.scaledWidth + 5) * actionBarNum + 20;
+			graphicList.y = FP.screen.height - (buttonBG.scaledHeight + 20);
 			
-			setHitbox(buttonBG.scaledWidth, buttonBG.scaledHeight, 0, 0);
+			graphicListHover.x = (buttonBG.scaledWidth + 5) * actionBarNum + 20;
+			graphicListHover.y = FP.screen.height - (buttonBG.scaledHeight + 20);
+			
+			graphicListPressed.x = (buttonBG.scaledWidth + 5) * actionBarNum + 20;
+			graphicListPressed.y = FP.screen.height - (buttonBG.scaledHeight + 20);
+			
+			setHitbox(buttonBG.scaledWidth, buttonBG.scaledHeight, -((buttonBG.scaledWidth + 5) * actionBarNum + 20), -(FP.screen.height - (buttonBG.scaledHeight + 20)));
+			
+			type = "spellButton";
 			
 		}
 		
 		override public function update():void
 		{
-			x = FP.camera.x + origX;
-			y = FP.camera.y + origY;
+			//x = FP.camera.x + origX;
+			//y = FP.camera.y + origY;
+			
 			if (spellPressed == true)
 			{
 				spellPressedTimer++;
@@ -131,7 +140,7 @@ package GameEngine.HUD.ActionBar
 				
 				if (Input.mousePressed) //on mouseclick - spawn cast bar is here because this is nto picked up by playerinput controller
 				{
-					gameWorld.CastSpell(spell.id);
+					gameWorld.CastSpell(actionBarNum);
 				}
 			}
 			else 
@@ -140,6 +149,8 @@ package GameEngine.HUD.ActionBar
 				if (isHover == true) {graphic = graphicList;}
 				isHover = false;
 			}
+			
+			super.update();
 		}
 		
 		public function playGCD():void

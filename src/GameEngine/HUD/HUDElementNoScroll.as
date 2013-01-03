@@ -24,6 +24,14 @@ package GameEngine.HUD
 			
 			super.added();
 		}
+		
+		override public function render():void
+		{
+			
+			x = FP.camera.x;
+			y = FP.camera.y;
+			super.render();
+		}
 	}
 
 }

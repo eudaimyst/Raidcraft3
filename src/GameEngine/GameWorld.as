@@ -1,6 +1,9 @@
 package GameEngine 
 {
 	import GameEngine.*;
+	import GameEngine.Characters.DummyEnemy;
+	import GameEngine.Characters.Enemies.EnemyData;
+	import GameEngine.Characters.Enemy;
 	import GameEngine.Characters.FriendlyHero;
 	import GameEngine.Characters.Hero;
 	import GameEngine.Characters.Heroes.Mage;
@@ -9,13 +12,16 @@ package GameEngine
 	import GameEngine.Controllers.NetworkController;
 	import GameEngine.Controllers.PlayerInputController;
 	import GameEngine.HUD.ActionBar.SpellButton;
+	import GameEngine.HUD.AwaitingPlayers;
 	import GameEngine.HUD.CastBar.CastBar;
 	import GameEngine.HUD.LatencyDisplay;
 	import GameEngine.HUD.Logs.ChatFrame;
 	import GameEngine.HUD.UnitFrame.PlayerFrame;
+	import GameEngine.HUD.UnitFrame.TargetFrame;
 	import GameEngine.Levels.Level;
 	import GameEngine.Spells.BaseSpell;
 	import GameEngine.Spells.SpellData;
+	import net.flashpunk.utils.Input;
 	import net.flashpunk.World;
 	import user.UserCharacter;
 	import net.flashpunk.FP;
@@ -30,13 +36,25 @@ package GameEngine
 		public var networkController:NetworkController;
 		public var friendlyPlayerArray:Array = new Array; //stores an array of friendly players, with player.io player.id 's as indexes.
 		public var spellButtons:Array = new Array;
+		public var enemyArray:Array = new Array; //stores an array of spawned enemies, this creates id for index when spawned in SpawnEnemy.
+		public var enemyCount:int = 0; //counts enemies for enemyArray index
+		
 		public var playerHero:Hero;
 		
 		public var castBar:CastBar;
 		
 		public var chatFrame:ChatFrame;
+		public var targetFrame:TargetFrame;
 		
 		public var loadedLevel:Level = new Level(GC.TILEMAP_TEST_LEVEL_2);//choose what tilemap to use for the level
+		
+		public var isHost:Boolean = false; //if true, this game world is the host
+		
+		public var worldStatus:int = 0; //0 = waiting for players, 1 = game world started, 2 = game world finished
+		
+		
+		
+		private var awaitingPlayersDialog:AwaitingPlayers;
 		
 		public function GameWorld(_char:Class, _networkController:NetworkController, _roomName:String) 
 		{
@@ -62,12 +80,40 @@ package GameEngine
 			//spawn chatlog
 			chatFrame = new ChatFrame(this);
 			add (chatFrame);
-			//spawn latency display
-			add (new LatencyDisplay(networkController));
+			targetFrame = new TargetFrame();
+			add (targetFrame);
+			
 			//spawn level
 			add (loadedLevel);
 			//spawn hero
 			SpawnPlayer(UserCharacter.charClass);
+			
+			
+			//spawn latency display
+			add (new LatencyDisplay(networkController));
+			
+			awaitingPlayersDialog = new AwaitingPlayers(this);
+			add (awaitingPlayersDialog);
+			
+			
+		}
+		
+		public function StartLevel():void //this is called by awaiting players
+		{
+			if (worldStatus == 0)
+			{
+				networkController.SendStartLevel();
+			}
+			else
+			{
+				remove (awaitingPlayersDialog);
+				//spawn enemy (testing)
+				if (isHost)
+				{
+					
+					SpawnEnemy(1);
+				}
+			}
 			
 		}
 		
@@ -90,6 +136,7 @@ package GameEngine
 				{
 					//do nothing
 					trace("player is moving");
+					
 				}
 				else
 				{
@@ -114,14 +161,36 @@ package GameEngine
 							}
 							else
 							{
-								playerHero.isCasting = true;
-								spellButton.onPress();
-								castBar = new CastBar(loadedSpell, spellButton);
-								add (castBar);
+								if (playerHero.target == null)
+								{
+									//do nothing
+									trace("player has no target");
+								}
+								else
+								{
+									playerHero.isCasting = true;
+									spellButton.onPress();
+									castBar = new CastBar(loadedSpell, spellButton);
+									add (castBar);
+								}
 							}
 						}
 					}
 				}
+			}
+		}
+		
+		public function CastSpellFinished(_passedSpell:BaseSpell):void
+		{
+			if (playerHero.target == null)
+			{
+				//do nothing
+				trace("player has no target");
+			}
+			else
+			{
+			trace (_passedSpell.SPELL_NAME, "hits for", _passedSpell.spellDamage, "on", playerHero.target.unitName, "with id", playerHero.target.unitID);
+			playerHero.target.DealDamage(_passedSpell.spellDamage, playerHero.heroID);
 			}
 		}
 		
@@ -159,9 +228,65 @@ package GameEngine
 			}
 		}
 		
-		public function Test():void
+		public function SpawnEnemy(_enemyID:int):void
 		{
-			trace("test function in level");
+			var enemyData:EnemyData = new EnemyData
+			
+			var enemyToSpawn:Enemy = new Enemy(this, enemyData.loadData(_enemyID))
+			enemyArray[enemyCount] = enemyToSpawn;
+			enemyToSpawn.unitID = enemyCount;
+			add (enemyToSpawn);
+			
+			networkController.sendEnemySpawn(_enemyID);
+			enemyCount++;
+		}
+		
+		public function DealDamageToEnemy(_unitID:int, _damage:int, _fromID:int):void
+		{
+			if (isHost)
+			{
+				var enemyToDealDamage:Enemy = enemyArray[_unitID];
+				enemyToDealDamage.health -= _damage;
+				trace (_damage, "damage dealt to", enemyToDealDamage.unitName, "with id", _unitID);
+				enemyToDealDamage.threatIndex[_fromID] += _damage;
+				trace ("threat increased by", _damage, "for player", _fromID);
+			}
+			else
+			{
+				var dummyEnemyToDealDamage:DummyEnemy = enemyArray[_unitID];
+				dummyEnemyToDealDamage.health -= _damage;
+				trace (_damage, "damage dealt to DUMMY-", dummyEnemyToDealDamage.unitName, "with id", _unitID);
+			}
+			
+			if (playerHero.target == null)
+			{
+				//do nothing
+			}
+			else
+			{
+				if (playerHero.target.unitID == _unitID)
+				{
+					targetFrame.setTarget(playerHero.target);
+				}
+			}
+		}
+		
+		public function SpawnDummyEnemy(_enemyID:int):void
+		{
+			if (isHost)
+			{
+				//do nothing
+			}
+			else
+			{
+				var enemyData:EnemyData = new EnemyData
+				var enemyToSpawn:DummyEnemy = new DummyEnemy(this, enemyData.loadData(_enemyID));
+				
+				enemyArray[enemyCount] = enemyToSpawn;
+				enemyToSpawn.unitID = enemyCount;
+				add (enemyToSpawn);
+				
+			}
 		}
 		
 		public function updateCamera():void
@@ -172,7 +297,10 @@ package GameEngine
 			else {FP.camera.y = playerHero.y - FP.halfHeight;}
 		}
 		
-		
+		public function userInitialized():void //once the player id and everything has been set (ready for network communications)
+		{
+			
+		}
 	}
 
 }

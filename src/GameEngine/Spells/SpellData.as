@@ -39,9 +39,11 @@ package GameEngine.Spells
 				spell.isCastTime = true;
 				spell.isCoolDown = true;
 				spell.isDamage = true;
+				
+				spell.spellDamage = 200;
 			
 				spell.spellCastTime = 1.5;
-				spell.spellCoolDown = 3.5;
+				spell.spellCoolDown = 3;
 			}
 			if (_spellID == 1)
 			{
@@ -58,13 +60,15 @@ package GameEngine.Spells
 				spell.isCoolDown = true;
 				spell.isDamage = true;
 			
+				spell.spellDamage = 120;
+				
 				spell.spellCastTime = 1;
-				spell.spellCoolDown = 1.5;
+				spell.spellCoolDown = 8;
 			}
 			if (_spellID == 2)
 			{
-				spell.SPELL_ICON = GS.LIGHTNING_BOLT;
-				spell.SPELL_NAME = "lightning strike";
+				spell.SPELL_ICON = GS.CHAIN_LIGHTNING;
+				spell.SPELL_NAME = "chain lightning";
 				spell.id = _spellID;
 				trace (spell.SPELL_NAME);
 				spell.isCastTime = true;
@@ -76,13 +80,15 @@ package GameEngine.Spells
 				spell.isCoolDown = true;
 				spell.isDamage = true;
 			
-				spell.spellCastTime = .5;
-				spell.spellCoolDown = .75;
+				spell.spellDamage = 60;
+				
+				spell.spellCastTime = 1;
+				spell.spellCoolDown = 1.5;
 			}
 			if (_spellID == 3)
 			{
-				spell.SPELL_ICON = GS.BONEFREEZE;
-				spell.SPELL_NAME = "bone freeze";
+				spell.SPELL_ICON = GS.FIRE_AURA;
+				spell.SPELL_NAME = "fire aura";
 				spell.id = _spellID;
 				trace (spell.SPELL_NAME);
 				spell.isCastTime = true;
@@ -90,17 +96,17 @@ package GameEngine.Spells
 				spell.yPosition = 2; //y position on the spell selection screen (starts at 1)
 			
 				spell.isActive = true;
-				spell.isCastTime = true;
+				spell.isCastTime = false;
 				spell.isCoolDown = true;
 				spell.isDamage = true;
 			
 				spell.spellCastTime = 1.5;
-				spell.spellCoolDown = 3.5;
+				spell.spellCoolDown = 10;
 			}
 			if (_spellID == 4)
 			{
-				spell.SPELL_ICON = GS.ARCANE_POWER;
-				spell.SPELL_NAME = "arcane power";
+				spell.SPELL_ICON = GS.OVERPOWER;
+				spell.SPELL_NAME = "overpower";
 				spell.id = _spellID;
 				trace (spell.SPELL_NAME);
 				spell.isCastTime = true;
@@ -108,17 +114,17 @@ package GameEngine.Spells
 				spell.yPosition = 4; //y position on the spell selection screen (starts at 1)
 			
 				spell.isActive = true;
-				spell.isCastTime = true;
+				spell.isCastTime = false;
 				spell.isCoolDown = true;
 				spell.isDamage = true;
 			
 				spell.spellCastTime = 1.5;
-				spell.spellCoolDown = 3.5;
+				spell.spellCoolDown = 30;
 			}
 			if (_spellID == 5)
 			{
-				spell.SPELL_ICON = GS.CHAIN_LIGHTNING;
-				spell.SPELL_NAME = "chain lightning";
+				spell.SPELL_ICON = GS.BLINK;
+				spell.SPELL_NAME = "blink";
 				spell.id = _spellID;
 				trace (spell.SPELL_NAME);
 				spell.isCastTime = true;
@@ -130,8 +136,8 @@ package GameEngine.Spells
 				spell.isCoolDown = true;
 				spell.isDamage = true;
 			
-				spell.spellCastTime = 1.5;
-				spell.spellCoolDown = 3.5;
+				spell.spellCastTime = .5;
+				spell.spellCoolDown = 12;
 			}
 			//spell ID 20 - 39 = necro
 			if (_spellID == 20)

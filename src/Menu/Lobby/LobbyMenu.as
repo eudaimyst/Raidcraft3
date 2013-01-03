@@ -8,6 +8,8 @@ package Menu.Lobby
 	import UI.*;
 	import user.UserCharacter;
 	import net.flashpunk.FP;
+	
+	
 	/**
 	 * ...
 	 * @author skipgamer
@@ -17,9 +19,11 @@ package Menu.Lobby
 		public var lobbyController:NetworkController = new NetworkController();
 		public var numOfRooms:SimpleText = new SimpleText(1, 2, "rooms");
 		public var roomNameInput:CreateRoomInput = new CreateRoomInput(5, 5, "room name");
-		public var okButton:CreateRoomButton = new CreateRoomButton (5, 6, "OK", true, null, okPressed);
+		public var roomLevelSelecter:LevelDropdown;
+		public var okButton:CreateRoomButton = new CreateRoomButton (5, 5, "OK", true, null, okPressed);
 		
 		public var roomInfo:RoomInfo;
+		
 		
 		public function LobbyMenu() 
 		{
@@ -34,18 +38,33 @@ package Menu.Lobby
 			add (numOfRooms);
 			
 			lobbyController.setLobby(this);
+			
+			roomLevelSelecter = new LevelDropdown(5, 6, this);
 		}
 		
 		private function createRoom():void
 		{
 			add (roomNameInput);
+			add (roomLevelSelecter);
+		}
+		
+		
+		
+		public function createRoomOk():void //creates ok button for create room
+		{
+			trace("createroomok");
+			trace(String(FP.world.classCount(CreateRoomButton)));
+			if (FP.world.classCount(CreateRoomButton) < 4)
+			{
 			add (okButton);
+			}
 		}
 		
 		private function okPressed():void
 		{
 			remove (roomNameInput);
 			remove (okButton);
+			remove (roomLevelSelecter);
 			lobbyController.createRaid(roomNameInput.text);
 			//updateRooms(); <causing errors trying to update rooms before connection is established
 		}

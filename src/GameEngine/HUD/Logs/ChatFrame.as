@@ -121,8 +121,7 @@ package GameEngine.HUD.Logs
 		
 		override public function update():void
 		{
-			x = FP.camera.x;
-			y = FP.camera.y;
+			
 			
 			if (inputActiveVar == true)
 			{
@@ -193,6 +192,8 @@ package GameEngine.HUD.Logs
 						//inputActive = false;
 				}
 			}
+			
+			super.update();
 		}
 	
 	}

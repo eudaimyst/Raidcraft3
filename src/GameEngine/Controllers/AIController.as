@@ -1,5 +1,6 @@
 package GameEngine.Controllers 
 {
+	import GameEngine.Characters.Enemy;
 	import net.flashpunk.Entity;
 	
 	/**
@@ -9,9 +10,14 @@ package GameEngine.Controllers
 	public class AIController extends Entity 
 	{
 		
-		public function AIController() 
+		public function AIController(_controlledEnemy:Enemy) 
 		{
 			
+		}
+		
+		public function spawnedState():void
+		{
+			trace("enemy is in spawned state");
 		}
 		
 	}

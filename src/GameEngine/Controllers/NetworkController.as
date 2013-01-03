@@ -1,5 +1,6 @@
 package GameEngine.Controllers 
 {
+	import flash.display.GraphicsPathWinding;
 	import GameEngine.Characters.FriendlyHero;
 	import GameEngine.Characters.Hero;
 	import GameEngine.GameWorld;
@@ -26,7 +27,7 @@ package GameEngine.Controllers
 		public var currentHero:Hero; //user controlled hero communicating with this instance of Network Controller.
 		public var userID:int;
 		
-		public var currentRooms:Array = new Array("test");
+		public var currentRooms:Array;
 		
 		protected var latencyDisplay:LatencyDisplay;
 		
@@ -50,7 +51,7 @@ package GameEngine.Controllers
 			client = _client;
 			trace("handling connection attempt");
 			//Set developmentsever (Comment out to connect to your server online)
-			//client.multiplayer.developmentServer = "localhost:8184";
+			client.multiplayer.developmentServer = "localhost:8184";
 			
 			refreshList(); //gets number of rooms
 			
@@ -62,7 +63,7 @@ package GameEngine.Controllers
 			trace ("********************");
 			trace ("GameWorld set");
 			trace ("***********************");
-			currentGameWorld.Test();
+			
 		}
 		
 		public function setLobby(_lobby:LobbyMenu):void
@@ -110,6 +111,18 @@ package GameEngine.Controllers
 		{
 			trace("Sent stopwalk message to server");
 			connection.send("stopwalk", _direction);
+		}
+		
+		public function sendDamage(_targetUnitID:int, _damageAmount:int, _fromUnitID:int):void
+		{
+			trace("sent damage message to server");
+			connection.send("sendDamage", _targetUnitID, _damageAmount, _fromUnitID);
+		}
+		
+		public function sendLocationUpdate(x:Number, y:Number):void
+		{
+			trace("location update sent(player stopped moving)");
+			connection.send("LocationUpdate", int(x), int(y));
 		}
 		
 		private function handleCreate(roomID:String):void //called when createRaid succeeds
@@ -161,6 +174,16 @@ package GameEngine.Controllers
 			connection.send("SetName", UserVariables.userName);
 		}
 		
+		public function sendEnemySpawn(_enemyID:int):void
+		{
+			connection.send("SendEnemySpawn", _enemyID);
+		}
+		
+		public function RecieveEnemySpawn(_message:Message, _enemyID:uint):void
+		{
+			currentGameWorld.SpawnDummyEnemy(_enemyID);
+		}
+		
 		private function handleJoin(_connection:Connection):void
 		{
 			trace("Sucessfully joined the room");
@@ -196,14 +219,41 @@ package GameEngine.Controllers
 			//Add message listener for send spawn commands
 			_connection.addMessageHandler("SendSpawn", RecieveSpawn);
 			
-			//Add message listener for send chat messages
+			//Add message listener for recieving chat messages
 			_connection.addMessageHandler("RecieveChat", RecieveChat);
 			
-			//Add message listener for send chat messages
+			//Add message listener for recieving ping messages
 			_connection.addMessageHandler("pong", pong);
+			
+			//Add message listener for recieving player location update messages
+			_connection.addMessageHandler("SendLocationUpdate", RecieveLocationUpdate);
+			
+			//Add message listener for send spawn commands
+			_connection.addMessageHandler("RecieveEnemySpawn", RecieveEnemySpawn);
+			
+			//Add message listener for send spawn commands
+			_connection.addMessageHandler("StartLevel", RecieveStartLevel);
 			
 			//Listen to all messages using a private function
 			_connection.addMessageHandler("*", handleMessages);
+			
+			_connection.addMessageHandler("DamageDealtToEnemy", DamageDealtToEnemy);
+		}
+		
+		public function DamageDealtToEnemy(m:Message, _unitID:int, _damage:int, _fromID:int):void
+		{
+			currentGameWorld.DealDamageToEnemy(_unitID, _damage, _fromID);
+		}
+		
+		public function SendStartLevel():void
+		{
+			connection.send("StartLevel");
+		}
+		
+		private function RecieveStartLevel(m:Message):void
+		{
+			currentGameWorld.worldStatus = 1;
+			currentGameWorld.StartLevel();
 		}
 		
 		private function RecieveChat(m:Message, _text:String, _name:String):void
@@ -217,8 +267,7 @@ package GameEngine.Controllers
 			trace("Recived a message with SetUserID from the server");
 			trace("your user id = " + _userid);
 			userID = _userid;
-			currentHero.heroID = userID;
-			currentHero.updateUserID();
+			currentHero.updateUserID(_userid);
 		}
 		
 		private function Hello(m:Message):void
@@ -233,6 +282,17 @@ package GameEngine.Controllers
 			{
 			currentGameWorld.SpawnFriendlyPlayer(_userid, _char, _origX, _origY, _username); 
 			trace("player: ", _username, "joined");
+			}
+		}
+		
+		private function RecieveLocationUpdate(_message:Message, _userid:uint, _x:int = 0, _y:int = 0):void
+		{
+			trace("Recieved location update from server");
+			if (_userid != userID) //if the user sending spawn message is not self (to prevent moving the players hero)
+			{
+				var tempFriendlyHero:FriendlyHero = currentGameWorld.friendlyPlayerArray[_userid];
+				tempFriendlyHero.MoveToLocation(_x, _y);
+				trace();
 			}
 		}
 		
